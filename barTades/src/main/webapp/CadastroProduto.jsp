@@ -27,7 +27,7 @@ Valor de compra: <input type="number" name="valorCompraProduto"/>
 Valor de venda: <input type="number" name="valorVendaProduto"/>
 
 <br><br>
-<input type="submit" value="Salvar"/>
+<input type="submit"/>
 </form>
 
 </body>
