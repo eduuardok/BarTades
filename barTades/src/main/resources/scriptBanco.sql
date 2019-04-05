@@ -16,7 +16,7 @@ foreign key (id_fornecedor) references fornecedores(id));
 create table fornecedores(
 id int not null auto_increment,
 nome varchar(255),
-cnpj varchar (14),
+cnpj varchar (18),
 telefone varchar(13),
 endereco varchar(255),
 primary key (id));
@@ -64,6 +64,7 @@ endereco varchar(255),
 primary key (id));
 
 create table categoria (
-id int,
-nome varchar(100));
+id int not null auto_increment,
+nome varchar(100),
+primary key (id));
 
