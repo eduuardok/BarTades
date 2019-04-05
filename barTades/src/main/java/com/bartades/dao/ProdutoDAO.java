@@ -35,7 +35,8 @@ public class ProdutoDAO {
                      "c.nome as categoria, \n" +
                      "p.preco_venda, \n" +
                      "p.preco_compra, \n" +
-                     "f.nome as fornecedor \n" +
+                     "f.nome as fornecedor, \n" +
+                     "p.quantidade_disponivel \n" +
                      "from produtos p\n" +
                      "join categoria c on p.categoria = c.id\n" +
                      "join fornecedores f on p.id_fornecedor = f.id;";
@@ -52,7 +53,8 @@ public class ProdutoDAO {
                 retorno.getString("categoria"),
                 retorno.getDouble("preco_venda"),
                 retorno.getDouble("preco_compra"),
-                retorno.getString("fornecedor"));
+                retorno.getString("fornecedor"),
+                retorno.getInt("quantidade_dispnivel"));
                 listaProdutos.add(p);
             }
             
@@ -73,7 +75,7 @@ public class ProdutoDAO {
         
         boolean retorno = false;
         
-        String sql = "INSERT INTO produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor) values (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel) values (?, ?, ?, ?, ?, ?, 0);";
         
         try(Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement insert = conn.prepareStatement(sql);
@@ -84,6 +86,7 @@ public class ProdutoDAO {
             insert.setDouble(4, p.getPrecoVenda());
             insert.setDouble(5, p.getPrecoCompra());
             insert.setInt(6, encontrarIdFornecedor(p.getFornecedor()));
+            
             
             int linhasAfetadas = insert.executeUpdate();
             
@@ -107,7 +110,7 @@ public class ProdutoDAO {
         
         boolean retorno = false;
         
-        String sql = "UPDATE produtos set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ? WHERE id = ?;";
+        String sql = "UPDATE produtos set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ?, quantidade_disponivel = ? WHERE id = ?;";
         
         try(Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement update = conn.prepareStatement(sql);
@@ -118,7 +121,9 @@ public class ProdutoDAO {
             update.setDouble(4, p.getPrecoVenda());
             update.setDouble(5, p.getPrecoCompra());
             update.setInt(6, encontrarIdFornecedor(p.getFornecedor()));
-            update.setInt(7, p.getId());
+            update.setInt(7, p.getQuantidade());
+            update.setInt(8, p.getId());
+            
             
             int linhasAfetadas = update.executeUpdate();
             
@@ -138,7 +143,6 @@ public class ProdutoDAO {
      * @throws ClassNotFoundException
      * @throws SQLException 
      */
-    
     private static int encontrarIdCategoria(String nomeCategoria) throws ClassNotFoundException, SQLException{
         
         String sql = "SELECT id FROM categoria WHERE nome = ?";

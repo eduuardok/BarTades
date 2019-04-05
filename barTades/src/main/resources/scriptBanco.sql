@@ -10,6 +10,7 @@ categoria int (3),
 preco_venda numeric(65, 2),
 preco_compra numeric(65,2),
 id_fornecedor int,
+quantidade_disponivel int (4),
 primary key(id),
 foreign key (id_fornecedor) references fornecedores(id));
 

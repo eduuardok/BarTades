@@ -18,8 +18,9 @@ public class Produto {
     private double precoVenda;
     private double precoCompra;
     private String fornecedor;
+    private int quantidade;
     
-    public Produto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor){
+    public Produto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade){
         
         this.nome = nome;
         this.descricao = descricao;
@@ -27,10 +28,11 @@ public class Produto {
         this.precoVenda = precoVenda;
         this.precoCompra = precoCompra;
         this.fornecedor = fornecedor;
+        this.quantidade = quantidade;
         
     }
     
-    public Produto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor){
+    public Produto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade){
         
         this._ID = id;
         this.nome = nome;
@@ -39,6 +41,8 @@ public class Produto {
         this.precoVenda = precoVenda;
         this.precoCompra = precoCompra;
         this.fornecedor = fornecedor;
+        this.quantidade = quantidade;
+        
     }
     
     public int getId(){
@@ -91,6 +95,14 @@ public class Produto {
     
     public String getFornecedor(){
         return this.fornecedor;
+    }
+    
+    public void setQuantidade(int quantidade){
+        this.quantidade = quantidade;
+    }
+    
+    public int getQuantidade(){
+        return this.quantidade;
     }
     
 }

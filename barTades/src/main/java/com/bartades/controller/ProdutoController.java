@@ -32,7 +32,7 @@ public class ProdutoController {
     public static boolean SalvarProduto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor) 
             throws ClassNotFoundException, SQLException{
         
-        Produto produto = new Produto(nome, descricao, categoria, precoVenda, precoCompra, fornecedor);
+        Produto produto = new Produto(nome, descricao, categoria, precoVenda, precoCompra, fornecedor, 0);
         return ProdutoDAO.SalvarProduto(produto);
         
     }
@@ -58,14 +58,15 @@ public class ProdutoController {
      * @param precoVenda = double preco venda do produto
      * @param precoCompra = double preco compra do produto
      * @param fornecedor = String fornecedor do produto
+     * @param quantidade = int quantidade a ser adicionada ao produto
      * @return boolean = true: sucesso, false = falha
      * @throws ClassNotFoundException
      * @throws SQLException 
      */
-    public static boolean AtualizarProduto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor) 
+    public static boolean AtualizarProduto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade) 
             throws ClassNotFoundException, SQLException{
         
-        Produto p = new Produto(id, nome, descricao, categoria, precoVenda, precoCompra, fornecedor);
+        Produto p = new Produto(id, nome, descricao, categoria, precoVenda, precoCompra, fornecedor, quantidade);
         
         return ProdutoDAO.AtualizarProduto(p);
     }
