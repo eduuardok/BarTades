@@ -18,17 +18,7 @@ public class TesteMain {
     
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
-        ArrayList<Produto> teste = ProdutoController.listarProdutos();
-        
-        for(Produto p : teste){
-            System.out.println(p.getNome());
-        }
-        
-        Produto p1 = teste.get(0);
-        
-        System.out.println(p1.getNome());
-        
-        ProdutoController.SalvarProduto("ProdutoDois", "Teste dois", "CategoriaTesteDois", 400.0, 30.0, "FornecedorTesteDois");
+       
         
     }
     

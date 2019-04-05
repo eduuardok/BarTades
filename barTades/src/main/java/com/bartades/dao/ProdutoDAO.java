@@ -18,6 +18,13 @@ import java.util.ArrayList;
  */
 public class ProdutoDAO {
     
+    /**
+     * Este método lista todos os produtos que estão no banco de dados, já com fornecedor e categoria em String
+     * 
+     * @return ArrayList do tipo Produto
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public static ArrayList<Produto> listarProdutos() throws ClassNotFoundException, SQLException{
         
         ArrayList<Produto> listaProdutos = new ArrayList();
@@ -54,6 +61,14 @@ public class ProdutoDAO {
         return listaProdutos;
     }
     
+    /**
+     * Este método salva um novo produto no banco de dados
+     * 
+     * @param p = Objeto do tipo Produto
+     * @return boolean: true = sucesso, false = falha
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public static boolean SalvarProduto(Produto p) throws ClassNotFoundException, SQLException{
         
         boolean retorno = false;
@@ -80,11 +95,19 @@ public class ProdutoDAO {
         return retorno;
     }
     
+    /**
+     * Este método atualiza um produto já existente no banco de dados
+     * 
+     * @param p = Objeto do tipo Produto
+     * @return boolean: true = sucesso, false = falha
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public static boolean AtualizarProduto(Produto p) throws ClassNotFoundException, SQLException{
         
         boolean retorno = false;
         
-        String sql = "UPDATE produto set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ? WHERE id = ?;";
+        String sql = "UPDATE produtos set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ? WHERE id = ?;";
         
         try(Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement update = conn.prepareStatement(sql);
@@ -106,6 +129,15 @@ public class ProdutoDAO {
         }
         return retorno;
     }
+    
+    /**
+     * (Este é um método auxiliar) Utilizado para encontrar o id da categoria no banco de dados
+     * 
+     * @param nomeCategoria = String nome da categoria
+     * @return int = id da categoria
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     
     private static int encontrarIdCategoria(String nomeCategoria) throws ClassNotFoundException, SQLException{
         
@@ -129,6 +161,14 @@ public class ProdutoDAO {
         return idCategoria;
     }
     
+    /**
+     * (Este é um método auxilar) Utilizado para encontrar o id do fornecedor no banco de dados
+     * 
+     * @param nomeFornecedor = String nome do fornecedor
+     * @return int = id do fornecedor
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     private static int encontrarIdFornecedor(String nomeFornecedor) throws ClassNotFoundException, SQLException{
         
         String sql = "SELECT id FROM fornecedores WHERE nome = ?";
