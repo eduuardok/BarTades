@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class InterfaceConexao {
     
     private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private final static String URL = "jdbc:mysql://localhost:3307/produtobd?useTimezone=true&serverTimezone=UTC";
+    private final static String URL = "jdbc:mysql://localhost:3306/bartades?useTimezone=true&serverTimezone=UTC";
     private final static String USUARIO = "root";
     private final static String SENHA = "testebase1"; //<-- lembrar de trocar
     private static Connection CONEXAO;

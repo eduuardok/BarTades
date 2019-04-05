@@ -8,6 +8,7 @@ package com.bartades.controller;
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Produto;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +22,10 @@ public class ProdutoController {
         Produto produto = new Produto(nome, descricao, categoria, precoVenda, precoCompra, fornecedor);
         return ProdutoDAO.SalvarProduto(produto);
         
+    }
+    
+    public static ArrayList<Produto> listarProdutos() throws ClassNotFoundException, SQLException{
+        return ProdutoDAO.listarProdutos();
     }
     
 }
