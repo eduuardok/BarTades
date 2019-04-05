@@ -6,7 +6,7 @@ create table produtos(
 id int not null auto_increment,
 nome varchar(255),
 descricao varchar(255),
-categoria varchar(255),
+categoria int (3),
 preco_venda numeric(65, 2),
 preco_compra numeric(65,2),
 id_fornecedor int,
@@ -62,4 +62,8 @@ nome varchar(255),
 estado varchar(2),
 endereco varchar(255),
 primary key (id));
+
+create table categoria (
+id int,
+nome varchar(100));
 
