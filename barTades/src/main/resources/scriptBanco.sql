@@ -27,11 +27,11 @@ id int not null auto_increment,
 nome varchar(255),
 email varchar(255),
 telefone varchar(255),
-cpf varchar(15),
+cpf varchar(18),
 sexo varchar(1),
 senha varchar(30),
-nivel_acesso int(3),
-unidade_atuacao int,
+unidade_atuacao int(3),
+cargo int(3),
 primary key (id));
 
 create table funcoes(
