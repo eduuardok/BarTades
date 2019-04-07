@@ -35,11 +35,11 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="#">Usu&aacute;rios
+							<li class="nav-item"><a class="nav-link" href="CadastroUsuario.jsp">Usu&aacute;rios
 							</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
+							<li class="nav-item"><a class="nav-link" href="CadastroProduto.jsp">Produtos</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
@@ -59,8 +59,8 @@
 			<div class="col-md-12">
 				<h3>CADASTRO DE USU&Aacute;RIO</h3>
 				<!-- 				FORMULARIO DE CADASTRO -->
-				<form name="cadUsuario" action="/barTades/cadastroUsuario"
-					method="post">
+				<form name="cadUsuario" action="cadastroUsuario"
+					method="POST">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">

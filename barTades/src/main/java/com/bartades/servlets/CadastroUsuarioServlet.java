@@ -14,13 +14,16 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = { "/cadastroUsuario" })
+@WebServlet(urlPatterns =  "/cadastroUsuario" )
 public class CadastroUsuarioServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+            
+            request.getRequestDispatcher("CadastroUsuario.jsp");
+            
 	}
 
 	@Override
@@ -35,18 +38,12 @@ public class CadastroUsuarioServlet extends HttpServlet {
 		String sexo = request.getParameter("sexoUsuario");
 		String cargo = request.getParameter("nivelAcessoUsuario");
 		String  unidadeAtuacao = request.getParameter("unidadeAtuacaoUsuario");
+        
+                System.out.println(nome);
 
-		Usuario user = new Usuario(nome, cpf, email, senha, telefone, sexo, unidadeAtuacao, cargo);
-            try {
-                //nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo
-                UsuarioDAO.SalvarUsuario(user);
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(CadastroUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+		//request.setAttribute("nome", nome);
 
-		//request.setAttribute("usuario", user.toString());
-
-		request.getRequestDispatcher("CadastroUsuario.jsp").forward(request, response);
+		request.getRequestDispatcher("Sucesso.jsp").forward(request, response);
 	}
 
 }
