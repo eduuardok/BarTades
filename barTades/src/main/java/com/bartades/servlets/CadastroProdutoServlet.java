@@ -33,7 +33,7 @@ public class CadastroProdutoServlet extends HttpServlet {
            request.setAttribute("valorVenda", valorVenda);
            request.setAttribute("descricaoProduto", descricaoProduto);
             
-           RequestDispatcher dispatcher = request.getRequestDispatcher("Sucesso.jsp");
+           RequestDispatcher dispatcher = request.getRequestDispatcher("VisualizarProdutos.jsp");
            dispatcher.forward(request, response);
            
             System.out.println(fornecedorProduto);

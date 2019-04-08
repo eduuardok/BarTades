@@ -31,11 +31,9 @@
     <body>
         
         <%
-        
             List<Produto> listaProdutos = ProdutoController.listarProdutos();
-            
         %>
-
+        
         <input type="hidden" class="teste" value="" />
         <div class="container-fluid">
             <div class="row">
@@ -84,11 +82,12 @@
                 </tr>
             </thead>
             <tbody>
-                <% for(Produto p : listaProdutos){
                     
+               <% int iterator = 0; for(Produto p : listaProdutos){
+                    iterator++;
                 %>
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row"  value="<%out.print(p.getId());%>"><%out.print(iterator);%></th>
                     <td><%out.print(p.getNome());%></td>
                     <td><%out.print(p.getCategoria());%></td>
                     <td><%out.print(p.getPrecoVenda());%></td>
@@ -98,8 +97,8 @@
                 </tr>
                 <%
                 }
-               %>
-               
+               %> 
+       
             </tbody>
         </table>
         <br>

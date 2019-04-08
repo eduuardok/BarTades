@@ -1,5 +1,6 @@
 package com.bartades.servlets;
 
+import com.bartades.controller.UsuarioController;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -7,8 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.bartades.dao.UsuarioDAO;
 import com.bartades.model.Usuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -41,7 +40,13 @@ public class CadastroUsuarioServlet extends HttpServlet {
         
                 System.out.println(nome);
 
-		//request.setAttribute("nome", nome);
+            try {
+                //String nome, String cpf, String email, String senha, String telefone, String sexo, String unidadeAtuacao, String cargo
+                Usuario user = new Usuario(nome, cpf, email, senha, telefone, sexo, unidadeAtuacao, cargo);
+                UsuarioController.adicionarUsuario(user);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(CadastroUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
 		request.getRequestDispatcher("Sucesso.jsp").forward(request, response);
 	}
