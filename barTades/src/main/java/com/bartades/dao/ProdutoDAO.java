@@ -54,7 +54,7 @@ public class ProdutoDAO {
                 retorno.getDouble("preco_venda"),
                 retorno.getDouble("preco_compra"),
                 retorno.getString("fornecedor"),
-                retorno.getInt("quantidade_dispnivel"));
+                retorno.getInt("quantidade_disponivel"));
                 listaProdutos.add(p);
             }
             

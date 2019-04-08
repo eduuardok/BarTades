@@ -19,20 +19,15 @@ import java.util.ArrayList;
  */
 public class TesteMain {
     
-    //public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
-       //Usuario user = new Usuario("Eduardo", "352.270.248-47", "eduuardok@gmail.com", "eluna", "98657-9412", "M", "UnidadeTeste1", "Gerente");
-       
-       //UsuarioDAO.SalvarUsuario(user);
+        ArrayList<Produto> produtos = ProdutoController.listarProdutos();
         
-      // ArrayList<Usuario> listaUsuarios = UsuarioDAO.listarUsuarios();
-        
-       //for (Usuario u : listaUsuarios){
-         //   System.out.println(u.toString());
-           // System.out.println(u.getNome());
-            
-   //}
-      // }
+        for(int i = 0; i < produtos.size(); i++){
+            System.out.println(produtos.get(i).getNome());
+        }
+
+}
     
     
     
