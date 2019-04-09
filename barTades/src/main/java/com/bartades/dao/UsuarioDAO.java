@@ -15,7 +15,9 @@ public class UsuarioDAO {
 	
     public static ArrayList<Usuario> listarUsuarios() throws ClassNotFoundException, SQLException{
         
-        ArrayList<Usuario> listaUsuarios = new ArrayList();
+    	System.out.println("Entrou DAO");
+    	
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
         
         String sql = "select u.id, \n" +
                      "u.nome, \n" +
@@ -46,6 +48,8 @@ public class UsuarioDAO {
                 retorno.getString("unidade_atuacao"),
                 retorno.getString("cargo"));
                 listaUsuarios.add(u);
+                
+                
             }
             
         }

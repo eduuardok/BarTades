@@ -1,42 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!--
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Cadastrar novo produto</title>
-</head>
-<body>
-<h1>Cadastro de produtos</h1><br><br>
-<form method="POST">
-Nome: <input type="text" name="nomeProduto" />
-<br>
-<br>
-Categoria: <select name="categoriaProduto">
-    <option value="CategoriaTeste">CategoriaTeste</option>
-    <option value="CategoriaTeste">CategoriaTesteDois</option>
-</select>
-<br><br>
-Fornecedor: <select name="fornecedorProduto">
-    <option value="fornecedorTeste">FornecedorTeste</option>
-    <option value="fornecedorTesteDois">FornecedorTesteDois</option>
-</select>
-<br><br>
-Valor de compra: <input type="number" name="valorCompraProduto"/>
-<br><br>
-Valor de venda: <input type="number" name="valorVendaProduto"/>
-
-<br><br>
-Descrição: <input type="text" size="255" name="descricaoProduto"/>
-<br><br>
-<input type="submit"/>
-</form>
-
-</body>
-</html> -->
-
+	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -70,8 +34,8 @@ Descrição: <input type="text" size="255" name="descricaoProduto"/>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="CadastroUsuario.jsp">Usu&aacute;rios
-							</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
@@ -94,8 +58,7 @@ Descrição: <input type="text" size="255" name="descricaoProduto"/>
 			<div class="col-md-12">
 				<h3>CADASTRO DE PRODUTO</h3>
 				<!-- 				FORMULARIO DE CADASTRO -->
-				<form name="cadProduto" action="cadastroProduto"
-					method="POST">
+				<form name="cadProduto" action="cadastroProduto" method="POST">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -106,31 +69,32 @@ Descrição: <input type="text" size="255" name="descricaoProduto"/>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="descricaoProduto">Descrição</label> <input type="text" 
-									class="form-control" id="descricaoProduto" name="descricaoProduto"
-									placeholder="Descrição do produto">
+								<label for="descricaoProduto">Descrição</label> <input
+									type="text" class="form-control" id="descricaoProduto"
+									name="descricaoProduto" placeholder="Descrição do produto">
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label for="valorCompraProduto">Preço de compra</label> <input type="number"
-									class="form-control" id="valorCompraProduto"
+								<label for="valorCompraProduto">Preço de compra</label> <input
+									type="text" class="form-control" id="valorCompraProduto"
 									name="valorCompraProduto" placeholder="Valor de compra"
-									>
+									onKeyPress="return(moeda(this,'.',',',event))">
 							</div>
 						</div>
-                                                <div class="col-md-3">
+						<div class="col-md-3">
 							<div class="form-group">
-								<label for="valorVendaProduto">Preço de venda</label> <input type="number"
-									class="form-control" id="valorVendaProduto"
+								<label for="valorVendaProduto">Preço de venda</label> <input
+									type="text" class="form-control" id="valorVendaProduto"
 									name="valorVendaProduto" placeholder="Valor de compra"
-									>
+									onKeyPress="return(moeda(this,'.',',',event))">
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="categoriaProduto">Categoria</label> <select
-									class="form-control" id="categoriaProduto" name="categoriaProduto">
+									class="form-control" id="categoriaProduto"
+									name="categoriaProduto">
 									<option value="CategoriaTeste">CategoriaTeste</option>
 									<option value="CategoriaTesteDois">CategoriaTesteDois</option>
 								</select>
@@ -143,7 +107,7 @@ Descrição: <input type="text" size="255" name="descricaoProduto"/>
 									name="fornecedorProduto">
 									<option value="FornecedorTeste">FornecedorTeste</option>
 									<option value="FornecedorTesteDois">FornecedorTesteDois</option>
-									
+
 								</select>
 							</div>
 						</div>
@@ -237,4 +201,4 @@ Descrição: <input type="text" size="255" name="descricaoProduto"/>
 		crossorigin="anonymous"></script>
 
 </body>
-</html> 
+</html>

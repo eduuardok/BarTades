@@ -23,28 +23,31 @@ import javax.servlet.http.HttpServletResponse;
  * @author ELuna
  */
 @WebServlet(urlPatterns = "/visualizarProdutos")
-public class ListarProdutosServlet extends HttpServlet{
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
-        request.getRequestDispatcher("VisualizarProdutos.jsp").forward(request, response);
-        
-    }
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
-        try {
-            List listaProdutos = ProdutoController.listarProdutos();
-            request.setAttribute("sessaoListaProdutos", listaProdutos);
-            request.setAttribute("teste", "teste");
-            RequestDispatcher rd = request.getRequestDispatcher("VisualizarProdutos.jsp");
-            rd.forward(request, response);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ListarProdutosServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
+public class ListarProdutosServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.getRequestDispatcher("Produto.jsp").forward(request, response);
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		try {
+			List listaProdutos = ProdutoController.listarProdutos();
+			request.setAttribute("sessaoListaProdutos", listaProdutos);
+			request.setAttribute("teste", "teste");
+			RequestDispatcher rd = request.getRequestDispatcher("Produto.jsp");
+			rd.forward(request, response);
+		} catch (ClassNotFoundException | SQLException ex) {
+			Logger.getLogger(ListarProdutosServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+
 }

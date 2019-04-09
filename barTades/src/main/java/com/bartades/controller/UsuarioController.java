@@ -16,6 +16,7 @@ public class UsuarioController {
         }
         
         public static ArrayList<Usuario> listarUsuarios() throws ClassNotFoundException, SQLException{
-            return UsuarioDAO.listarUsuarios();
+        	System.out.println("Entrou no contoller");
+        	return UsuarioDAO.listarUsuarios();
         }
 }

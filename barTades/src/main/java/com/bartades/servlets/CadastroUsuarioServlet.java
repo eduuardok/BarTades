@@ -13,16 +13,16 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns =  "/cadastroUsuario" )
+@WebServlet(urlPatterns = "/cadastroUsuario")
 public class CadastroUsuarioServlet extends HttpServlet {
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-            
-            request.getRequestDispatcher("CadastroUsuario.jsp");
-            
+
+		request.getRequestDispatcher("CadastroUsuario.jsp");
+
 	}
 
 	@Override
@@ -36,19 +36,17 @@ public class CadastroUsuarioServlet extends HttpServlet {
 		String telefone = request.getParameter("telefoneUsuario");
 		String sexo = request.getParameter("sexoUsuario");
 		String cargo = request.getParameter("nivelAcessoUsuario");
-		String  unidadeAtuacao = request.getParameter("unidadeAtuacaoUsuario");
-        
-                System.out.println(nome);
+		String unidadeAtuacao = request.getParameter("unidadeAtuacaoUsuario");
 
-            try {
-                //String nome, String cpf, String email, String senha, String telefone, String sexo, String unidadeAtuacao, String cargo
-                Usuario user = new Usuario(nome, cpf, email, senha, telefone, sexo, unidadeAtuacao, cargo);
-                UsuarioController.adicionarUsuario(user);
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(CadastroUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+		try {
+			Usuario user = new Usuario(nome, cpf, email, senha, telefone, sexo, unidadeAtuacao, cargo);
+			UsuarioController.adicionarUsuario(user);
+		} catch (ClassNotFoundException | SQLException ex) {
+			Logger.getLogger(CadastroUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+		request.getRequestDispatcher("Usuario.jsp").forward(request, response);
 
-		request.getRequestDispatcher("Sucesso.jsp").forward(request, response);
 	}
 
 }
