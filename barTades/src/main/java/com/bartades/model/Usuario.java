@@ -1,8 +1,8 @@
 package com.bartades.model;
 
 public class Usuario {
-    
-        private int ID;
+
+	private int ID;
 	private String nome;
 	private String cpf;
 	private String email;
@@ -15,8 +15,8 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(String nome, String cpf, String email, String senha, String telefone, String sexo, String unidadeAtuacao,
-			String cargo) {
+	public Usuario(String nome, String cpf, String email, String senha, String telefone, String sexo,
+			String unidadeAtuacao, String cargo) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
@@ -26,19 +26,19 @@ public class Usuario {
 		this.unidadeAtuacao = unidadeAtuacao;
 		this.cargo = cargo;
 	}
-        
-        public Usuario (int id, String nome, String cpf, String email, String senha, String telefone, String sexo, String unidadeAtuacao, String cargo){
-                this.ID = id;
-                this.nome = nome;
+
+	public Usuario(int id, String nome, String cpf, String email, String senha, String telefone, String sexo,
+			String unidadeAtuacao, String cargo) {
+		this.ID = id;
+		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
-                this.telefone = telefone;
+		this.telefone = telefone;
 		this.sexo = sexo;
 		this.unidadeAtuacao = unidadeAtuacao;
 		this.cargo = cargo;
-        }
-            
+	}
 
 	public String getNome() {
 		return nome;
@@ -99,10 +99,10 @@ public class Usuario {
 	public String getUnidadeAtuacao() {
 		return unidadeAtuacao;
 	}
-        
-        public int getId(){
-            return this.ID;
-        }
+
+	public int getId() {
+		return this.ID;
+	}
 
 	public void setUnidadeAtuacao(String unidadeAtuacao) {
 		this.unidadeAtuacao = unidadeAtuacao;

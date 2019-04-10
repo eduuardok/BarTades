@@ -30,6 +30,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("idProduto"));
 		try {
 			ArrayList<Produto> produto = ProdutoController.encontrarProdutoPorId(id);
+			
 			request.setAttribute("nomeProduto", produto.get(0).getNome());
 			request.setAttribute("categoriaProduto", produto.get(0).getCategoria());
 			request.setAttribute("precoVenda", produto.get(0).getPrecoVenda());

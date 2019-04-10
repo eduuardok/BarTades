@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
-<%@page import="java.util.List"%>
-<%@page import="com.bartades.model.Usuario"%>
-<%@page import="com.bartades.controller.UsuarioController"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="js/produtoScript.js"></script>
 <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -18,14 +13,14 @@
 	crossorigin="anonymous">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-<title>Usuarios</title>
+<title>Cadastro de Franquia</title>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<a class="navbar-brand" href="#">HOME</a>
+					<a class="navbar-brand" href="index.jsp">HOME</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -34,11 +29,12 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="Usuario.jsp">Usu&aacute;rios
-							</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="CadastroProduto.jsp">Produtos</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
@@ -56,9 +52,37 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>USU&Aacute;RIOS</h3>
+				<h3>CADASTRO DE FRANQUIAS</h3>
+				<form name="cadFranquia" action="cadastroFranquia" method="POST">
+					<div class="row">
+						<div class="col-md-5">
+							<div class="form-group">
+								<label for="nomeFranquia">Nome</label> <input type="text"
+									class="form-control" id="nomeFranquia" name="nomeFranquia"
+									placeholder="Digite o nome...">
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="form-group">
+								<label for="enderecoFranquia">Endere&ccedil;o </label> <input
+									type="text" class="form-control" id="enderecoFranquia"
+									name="enderecoFranquia" aria-describedby="emailHelp"
+									placeholder="Digite o endereço...">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="estadoFranquia">Estado</label> <input type="text"
+									class="form-control" id="estadoFranquia" name="estadoFranquia"
+									placeholder="Digite o estado...">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-success">Cadastrar</button>
+						</div>
+					</div>
+				</form>
 			</div>
-			<div class="col-md-3"></div>
 		</div>
 	</div>
 	<br>
@@ -75,8 +99,8 @@
 							experi&ecirc;ncia do nosso cliente.</p>
 						<!-- Rights-->
 						<p class="rights">
-							<span>&copy;</span><span class="copyright-year">2019</span><span></span><span>
-								BarTades</span><span> All Rights Reserved.</span>
+							<span>ï¿½ï¿½ </span><span class="copyright-year">2019</span><span>ï¿½</span><span>BarTades</span><span>.ï¿½</span><span>All
+								Rights Reserved.</span>
 						</p>
 					</div>
 				</div>
@@ -88,7 +112,7 @@
 					<dl class="contact-list">
 						<dt>E-mail:</dt>
 						<dd>
-							<a href="mailto:#">bartades@contato.com</a>
+							<a href="mailto:#">dkstudioin@gmail.com</a>
 						</dd>
 					</dl>
 					<dl class="contact-list">
@@ -101,13 +125,31 @@
 				</div>
 				<div class="col-md-4 col-xl-3">
 					<ul class="nav-list">
-						<li><a href="Usuario.jsp">Usu&aacute;rios </a></li>
+						<li><a href="#">Usu&aacute;rios </a></li>
 						<li><a href="#">Fornecedores</a></li>
 						<li><a href="#">Franquias</a></li>
 						<li><a href="#">Produtos</a></li>
 						<li><a href="#">Contate-nos</a></li>
 					</ul>
 				</div>
+			</div>
+		</div>
+		<div class="row no-gutters social-container">
+			<div class="col">
+				<a class="social-inner" href="#"><span
+					class="icon mdi mdi-facebook"></span><span>Facebook</span></a>
+			</div>
+			<div class="col">
+				<a class="social-inner" href="#"><span
+					class="icon mdi mdi-instagram"></span><span>instagram</span></a>
+			</div>
+			<div class="col">
+				<a class="social-inner" href="#"><span
+					class="icon mdi mdi-twitter"></span><span>twitter</span></a>
+			</div>
+			<div class="col">
+				<a class="social-inner" href="#"><span
+					class="icon mdi mdi-youtube-play"></span><span>google</span></a>
 			</div>
 		</div>
 	</footer>

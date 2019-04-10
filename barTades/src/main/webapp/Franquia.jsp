@@ -1,16 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%-- 
+    Document   : VisualizarProdutos
+    Created on : Apr 6, 2019, 9:56:38 PM
+    Author     : ELuna
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@page import="com.bartades.model.Usuario"%>
-<%@page import="com.bartades.controller.UsuarioController"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="js/produtoScript.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -18,14 +22,18 @@
 	crossorigin="anonymous">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-<title>Usuarios</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Visualizar Franquias</title>
 </head>
+
 <body>
+
+	<input type="hidden" class="teste" value="" />
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<a class="navbar-brand" href="#">HOME</a>
+					<a class="navbar-brand" href="index.jsp">HOME</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -34,11 +42,18 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="Usuario.jsp">Usu&aacute;rios
-							</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Produtos </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
+										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+								</div></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
@@ -53,14 +68,19 @@
 		</div>
 	</div>
 	<br>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h3>USU&Aacute;RIOS</h3>
-			</div>
-			<div class="col-md-3"></div>
-		</div>
-	</div>
+	<h3>Visualização de Franquias</h3>
+
+
+	<table class="table table-hover">
+		<thead class="thead-dark">
+			<tr>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+			</tr>
+		</tbody>
+	</table>
 	<br>
 	<footer class="section footer-classic context-dark bg-image"
 		style="background: #2d3246;">
@@ -73,10 +93,10 @@
 							src="https://img.icons8.com/color/50/000000/bar.png"></a>
 						<p>N&oacute;s somos uma empresa focada no melhor atendimento e
 							experi&ecirc;ncia do nosso cliente.</p>
-						<!-- Rights-->
+						<!-- Rights -->
 						<p class="rights">
-							<span>&copy;</span><span class="copyright-year">2019</span><span></span><span>
-								BarTades</span><span> All Rights Reserved.</span>
+							<span>ï¿½ï¿½ </span><span class="copyright-year">2019</span><span>ï¿½</span><span>BarTades</span><span>.ï¿½</span><span>All
+								Rights Reserved.</span>
 						</p>
 					</div>
 				</div>
@@ -88,7 +108,7 @@
 					<dl class="contact-list">
 						<dt>E-mail:</dt>
 						<dd>
-							<a href="mailto:#">bartades@contato.com</a>
+							<a href="mailto:#">dkstudioin@gmail.com</a>
 						</dd>
 					</dl>
 					<dl class="contact-list">
@@ -101,13 +121,31 @@
 				</div>
 				<div class="col-md-4 col-xl-3">
 					<ul class="nav-list">
-						<li><a href="Usuario.jsp">Usu&aacute;rios </a></li>
+						<li><a href="#">Usu&aacute;rios </a></li>
 						<li><a href="#">Fornecedores</a></li>
 						<li><a href="#">Franquias</a></li>
 						<li><a href="#">Produtos</a></li>
 						<li><a href="#">Contate-nos</a></li>
 					</ul>
 				</div>
+			</div>
+		</div>
+		<div class="row no-gutters social-container">
+			<div class="col">
+				<a class="social-inner" href="#"><span
+					class="icon mdi mdi-facebook"></span><span>Facebook</span></a>
+			</div>
+			<div class="col">
+				<a class="social-inner" href="#"><span
+					class="icon mdi mdi-instagram"></span><span>instagram</span></a>
+			</div>
+			<div class="col">
+				<a class="social-inner" href="#"><span
+					class="icon mdi mdi-twitter"></span><span>twitter</span></a>
+			</div>
+			<div class="col">
+				<a class="social-inner" href="#"><span
+					class="icon mdi mdi-youtube-play"></span><span>google</span></a>
 			</div>
 		</div>
 	</footer>
@@ -123,6 +161,5 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-
 </body>
 </html>
