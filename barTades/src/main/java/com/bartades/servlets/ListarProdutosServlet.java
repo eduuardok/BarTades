@@ -41,14 +41,13 @@ public class ListarProdutosServlet extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException ex) {
 			Logger.getLogger(ListarProdutosServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
+		
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
-
 }
 	
 }

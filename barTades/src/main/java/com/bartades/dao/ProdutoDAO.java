@@ -17,6 +17,50 @@ import java.util.ArrayList;
  * @author ELuna
  */
 public class ProdutoDAO {
+	
+	public static ArrayList<Produto> encontrarProdutoPorId(int id) throws ClassNotFoundException, SQLException {
+	
+		 ArrayList<Produto> produtoRetorno = new ArrayList<Produto>();
+		
+		 String sql = "select p.id,\n" +
+                 "p.nome, \n" +
+                 "p.descricao, \n" +
+                 "c.nome as categoria, \n" +
+                 "p.preco_venda, \n" +
+                 "p.preco_compra, \n" +
+                 "f.nome as fornecedor, \n" +
+                 "p.quantidade_disponivel \n" +
+                 "from produtos p \n" +
+                 "join categoria c on p.categoria = c.id \n" +
+                 "join fornecedores f on p.id_fornecedor = f.id \n" +
+                 "where p.id = ?;";
+                
+		 
+		 
+		 try(Connection conn = InterfaceConexao.obterConexao();
+	                PreparedStatement select = conn.prepareStatement(sql);
+	                ){
+	                select.setInt(1, id);
+	                ResultSet retorno = select.executeQuery();
+	                
+	                while(retorno.next()){
+	                	Produto p = new Produto(
+	                            retorno.getInt("ID"),
+	                            retorno.getString("nome"),
+	                            retorno.getString("descricao"),
+	                            retorno.getString("categoria"),
+	                            retorno.getDouble("preco_venda"),
+	                            retorno.getDouble("preco_compra"),
+	                            retorno.getString("fornecedor"),
+	                            retorno.getInt("quantidade_disponivel"));
+	                	produtoRetorno.add(p);
+	            }
+	            
+	        }
+		 return produtoRetorno;
+	}
+	
+
     
     /**
      * Este método lista todos os produtos que estão no banco de dados, já com fornecedor e categoria em String
@@ -37,9 +81,10 @@ public class ProdutoDAO {
                      "p.preco_compra, \n" +
                      "f.nome as fornecedor, \n" +
                      "p.quantidade_disponivel \n" +
-                     "from produtos p\n" +
-                     "join categoria c on p.categoria = c.id\n" +
-                     "join fornecedores f on p.id_fornecedor = f.id;";
+                     "from produtos p \n" +
+                     "join categoria c on p.categoria = c.id \n" +
+                     "join fornecedores f on p.id_fornecedor = f.id \n" +
+                     "order by p.id asc;";
         
         try(Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement select = conn.prepareStatement(sql);

@@ -38,7 +38,15 @@
 								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
+							<li class="nav-item dropdown">
+        						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          						Produtos
+        						</a>
+        						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         					    <a class="dropdown-item" href="cadastroProduto">Cadastro</a>
+          						<a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+        					</div>
+     					 </li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
@@ -63,29 +71,29 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="nomeProduto">Nome do produto</label> <input
-									type="text" class="form-control" id="nomeProduto"
+									type="text" class="form-control" id="nomeProduto" value="${nomeProduto}"
 									name="nomeProduto" placeholder="Digite o nome do produto">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="descricaoProduto">Descrição</label> <input
-									type="text" class="form-control" id="descricaoProduto"
+									type="text" class="form-control" id="descricaoProduto" value ="${descricaoProduto}"
 									name="descricaoProduto" placeholder="Descrição do produto">
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="valorCompraProduto">Preço de compra</label> <input
-									type="text" class="form-control" id="valorCompraProduto"
-									name="valorCompraProduto" placeholder="Valor de compra"
+									type="text" class="form-control" id="valorCompraProduto" value = "${precoCompra}"
+									name="valorCompraProduto" placeholder="Valor de compra" 
 									onKeyPress="return(moeda(this,'.',',',event))">
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="valorVendaProduto">Preço de venda</label> <input
-									type="text" class="form-control" id="valorVendaProduto"
+									type="text" class="form-control" id="valorVendaProduto" value = "${precoVenda}"
 									name="valorVendaProduto" placeholder="Valor de compra"
 									onKeyPress="return(moeda(this,'.',',',event))">
 							</div>
@@ -93,7 +101,7 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="categoriaProduto">Categoria</label> <select
-									class="form-control" id="categoriaProduto"
+									class="form-control" id="categoriaProduto" 
 									name="categoriaProduto">
 									<option value="CategoriaTeste">CategoriaTeste</option>
 									<option value="CategoriaTesteDois">CategoriaTesteDois</option>
@@ -103,7 +111,7 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="fornecedorProduto">Fornecedor</label> <select
-									class="form-control" id="fornecedorProduto"
+									class="form-control" id="fornecedorProduto" value="${fornecedorProduto}"
 									name="fornecedorProduto">
 									<option value="FornecedorTeste">FornecedorTeste</option>
 									<option value="FornecedorTesteDois">FornecedorTesteDois</option>

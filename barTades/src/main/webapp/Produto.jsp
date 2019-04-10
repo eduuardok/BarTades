@@ -14,6 +14,10 @@
         <script
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/produtoScript.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script text="javascript">$(function () {
+        	  $('[data-toggle="popover"]').popover()
+        })</script>
         <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -45,7 +49,15 @@
                                     </a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-                                <li class="nav-item"><a class="nav-link" href="CadastroProduto.jsp">Produtos</a></li>
+                                <li class="nav-item dropdown">
+        						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          						Produtos
+        						</a>
+        						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         					    <a class="dropdown-item" href="cadastroProduto">Cadastro</a>
+          						<a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+        					</div>
+     					 </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
                             </ul>
                             <form class="form-inline my-2 my-lg-0">
@@ -63,7 +75,7 @@
         <h3>Visualização de produtos</h3>
 	
 		
-        <table class="table table-hover" action="visualizarProdutos">
+        <table class="table table-hover" action="visualizarProdutos" >
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
@@ -73,20 +85,24 @@
                     <th scope="col">Preço compra</th>
                     <th scope="col">Fornecedor</th>
                     <th scope="col">Descrição</th>
+                    <th scope="col">Quantidade em estoque</th>
+                    <th scope="col">Opções</th>
                 </tr>
             </thead>
             <tbody>
                     
                   
               <c:forEach var="produtos" items="${listaDeProdutos}">
-                <tr>
-                    <th scope="row" value="${produtos['id']}">${produtos['id']}</th>
+                <tr> 	
+                    <th scope="row">${produtos['id']}</th>
                     <td>${produtos['nome']}</td>
                     <td>${produtos['categoria']}</td>
                     <td>${produtos['precoVenda']}</td>
                     <td>${produtos['precoCompra']}</td>
                     <td>${produtos['fornecedor']}</td>
                     <td>${produtos['descricao']}</td>
+                    <td>${produtos['quantidade']}</td>
+                    <td><a href="editarProduto?idProduto=${produtos['id']}"><button type="button" class="btn btn-outline-dark">Editar</button></a></td>
                 </tr>
             </c:forEach>
             </tbody>

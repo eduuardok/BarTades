@@ -27,11 +27,13 @@ public class CadastroProdutoServlet extends HttpServlet {
 		String valorVenda = request.getParameter("valorVendaProduto").replace(".", "").replace(",", ".");
 		String descricaoProduto = request.getParameter("descricaoProduto");
 
+		ProdutoController.SalvarProduto(nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
+				Double.parseDouble(valorCompra), fornecedorProduto);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
 		dispatcher.forward(request, response);
 
-		ProdutoController.SalvarProduto(nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
-				Double.parseDouble(valorCompra), fornecedorProduto);
+		
 
 	}
 

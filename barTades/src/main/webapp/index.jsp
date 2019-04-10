@@ -6,6 +6,9 @@
 <meta charset="ISO-8859-1">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
 <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -31,7 +34,15 @@
 							</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item"><a class="nav-link" href="CadastroProduto.jsp">Produtos</a></li>
+							<li class="nav-item dropdown">
+        						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          						Produtos
+        						</a>
+        						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         					    <a class="dropdown-item" href="cadastroProduto">Cadastro</a>
+          						<a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+        					</div>
+     					 </li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">

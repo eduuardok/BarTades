@@ -29,6 +29,11 @@ public class ProdutoController {
      * @throws ClassNotFoundException
      * @throws SQLException 
      */
+	
+	public static ArrayList<Produto> encontrarProdutoPorId(int id) throws ClassNotFoundException, SQLException{
+		return ProdutoDAO.encontrarProdutoPorId(id);
+	}
+	
     public static boolean SalvarProduto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor) 
             throws ClassNotFoundException, SQLException{
         
