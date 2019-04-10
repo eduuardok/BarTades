@@ -4,12 +4,9 @@
     Author     : ELuna
 --%>
 
-<%@page import="com.bartades.controller.ProdutoController"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.bartades.model.Produto" %>
-<jsp:useBean id="beanProduto" class="com.bartades.controller.ProdutoController"/>
 
 <!DOCTYPE html>
 <html>
@@ -25,14 +22,10 @@
         <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Produtos</title>
+        <title>Visualizar produtos</title>
     </head>
 
     <body>
-        
-        <%
-            List<Produto> listaProdutos = ProdutoController.listarProdutos();
-        %>
         
         <input type="hidden" class="teste" value="" />
         <div class="container-fluid">
@@ -68,8 +61,9 @@
         </div>
         <br>
         <h3>Visualização de produtos</h3>
-
-        <table class="table" action="visualizarProdutos">
+	
+		
+        <table class="table table-hover" action="visualizarProdutos">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
@@ -83,22 +77,18 @@
             </thead>
             <tbody>
                     
-               <% int iterator = 0; for(Produto p : listaProdutos){
-                    iterator++;
-                %>
+                  
+              <c:forEach var="produtos" items="${listaDeProdutos}">
                 <tr>
-                    <th scope="row"  value="<%out.print(p.getId());%>"><%out.print(iterator);%></th>
-                    <td><%out.print(p.getNome());%></td>
-                    <td><%out.print(p.getCategoria());%></td>
-                    <td><%out.print(p.getPrecoVenda());%></td>
-                    <td><%out.print(p.getPrecoCompra());%></td>
-                    <td><%out.print(p.getFornecedor());%></td>
-                    <td><%out.print(p.getDescricao());%></td>
+                    <th scope="row" value="${produtos['id']}">${produtos['id']}</th>
+                    <td>${produtos['nome']}</td>
+                    <td>${produtos['categoria']}</td>
+                    <td>${produtos['precoVenda']}</td>
+                    <td>${produtos['precoCompra']}</td>
+                    <td>${produtos['fornecedor']}</td>
+                    <td>${produtos['descricao']}</td>
                 </tr>
-                <%
-                }
-               %> 
-       
+            </c:forEach>
             </tbody>
         </table>
         <br>

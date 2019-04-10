@@ -23,22 +23,13 @@ public class CadastroProdutoServlet extends HttpServlet {
 		String nomeProduto = request.getParameter("nomeProduto");
 		String categoriaProduto = request.getParameter("categoriaProduto");
 		String fornecedorProduto = request.getParameter("fornecedorProduto");
-		String valorCompra = request.getParameter("valorCompraProduto");
-		String valorVenda = request.getParameter("valorVendaProduto");
+		String valorCompra = request.getParameter("valorCompraProduto").replace(".", "").replace(",", ".");
+		String valorVenda = request.getParameter("valorVendaProduto").replace(".", "").replace(",", ".");
 		String descricaoProduto = request.getParameter("descricaoProduto");
-
-		request.setAttribute("metodoHttp", metodoHttp);
-		request.setAttribute("nomeProduto", nomeProduto);
-		request.setAttribute("categoriaProduto", categoriaProduto);
-		request.setAttribute("fornecedorProduto", fornecedorProduto);
-		request.setAttribute("valorCompra", valorCompra);
-		request.setAttribute("valorVenda", valorVenda);
-		request.setAttribute("descricaoProduto", descricaoProduto);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
 		dispatcher.forward(request, response);
 
-		System.out.println(fornecedorProduto);
 		ProdutoController.SalvarProduto(nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
 				Double.parseDouble(valorCompra), fornecedorProduto);
 
@@ -48,6 +39,7 @@ public class CadastroProdutoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
+		
 		request.getRequestDispatcher("CadastroProduto.jsp").forward(request, response);
 
 	}

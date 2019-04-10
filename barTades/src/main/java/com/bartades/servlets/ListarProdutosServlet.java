@@ -6,6 +6,8 @@
 package com.bartades.servlets;
 
 import com.bartades.controller.ProdutoController;
+import com.bartades.model.Produto;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,18 +32,10 @@ public class ListarProdutosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("Produto.jsp").forward(request, response);
-
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
 		try {
-			List listaProdutos = ProdutoController.listarProdutos();
-			request.setAttribute("sessaoListaProdutos", listaProdutos);
-			request.setAttribute("teste", "teste");
+			List<Produto> listaProdutos = ProdutoController.listarProdutos();
+			request.setAttribute("listaDeProdutos", listaProdutos);	
 			RequestDispatcher rd = request.getRequestDispatcher("Produto.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {
@@ -50,4 +44,11 @@ public class ListarProdutosServlet extends HttpServlet {
 
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	
+
+}
+	
 }
