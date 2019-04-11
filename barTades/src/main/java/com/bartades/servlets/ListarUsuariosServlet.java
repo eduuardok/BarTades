@@ -35,11 +35,6 @@ public class ListarUsuariosServlet extends HttpServlet {
 
 		try {
 			List<Usuario> listaUsuarios = UsuarioController.listarUsuarios();
-
-			for (Usuario user : listaUsuarios) {
-				System.out.println(user.toString());
-			}
-
 			request.setAttribute("listaDeUsuarios", listaUsuarios);
 			RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
 			rd.forward(request, response);

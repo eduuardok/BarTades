@@ -2,7 +2,7 @@ package com.bartades.model;
 
 public class Usuario {
 
-	private int ID;
+	private int id;
 	private String nome;
 	private String cpf;
 	private String email;
@@ -29,7 +29,7 @@ public class Usuario {
 
 	public Usuario(int id, String nome, String cpf, String email, String senha, String telefone, String sexo,
 			String unidadeAtuacao, String cargo) {
-		this.ID = id;
+		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
@@ -101,7 +101,7 @@ public class Usuario {
 	}
 
 	public int getId() {
-		return this.ID;
+		return this.id;
 	}
 
 	public void setUnidadeAtuacao(String unidadeAtuacao) {

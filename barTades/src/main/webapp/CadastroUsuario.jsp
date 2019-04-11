@@ -16,12 +16,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 <title>Cadastro de Usu&aacute;rios</title>
 </head>
-<%
-	String user = (String) request.getAttribute("usuario");
-%>
 <body>
 	<!-- Input para teste -->
-	<input type="hidden" class="teste" value="<%out.print(user);%>" />
+	<input type="hidden" name="idUsuario" value="${idUsuario}" />
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -35,11 +32,12 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="CadastroUsuario.jsp">Usu&aacute;rios
-							</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item"><a class="nav-link" href="CadastroProduto.jsp">Produtos</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="CadastroProduto.jsp">Produtos</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
@@ -57,16 +55,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>CADASTRO DE USU&Aacute;RIO</h3>
-				<!-- 				FORMULARIO DE CADASTRO -->
-				<form name="cadUsuario" action="cadastroUsuario"
-					method="POST">
+				<h3>${pagina}</h3>
+				<form name="cadUsuario" action="${action}" method="POST">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="nomeUsuario">Nome Completo</label> <input
-									type="text" class="form-control" id="nomeUsuario"
-									name="nomeUsuario" placeholder="Digite seu nome...">
+								<label for="nomeUsuario">Nome:</label> <input type="text"
+									class="form-control" id="nomeUsuario" name="nomeUsuario"
+									placeholder="Digite seu nome..." value="${nomeUsuario}">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -74,14 +70,16 @@
 								<label for="cpfUsuario">CPF</label> <input type="text"
 									class="form-control" id="cpfUsuario" name="cpfUsuario"
 									placeholder="Digite seu CPF..."
-									onKeyPress="MascaraCPF(cadUsuario.cpfUsuario);" maxlength="14">
+									onKeyPress="MascaraCPF(cadUsuario.cpfUsuario);" maxlength="14"
+									value="${cpfUsuario}">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="emailUsuario">Email</label> <input type="email"
 									class="form-control" id="emailUsuario" name="emailUsuario"
-									aria-describedby="emailHelp" placeholder="Digite seu e-mail...">
+									aria-describedby="emailHelp" placeholder="Digite seu e-mail..."
+									value="${emailUsuario}">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -97,13 +95,14 @@
 									class="form-control" id="telefoneUsuario"
 									name="telefoneUsuario" placeholder="Digite seu telefone..."
 									onKeyPress="MascaraTelefone(cadUsuario.telefoneUsuario);"
-									maxlength="14">
+									maxlength="14" value="${telefoneUsuario}">
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="sexoUsuario">Sexo</label> <select
 									class="form-control" id="sexoUsuario" name="sexoUsuario">
+									<option value="${sexoUsuario}" selected>${sexoUsuario}</option>
 									<option value="m">M</option>
 									<option value="f">F</option>
 								</select>
@@ -114,9 +113,10 @@
 								<label for="nivelAcessoUsuario">Cargo</label> <select
 									class="form-control" id="nivelAcessoUsuario"
 									name="nivelAcessoUsuario">
+									<option value="${cargoUsuario}" selected>${cargoUsuario}</option>
 									<option value="Gerente">Gerente</option>
 									<option value="Peão">Peão</option>
-									
+
 								</select>
 							</div>
 						</div>
@@ -127,7 +127,7 @@
 									id="unidadeAtuacaoUsuario" name="unidadeAtuacaoUsuario">
 									<option value="MBars Curitiba">MBars Curitiba</option>
 									<option value="2">UnidadeTeste2</option>
-									
+
 								</select>
 							</div>
 						</div>
