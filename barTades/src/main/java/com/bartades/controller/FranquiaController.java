@@ -1,34 +1,30 @@
 package com.bartades.controller;
 
-import com.bartades.dao.ProdutoDAO;
-import com.bartades.model.Produto;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import com.bartades.dao.FranquiaDAO;
+import com.bartades.model.Franquia;
 
 public class FranquiaController {
-    
-	public static ArrayList<Produto> encontrarProdutoPorId(int id) throws ClassNotFoundException, SQLException{
-		return ProdutoDAO.encontrarProdutoPorId(id);
-	}
 	
-    public static boolean SalvarProduto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor) 
+    public static boolean SalvarFranquia(String nome, String estado, String endereco) 
             throws ClassNotFoundException, SQLException{
         
-        Produto produto = new Produto(nome, descricao, categoria, precoVenda, precoCompra, fornecedor, 0);
-        return ProdutoDAO.SalvarProduto(produto);
+        Franquia franquia = new Franquia(nome, estado, endereco);
+        return FranquiaDAO.SalvarFranquia(franquia);
         
     }
     
-    public static ArrayList<Produto> listarProdutos() throws ClassNotFoundException, SQLException{
-        return ProdutoDAO.listarProdutos();
+    public static ArrayList<Franquia> listarFranquias() throws ClassNotFoundException, SQLException{
+        return FranquiaDAO.listarFranquias();
     }
     
-    public static boolean AtualizarProduto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade) 
+    public static boolean AtualizarFranquia(int id, String nome, String estado, String endereco) 
             throws ClassNotFoundException, SQLException{
         
-        Produto p = new Produto(id, nome, descricao, categoria, precoVenda, precoCompra, fornecedor, quantidade);
+        Franquia f = new Franquia(id, nome, estado, endereco);
         
-        return ProdutoDAO.AtualizarProduto(p);
+        return FranquiaDAO.AtualizarFranquia(f);
     }
     
 }

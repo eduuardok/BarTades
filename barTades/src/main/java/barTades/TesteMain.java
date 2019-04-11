@@ -5,9 +5,11 @@
  */
 package barTades;
 
+import com.bartades.controller.FranquiaController;
 import com.bartades.controller.ProdutoController;
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.dao.UsuarioDAO;
+import com.bartades.model.Franquia;
 import com.bartades.model.Produto;
 import com.bartades.model.Usuario;
 import java.sql.SQLException;
@@ -20,13 +22,20 @@ import java.util.ArrayList;
 public class TesteMain {
     
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    	
+    	FranquiaController.SalvarFranquia("UnidadeTeste3", "BA", "Avenida dos perneta, 600");
         
-        ArrayList<Produto> produtos = ProdutoController.listarProdutos();
-        
-        for(int i = 0; i < produtos.size(); i++){
-            System.out.println(produtos.get(i).getNome());
-        }
+    	//FranquiaController.AtualizarFranquia(1, "UnidadeTeste1", "PB", "Avenida curralinho, 80");
 
+        ArrayList<Franquia> franquias = FranquiaController.listarFranquias();
+        
+        for(Franquia f : franquias) {
+        	System.out.println(f.getNome());
+        	System.out.println(f.getEndereco());
+        }
+        
+        FranquiaController.SalvarFranquia("UnidadeTeste3", "BA", "Avenida dos perneta, 600");
+        
 }
     
     

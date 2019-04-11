@@ -35,7 +35,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
 				Double.parseDouble(valorCompra), fornecedorProduto, 0);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Prod");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("visualizarProdutos");
 		dispatcher.forward(request, response);
 
 		
