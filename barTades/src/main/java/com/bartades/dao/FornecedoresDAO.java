@@ -5,27 +5,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Antonio Carlos
  */
-public class FornecedoresDAO extends InterfaceConexao {
+public class FornecedoresDAO {
 
-    public void incluirComTransacao(Fornecedores fornecedor) {
-        PreparedStatement stmt = null;
-        Connection conn = null;
+    public static boolean incluir(Fornecedores fornecedor) throws ClassNotFoundException, SQLException {
+
+        boolean retorno = false;
 
         String sql = "INSERT INTO fornecedores (nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade,estado) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            conn = obterConexao();
-
-            conn.setAutoCommit(false); // Permite usar transacoes para multiplos comandos no banco de dados
-            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = InterfaceConexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, fornecedor.getNome());
             stmt.setString(2, fornecedor.getCnpj());
             stmt.setString(3, fornecedor.getTelefone());
@@ -37,65 +33,27 @@ public class FornecedoresDAO extends InterfaceConexao {
             stmt.setString(9, fornecedor.getCidade());
             stmt.setString(10, fornecedor.getEstado());
 
-            stmt.execute();
+            int linhasAfetadas = stmt.executeUpdate();
 
-            // ResultSet para recuperar o ID gerado automaticamente no banco de dados.
-            // Neste exemplo, o ID é gerado automaticamente.
-            ResultSet generatedKeys = stmt.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                int idNovo = generatedKeys.getInt(1);
-                fornecedor.setID(idNovo);
-                System.out.println("***** ID NOVO CADASTRADO: " + String.valueOf(idNovo));
+            if (linhasAfetadas > 0) {
+                retorno = true;
+            }
 
-            }
-            conn.commit();
-        } catch (SQLException ex) {
-            try {
-                // Caso ocorra algum erro, tenta desfazer todas as ações realizadas no BD.
-                if (conn != null & !conn.isClosed()) {
-                    conn.rollback();
-                }
-            } catch (SQLException ex1) {
-                Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex1);
-            }
-            Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            try {
-                // Caso ocorra algum erro, tenta desfazer todas as ações realizadas no BD.
-                if (conn != null & !conn.isClosed()) {
-                    conn.rollback();
-                }
-            } catch (SQLException ex1) {
-                Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex1);
-            }
-            Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
         }
+        return retorno;
     }
 
-    public void incluir(Fornecedores fornecedor) {
-        PreparedStatement stmt = null;
-        Connection conn = null;
+    public static boolean atualizar(Fornecedores fornecedor) throws ClassNotFoundException, SQLException {
 
-        String sql = "INSERT INTO fornecedores (nome,cnpj,telefone,endereco,numero,complemento,cep,bairro,cidade,estado) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            conn = obterConexao();
-            stmt = conn.prepareStatement(sql);
+        boolean retorno = false;
+
+        String sql = "UPDATE fornecedores SET nome=?,"
+                + "cnpj=?, telefone=?, endereco=?, numero=?, complemento=?, cep=?,bairro=?,cidade=?,estado=? "
+                + "WHERE id=?";
+
+        try (Connection conn = InterfaceConexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);) {
+
             stmt.setString(1, fornecedor.getNome());
             stmt.setString(2, fornecedor.getCnpj());
             stmt.setString(3, fornecedor.getTelefone());
@@ -106,28 +64,73 @@ public class FornecedoresDAO extends InterfaceConexao {
             stmt.setString(8, fornecedor.getBairro());
             stmt.setString(9, fornecedor.getCidade());
             stmt.setString(10, fornecedor.getEstado());
+            stmt.setInt(11, fornecedor.getID());
+
             stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FornecedoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        }
+        return retorno;
+    }
+
+    public Fornecedores obterEmpresa(String idFornecedor) throws ClassNotFoundException, SQLException {
+
+        Fornecedores f = new Fornecedores();
+
+        String sql = "SELECT * FROM fornecedores where cnpj = ? AND ENABLED = true";
+
+        try (Connection conn = InterfaceConexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.setString(1, idFornecedor);
+            ResultSet resultados = stmt.executeQuery();
+
+            while (resultados.next()) {
+                f.setID(resultados.getInt("id"));
+                f.setNome(resultados.getString("nome"));
+                f.setCnpj(resultados.getString("cnpj"));
+                f.setTelefone(resultados.getString("telefone"));
+                f.setEndereco(resultados.getString("endereco"));
+                f.setNumero(resultados.getString("numero"));
+                f.setComplemento(resultados.getString("complemento"));
+                f.setCep(resultados.getString("cep"));
+                f.setBairro(resultados.getString("bairro"));
+                f.setCidade(resultados.getString("cidade"));
+                f.setEstado(resultados.getString("estado"));
+
             }
         }
+        return f;
+    }
+
+    public List<Fornecedores> listar() throws ClassNotFoundException, SQLException {
+
+        String sql = "SELECT cod_user, RZ_SOCIAL,CNPJ,INS_ESTAD,TEL,ENDERECO,NUMERO,COMPLEMENTO,CEP,BAIRRO,CIDADE,ESTADO"
+                + "FROM bdlivraria WHERE ENABLED = true";
+
+        List<Fornecedores> lista = new ArrayList<Fornecedores>();
+
+        try (Connection conn = InterfaceConexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);) {
+            ResultSet resultados = stmt.executeQuery(sql);
+
+            while (resultados.next()) {
+                int id = resultados.getInt("id");
+                String nome = resultados.getString("nome");
+                String cnpj = resultados.getString("cnpj");
+                String telefone = resultados.getString("telefone");
+                String endereco = resultados.getString("endereco");
+                String numero = resultados.getString("numero");
+                String complemento = resultados.getString("complemento");
+                String cep = resultados.getString("cep");
+                String bairro = resultados.getString("bairro");
+                String cidade = resultados.getString("cidade");
+                String estado = resultados.getString("Estado");
+
+                Fornecedores fornecedor = new Fornecedores(id, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado);
+                lista.add(fornecedor);
+            }
+
+        }
+        return lista;
     }
 
 }

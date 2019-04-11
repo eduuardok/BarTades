@@ -3,6 +3,9 @@ package com.bartades.servlets;
 import com.bartades.dao.FornecedoresDAO;
 import com.bartades.model.Fornecedores;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 /**
  *
@@ -44,17 +48,20 @@ public class FornecedoresServlet extends HttpServlet {
 
         // Cria um novo contato e salva
         // através do DAO
-        Fornecedores nova = new Fornecedores(0, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado);
+        Fornecedores novo = new Fornecedores(nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado);
         FornecedoresDAO dao = new FornecedoresDAO();
-        dao.incluirComTransacao(nova);
-
+        try {
+            dao.incluir(novo);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CadastroUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // Usa a sessao para manter os dados após
         // redirect (técnica POST-REDIRECT-GET),
         // usado para evitar dupla submissão dos
         // dados
         HttpSession sessao = request.getSession();
-        sessao.setAttribute("novaFornecedor", nova);
-        response.sendRedirect("bootstrap/Fornecedor.jsp?gravou");
+        sessao.setAttribute("novoFornecedor", novo);
+        response.sendRedirect("Fornecedores.jsp?gravou");
 
     }
 
