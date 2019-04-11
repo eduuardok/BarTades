@@ -59,7 +59,7 @@
                     <h3>CADASTRO DE FORNECEDORES</h3>
 
                     <div id="banner_popup" style="display:none;">
-                        <h1> Fornecedor cadstrada com sucesso ! 
+                        <h1> Fornecedor cadstrado com sucesso ! 
                             <input type="image" src="imagens/com_sucesso.png" width="30">
                         </h1>
                     </div>

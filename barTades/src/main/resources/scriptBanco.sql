@@ -2,31 +2,19 @@ create database bartades;
 
 use bartades;
 
-create table produtos(
-id int not null auto_increment,
-nome varchar(255),
-descricao varchar(255),
-categoria int (3),
-preco_venda numeric(65, 2),
-preco_compra numeric(65,2),
-id_fornecedor int,
-quantidade_disponivel int (4),
-disponibilidade boolean,
-primary key(id),
-foreign key (id_fornecedor) references fornecedores(id));
-
 create table fornecedores(
 id int not null auto_increment,
 nome varchar(255),
 cnpj varchar (18),
 telefone varchar(13),
 endereco varchar(255),
-numero varchar,
+numero varchar(12),
 complemento varchar(50),
 cep varchar(9),
 bairro varchar(50),
 cidade varchar(50),
 estado varchar(50),
+enabled boolean,
 primary key (id));
 
 create table usuarios(
@@ -70,6 +58,19 @@ nome varchar(255),
 estado varchar(2),
 endereco varchar(255),
 primary key (id));
+
+create table produtos(
+id int not null auto_increment,
+nome varchar(255),
+descricao varchar(255),
+categoria int (3),
+preco_venda numeric(65, 2),
+preco_compra numeric(65,2),
+id_fornecedor int,
+quantidade_disponivel int (4),
+disponibilidade boolean,
+primary key(id),
+foreign key (id_fornecedor) references fornecedores(id));
 
 create table categoria (
 id int not null auto_increment,

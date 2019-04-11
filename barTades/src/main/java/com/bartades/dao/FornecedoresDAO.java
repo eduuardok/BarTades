@@ -18,8 +18,8 @@ public class FornecedoresDAO {
 
         boolean retorno = false;
 
-        String sql = "INSERT INTO fornecedores (nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade,estado) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO fornecedores (nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado, enabled) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, true)";
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, fornecedor.getNome());
@@ -76,7 +76,7 @@ public class FornecedoresDAO {
 
         Fornecedores f = new Fornecedores();
 
-        String sql = "SELECT * FROM fornecedores where cnpj = ? AND ENABLED = true";
+        String sql = "SELECT * FROM fornecedores where cnpj = ? AND enabled = true";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);) {
@@ -104,7 +104,7 @@ public class FornecedoresDAO {
     public List<Fornecedores> listar() throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT cod_user, RZ_SOCIAL,CNPJ,INS_ESTAD,TEL,ENDERECO,NUMERO,COMPLEMENTO,CEP,BAIRRO,CIDADE,ESTADO"
-                + "FROM bdlivraria WHERE ENABLED = true";
+                + "FROM bdlivraria WHERE enabled = true";
 
         List<Fornecedores> lista = new ArrayList<Fornecedores>();
 
@@ -131,6 +131,18 @@ public class FornecedoresDAO {
 
         }
         return lista;
+    }
+
+    public void remover(int id) throws ClassNotFoundException, SQLException {
+
+        String sql = "UPDATE EMPRESA SET ENABLED=false WHERE COD_EMP= ?";
+
+        try (Connection conn = InterfaceConexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        }
     }
 
 }
