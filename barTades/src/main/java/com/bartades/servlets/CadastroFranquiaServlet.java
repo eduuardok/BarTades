@@ -1,6 +1,7 @@
 package com.bartades.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bartades.model.Franquia;
+import com.bartades.controller.FranquiaController;
 
 @WebServlet(urlPatterns = "/cadastroFranquia")
 public class CadastroFranquiaServlet extends HttpServlet {
@@ -29,9 +30,14 @@ public class CadastroFranquiaServlet extends HttpServlet {
 		String nome = request.getParameter("nomeFranquia");
 		String endereco = request.getParameter("enderecoFranquia");
 		String estado = request.getParameter("estadoFranquia");
-
-		Franquia franquia = new Franquia(nome, estado, endereco);
-
+		System.out.println(estado);
+		
+		try {
+			FranquiaController.SalvarFranquia(nome, estado, endereco);
+		} catch (ClassNotFoundException | SQLException e) {
+	
+			e.printStackTrace();
+		}
 		request.getRequestDispatcher("Franquia.jsp").forward(request, response);
 
 	}
