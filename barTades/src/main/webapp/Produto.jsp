@@ -31,10 +31,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Visualizar produtos</title>
 </head>
-
-<<<<<<< HEAD
 <body>
-=======
     <body>
         
         <input type="hidden" class="teste" value="" />
