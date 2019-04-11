@@ -103,8 +103,8 @@ public class FornecedoresDAO {
 
     public List<Fornecedores> listar() throws ClassNotFoundException, SQLException {
 
-        String sql = "SELECT cod_user, RZ_SOCIAL,CNPJ,INS_ESTAD,TEL,ENDERECO,NUMERO,COMPLEMENTO,CEP,BAIRRO,CIDADE,ESTADO"
-                + "FROM bdlivraria WHERE enabled = true";
+        String sql = "SELECT id, nome,cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado"
+                + "FROM bartades WHERE enabled = true";
 
         List<Fornecedores> lista = new ArrayList<Fornecedores>();
 
@@ -135,7 +135,7 @@ public class FornecedoresDAO {
 
     public void remover(int id) throws ClassNotFoundException, SQLException {
 
-        String sql = "UPDATE EMPRESA SET ENABLED=false WHERE COD_EMP= ?";
+        String sql = "UPDATE fornecedores SET ENABLED=false WHERE id= ?";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);) {
