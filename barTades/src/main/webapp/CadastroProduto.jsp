@@ -103,8 +103,13 @@
 								<label for="categoriaProduto">Categoria</label> <select
 									class="form-control" id="categoriaProduto" 
 									name="categoriaProduto">
-									<option value="CategoriaTeste">CategoriaTeste</option>
-									<option value="CategoriaTesteDois">CategoriaTesteDois</option>
+									
+									<c:forEach var="categorias" items="${listaCategorias}">
+									
+									<option value="${categorias['nome']}">${categorias['nome']}</option>
+									
+									</c:forEach>
+								
 								</select>
 							</div>
 						</div>
@@ -116,6 +121,16 @@
 									<option value="FornecedorTeste">FornecedorTeste</option>
 									<option value="FornecedorTesteDois">FornecedorTesteDois</option>
 
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="disponibilidadeProduto">Disponibilidade</label> <select
+									class="form-control" id="disponibilidadeProduto" value="${disponibilidadeProduto}"
+									name="disponibilidadeProduto">
+									<option value="1">Disponivel</option>
+									<option value="0">Indisponivel</option>
 								</select>
 							</div>
 						</div>

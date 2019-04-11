@@ -11,6 +11,7 @@ preco_venda numeric(65, 2),
 preco_compra numeric(65,2),
 id_fornecedor int,
 quantidade_disponivel int (4),
+disponibilidade boolean,
 primary key(id),
 foreign key (id_fornecedor) references fornecedores(id));
 
@@ -20,6 +21,12 @@ nome varchar(255),
 cnpj varchar (18),
 telefone varchar(13),
 endereco varchar(255),
+numero varchar,
+complemento varchar(50),
+cep varchar(9),
+bairro varchar(50),
+cidade varchar(50),
+estado varchar(50),
 primary key (id));
 
 create table usuarios(
@@ -69,3 +76,6 @@ id int not null auto_increment,
 nome varchar(100),
 primary key (id));
 
+insert into categoria (nome) values ('Bebidas');
+insert into categoria (nome) values ('Porções');
+insert into categoria (nome) values ('Aperitivos');

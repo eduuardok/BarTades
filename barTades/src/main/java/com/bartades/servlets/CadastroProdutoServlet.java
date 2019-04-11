@@ -1,12 +1,14 @@
 package com.bartades.servlets;
 
+import com.bartades.controller.CategoriaController;
 import com.bartades.controller.ProdutoController;
+import com.bartades.model.Categoria;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,9 +28,10 @@ public class CadastroProdutoServlet extends HttpServlet {
 		String valorCompra = request.getParameter("valorCompraProduto").replace(".", "").replace(",", ".");
 		String valorVenda = request.getParameter("valorVendaProduto").replace(".", "").replace(",", ".");
 		String descricaoProduto = request.getParameter("descricaoProduto");
+		boolean disponibilidadeProduto = Boolean.parseBoolean(request.getParameter("disponibilidadeProduto"));
 
 		ProdutoController.SalvarProduto(nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
-				Double.parseDouble(valorCompra), fornecedorProduto);
+				Double.parseDouble(valorCompra), fornecedorProduto, disponibilidadeProduto);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
 		dispatcher.forward(request, response);
@@ -41,6 +44,13 @@ public class CadastroProdutoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
+		
+		try {
+			ArrayList<Categoria> listaCategorias = CategoriaController.listarCategorias();
+			request.setAttribute("listaCategorias", listaCategorias);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("action", "cadastroProduto");
 		request.setAttribute("pagina", "CADASTRO DE PRODUTO");
 		request.getRequestDispatcher("CadastroProduto.jsp").forward(request, response);
