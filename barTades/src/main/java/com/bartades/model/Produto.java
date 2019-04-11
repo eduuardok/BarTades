@@ -19,8 +19,9 @@ public class Produto {
     private double precoCompra;
     private String fornecedor;
     private int quantidade;
+    private boolean disponibilidade;
     
-    public Produto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade){
+    public Produto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade, boolean disponibilidade){
         
         this.nome = nome;
         this.descricao = descricao;
@@ -29,10 +30,11 @@ public class Produto {
         this.precoCompra = precoCompra;
         this.fornecedor = fornecedor;
         this.quantidade = quantidade;
+        this.disponibilidade = disponibilidade;
         
     }
     
-    public Produto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade){
+    public Produto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade, boolean disponibilidade){
         
         this._ID = id;
         this.nome = nome;
@@ -42,6 +44,7 @@ public class Produto {
         this.precoCompra = precoCompra;
         this.fornecedor = fornecedor;
         this.quantidade = quantidade;
+        this.disponibilidade = disponibilidade;
         
     }
     
@@ -103,6 +106,14 @@ public class Produto {
     
     public int getQuantidade(){
         return this.quantidade;
+    }
+    
+    public void setDisponibilidade(boolean disponibilidade) {
+    	this.disponibilidade = disponibilidade;
+    }
+    
+    public boolean isDisponivel(){
+    	return this.disponibilidade;
     }
     
 }

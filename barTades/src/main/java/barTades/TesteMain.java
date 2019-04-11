@@ -25,25 +25,15 @@ public class TesteMain {
     
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
     
-    	/*
-    	FranquiaController.SalvarFranquia("UnidadeTeste3", "BA", "Avenida dos perneta, 600");
-        
-    	//FranquiaController.AtualizarFranquia(1, "UnidadeTeste1", "PB", "Avenida curralinho, 80");
-
-        ArrayList<Franquia> franquias = FranquiaController.listarFranquias();
-        
-        for(Franquia f : franquias) {
-        	System.out.println(f.getNome());
-        	System.out.println(f.getEndereco());
-        }
-        
-        FranquiaController.SalvarFranquia("UnidadeTeste3", "BA", "Avenida dos perneta, 600");
-      */  
-        ArrayList<Categoria> categorias = CategoriaController.listarCategorias();
-        
-        for(Categoria c : categorias) {
-        	System.out.println(c.getNome());
-        }
+    ArrayList<Produto> produtos = ProdutoController.listarProdutos();
+    
+    for(Produto p : produtos) {
+    	System.out.println(p.getNome());
+    	System.out.println(p.isDisponivel());
+    	System.out.println(p.getCategoria());
+    	System.out.println(p.getDescricao());
+    	
+    }
 }
     
     

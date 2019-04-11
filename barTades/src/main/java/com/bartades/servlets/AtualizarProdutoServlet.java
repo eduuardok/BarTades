@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bartades.controller.CategoriaController;
 import com.bartades.controller.ProdutoController;
+import com.bartades.model.Categoria;
 import com.bartades.model.Produto;
 
 @WebServlet(urlPatterns = "/editarProduto")
@@ -31,9 +33,10 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		String valorVenda = request.getParameter("valorVendaProduto").replace(".", "").replace(",", ".");
 		String descricaoProduto = request.getParameter("descricaoProduto");
 		String idProduto = request.getParameter("idProduto");
+		boolean disponibilidadeProduto = Boolean.parseBoolean(request.getParameter("disponibilidadeProduto"));
 		
 		ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
-				Double.parseDouble(valorCompra), fornecedorProduto, 0);
+				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("visualizarProdutos");
 		dispatcher.forward(request, response);
@@ -51,15 +54,17 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		request.setAttribute("pagina", "ATUALIZAR PRODUTO");
 		try {
 			ArrayList<Produto> produto = ProdutoController.encontrarProdutoPorId(id);
-			
 			request.setAttribute("nomeProduto", produto.get(0).getNome());
 			request.setAttribute("categoriaProduto", produto.get(0).getCategoria());
 			request.setAttribute("precoVenda", produto.get(0).getPrecoVenda());
 			request.setAttribute("precoCompra", produto.get(0).getPrecoCompra());
 			request.setAttribute("fornecedorProduto", produto.get(0).getFornecedor());
 			request.setAttribute("descricaoProduto", produto.get(0).getDescricao());
+			request.setAttribute("disponibilidadeProduto", produto.get(0).isDisponivel());
 			request.setAttribute("idProduto", id);
 			request.setAttribute("action", "editarProduto");
+			ArrayList<Categoria> listaCategorias = CategoriaController.listarCategorias();
+			request.setAttribute("listaCategorias", listaCategorias);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

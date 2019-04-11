@@ -124,6 +124,16 @@
 								</select>
 							</div>
 						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="disponibilidadeProduto">Disponibilidade</label> <select
+									class="form-control" id="disponibilidadeProduto" value="${disponibilidadeProduto}"
+									name="disponibilidadeProduto">
+									<option value="1">Disponivel</option>
+									<option value="0">Indisponivel</option>
+								</select>
+							</div>
+						</div>
 						<div class="col-md-12">
 							<button type="submit" class="btn btn-success" name="idProduto" value="${idProduto}">Cadastrar</button>
 						</div>
