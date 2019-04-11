@@ -36,7 +36,15 @@
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item"><a class="nav-link"
                                                         href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Fornecedores
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="CadastroFornecedores.jsp">Cadastro</a>
+                                        <a class="dropdown-item" href="BuscarFornecedor.jsp">Buscar</a>
+                                    </div>
+                                </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
