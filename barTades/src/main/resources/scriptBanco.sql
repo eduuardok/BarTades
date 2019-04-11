@@ -69,3 +69,6 @@ id int not null auto_increment,
 nome varchar(100),
 primary key (id));
 
+insert into categoria (nome) values ('Bebidas');
+insert into categoria (nome) values ('Porções');
+insert into categoria (nome) values ('Aperitivos');

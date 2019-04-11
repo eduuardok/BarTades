@@ -103,8 +103,13 @@
 								<label for="categoriaProduto">Categoria</label> <select
 									class="form-control" id="categoriaProduto" 
 									name="categoriaProduto">
-									<option value="CategoriaTeste">CategoriaTeste</option>
-									<option value="CategoriaTesteDois">CategoriaTesteDois</option>
+									
+									<c:forEach var="categorias" items="${listaCategorias}">
+									
+									<option value="${categorias['nome']}">${categorias['nome']}</option>
+									
+									</c:forEach>
+								
 								</select>
 							</div>
 						</div>
