@@ -29,6 +29,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
+		
 		String nome = request.getParameter("nomeUsuario");
 		String cpf = request.getParameter("cpfUsuario");
 		String email = request.getParameter("emailUsuario");

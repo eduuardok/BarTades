@@ -15,7 +15,6 @@ public class UsuarioDAO {
 	
     public static ArrayList<Usuario> listarUsuarios() throws ClassNotFoundException, SQLException{
         
-    	System.out.println("Entrou DAO");
     	
         ArrayList<Usuario> listaUsuarios = new ArrayList<>();
         

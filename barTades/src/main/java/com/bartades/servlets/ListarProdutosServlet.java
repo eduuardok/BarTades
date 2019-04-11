@@ -32,7 +32,6 @@ public class ListarProdutosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		try {
 			List<Produto> listaProdutos = ProdutoController.listarProdutos();
 			request.setAttribute("listaDeProdutos", listaProdutos);	

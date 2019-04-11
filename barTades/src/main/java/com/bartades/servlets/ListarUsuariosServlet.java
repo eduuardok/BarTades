@@ -17,6 +17,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.bartades.controller.UsuarioController;
+import com.bartades.model.Usuario;
+
 /**
  *
  * @author Victor
@@ -29,16 +33,24 @@ public class ListarUsuariosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("Usuario.jsp").forward(request, response);
+		try {
+			List<Usuario> listaUsuarios = UsuarioController.listarUsuarios();
 
+			for (Usuario user : listaUsuarios) {
+				System.out.println(user.toString());
+			}
+
+			request.setAttribute("listaDeUsuarios", listaUsuarios);
+			RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
+			rd.forward(request, response);
+		} catch (ClassNotFoundException | SQLException ex) {
+			Logger.getLogger(ListarProdutosServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
-		rd.forward(request, response);
 
 	}
 

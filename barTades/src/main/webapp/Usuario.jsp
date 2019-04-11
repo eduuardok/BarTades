@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@page import="java.util.List"%>
-<%@page import="com.bartades.model.Usuario"%>
-<%@page import="com.bartades.controller.UsuarioController"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,11 +33,24 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="Usuario.jsp">Usu&aacute;rios
-							</a></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Usu&aacute;rios </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="cadastroUsuarios">Cadastro</a> <a
+										class="dropdown-item" href="visualizarUsuarios">Visualizar</a>
+								</div></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Produtos </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
+										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+								</div></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
@@ -58,7 +70,40 @@
 			<div class="col-md-12">
 				<h3>USU&Aacute;RIOS</h3>
 			</div>
-			<div class="col-md-3"></div>
+
+
+			<table class="table table-hover" action="visualizarUsuarios">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nome</th>
+						<th scope="col">CPF</th>
+						<th scope="col">E-mail</th>
+						<th scope="col">Telefone</th>
+						<th scope="col">Sexo</th>
+						<th scope="col">Unidade de Atua&ccedil;&atilde;o</th>
+						<th scope="col">Cargo</th>
+						<th scope="col">Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="usuarios" items="${listaDeUsuarios}">
+						<p>${listaDeUsuarios}</p>
+						<tr>
+							<th scope="row">${usuarios['cpf']}</th>
+							<td>${usuarios['nome']}</td>
+							<td>${usuarios['email']}</td>
+							<td>${usuarios['telefone']}</td>
+							<td>${usuarios['sexo']}</td>
+							<td>${usuarios['unidadeAtuacao']}</td>
+							<td>${usuarios['cargo']}</td>
+							<td><a href="editarProduto?idProduto=${usuarios['cpf']}"><button
+										type="button" class="btn btn-outline-dark">Editar</button></a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<br>
 		</div>
 	</div>
 	<br>

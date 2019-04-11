@@ -114,8 +114,8 @@
 								<label for="nivelAcessoUsuario">Cargo</label> <select
 									class="form-control" id="nivelAcessoUsuario"
 									name="nivelAcessoUsuario">
-									<option value="1">Gerente</option>
-									<option value="2">Peão</option>
+									<option value="Gerente">Gerente</option>
+									<option value="Peão">Peão</option>
 									
 								</select>
 							</div>
@@ -125,7 +125,7 @@
 								<label for="unidadeAtuacaoUsuario">Unidade de
 									Atua&ccedil;&atilde;o </label> <select class="form-control"
 									id="unidadeAtuacaoUsuario" name="unidadeAtuacaoUsuario">
-									<option value="1">UnidadeTeste1</option>
+									<option value="MBars Curitiba">MBars Curitiba</option>
 									<option value="2">UnidadeTeste2</option>
 									
 								</select>

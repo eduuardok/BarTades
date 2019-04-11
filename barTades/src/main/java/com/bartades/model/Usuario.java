@@ -133,11 +133,4 @@ public class Usuario {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "O usuario " + nome + ", portador do  CPF " + cpf + ", e-mail " + email + ", senha " + senha
-				+ ", telefone " + telefone + ", sexo " + sexo + ", cargo " + cargo + ", unidadeAtuacao "
-				+ unidadeAtuacao + " foi cadastrado com sucesso no sistema!";
-	}
-
 }
