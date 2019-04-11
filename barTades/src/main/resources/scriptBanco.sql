@@ -21,6 +21,12 @@ nome varchar(255),
 cnpj varchar (18),
 telefone varchar(13),
 endereco varchar(255),
+numero varchar,
+complemento varchar(50),
+cep varchar(9),
+bairro varchar(50),
+cidade varchar(50),
+estado varchar(50),
 primary key (id));
 
 create table usuarios(
