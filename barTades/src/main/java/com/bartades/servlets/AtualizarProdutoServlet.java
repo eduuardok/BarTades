@@ -21,6 +21,26 @@ public class AtualizarProdutoServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
+	private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, ClassNotFoundException, SQLException {
+
+		String nomeProduto = request.getParameter("nomeProduto");
+		String categoriaProduto = request.getParameter("categoriaProduto");
+		String fornecedorProduto = request.getParameter("fornecedorProduto");
+		String valorCompra = request.getParameter("valorCompraProduto").replace(".", "").replace(",", ".");
+		String valorVenda = request.getParameter("valorVendaProduto").replace(".", "").replace(",", ".");
+		String descricaoProduto = request.getParameter("descricaoProduto");
+		String idProduto = request.getParameter("idProduto");
+		
+		ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
+				Double.parseDouble(valorCompra), fornecedorProduto, 0);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Prod");
+		dispatcher.forward(request, response);
+
+		
+
+	}
 	
 
 	@Override
@@ -28,6 +48,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		int id = Integer.parseInt(request.getParameter("idProduto"));
+		request.setAttribute("pagina", "ATUALIZAR PRODUTO");
 		try {
 			ArrayList<Produto> produto = ProdutoController.encontrarProdutoPorId(id);
 			
@@ -37,6 +58,8 @@ public class AtualizarProdutoServlet extends HttpServlet {
 			request.setAttribute("precoCompra", produto.get(0).getPrecoCompra());
 			request.setAttribute("fornecedorProduto", produto.get(0).getFornecedor());
 			request.setAttribute("descricaoProduto", produto.get(0).getDescricao());
+			request.setAttribute("idProduto", id);
+			request.setAttribute("action", "editarProduto");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -49,7 +72,12 @@ public class AtualizarProdutoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		
+		try {
+			processarRequisicao("POST", request, response);
+		} catch (ClassNotFoundException | SQLException e) {
+			
+			e.printStackTrace();
+		}
 
 	} 
 	

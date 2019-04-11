@@ -41,7 +41,8 @@ public class CadastroProdutoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		
+		request.setAttribute("action", "cadastroProduto");
+		request.setAttribute("pagina", "CADASTRO DE PRODUTO");
 		request.getRequestDispatcher("CadastroProduto.jsp").forward(request, response);
 
 	}

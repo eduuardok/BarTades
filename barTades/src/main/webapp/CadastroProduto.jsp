@@ -64,9 +64,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>CADASTRO DE PRODUTO</h3>
+				<h3>${pagina}</h3>
 				<!-- 				FORMULARIO DE CADASTRO -->
-				<form name="cadProduto" action="cadastroProduto" method="POST">
+				<form name="cadProduto" action="${action}" method="POST">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -94,7 +94,7 @@
 							<div class="form-group">
 								<label for="valorVendaProduto">Preço de venda</label> <input
 									type="text" class="form-control" id="valorVendaProduto" value = "${precoVenda}"
-									name="valorVendaProduto" placeholder="Valor de compra"
+									name="valorVendaProduto" placeholder="Valor de venda"
 									onKeyPress="return(moeda(this,'.',',',event))">
 							</div>
 						</div>
@@ -120,7 +120,7 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-							<button type="submit" class="btn btn-success">Cadastrar</button>
+							<button type="submit" class="btn btn-success" name="idProduto" value="${idProduto}">Cadastrar</button>
 						</div>
 					</div>
 				</form>
