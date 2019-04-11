@@ -36,7 +36,7 @@
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item"><a class="nav-link" href="Usuario.jsp">Usu&aacute;rios
 							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
+							<li class="nav-item"><a class="nav-link" href="CadastroFornecedores.jsp">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
