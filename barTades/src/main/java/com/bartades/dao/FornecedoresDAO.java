@@ -72,7 +72,7 @@ public class FornecedoresDAO {
         return retorno;
     }
 
-    public Fornecedores obterEmpresa(String idFornecedor) throws ClassNotFoundException, SQLException {
+    public Fornecedores obterFornecedores(String idFornecedor) throws ClassNotFoundException, SQLException {
 
         Fornecedores f = new Fornecedores();
 

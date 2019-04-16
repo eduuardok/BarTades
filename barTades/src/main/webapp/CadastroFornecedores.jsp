@@ -16,7 +16,7 @@
               crossorigin="anonymous">
         <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-        <title>Cadastro de Produtos</title>
+        <title>Cadastro de Fornecedores</title>
     </head>
     <body>
         <!-- Input para teste -->
