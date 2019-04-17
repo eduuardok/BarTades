@@ -7,16 +7,16 @@
     <head>
         <meta charset="ISO-8859-1">
         <script
-        src="https://ajax.googleapis.com/?/li?/jquery/3.3.1/jquery.min.js"></script>
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/pedidoScript.js"></script>
         <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
         <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/?/?/css/bootstrap.min.css"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
               crossorigin="anonymous">
         <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/?/jquery?/1.14.0/jquery.mask.js"></script>
-        <title>Cadastro de Pedidos</title>
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+        <title>Cadastro de Produtos</title>
     </head>
     <body>
         <!-- Input para teste -->
@@ -101,9 +101,6 @@
                                 <div class="col-md-8">
                                     <h5>Produtos:</h5>
                                 </div>
-                                <div class="col-md-4">
-                                    <button class="button" onclick="addRow('form_produto')"> </button>
-                                </div>
                             </div>
                             <div class="col-md-12" id="container">
                                 <div class="row" id="form_produto1">
@@ -143,8 +140,8 @@
                                     </div>
                                     <div class="col-md-1">
                                         <div class="form-group">
-                                            <label>Adicionar</label>
-                                            <button type="button" onClick="addRow('form_produto')"></button>
+                                            <label>Remover</label>
+                                            <button type="button" onClick="naoPodeRemover()">-</button>
                                         </div>
                                     </div>
                                 </div> 
