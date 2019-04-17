@@ -43,30 +43,28 @@ public class FornecedoresDAO {
         return retorno;
     }
 
-    public static boolean atualizar(Fornecedores fornecedor) throws ClassNotFoundException, SQLException {
+    public boolean atualizar(Fornecedores fornecedor) throws ClassNotFoundException, SQLException {
 
         boolean retorno = false;
 
-        String sql = "UPDATE fornecedores SET nome=?,"
-                + "cnpj=?, telefone=?, endereco=?, numero=?, complemento=?, cep=?,bairro=?,cidade=?,estado=? "
-                + "WHERE id=?";
+        String sql = "UPDATE fornecedores SET nome=?,telefone=?, endereco=?, numero=?, complemento=?, cep=?, bairro=?, cidade=?, estado=?"
+                + "WHERE cnpj=?";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);) {
 
             stmt.setString(1, fornecedor.getNome());
-            stmt.setString(2, fornecedor.getCnpj());
-            stmt.setString(3, fornecedor.getTelefone());
-            stmt.setString(4, fornecedor.getEndereco());
-            stmt.setString(5, fornecedor.getNumero());
-            stmt.setString(6, fornecedor.getComplemento());
-            stmt.setString(7, fornecedor.getCep());
-            stmt.setString(8, fornecedor.getBairro());
-            stmt.setString(9, fornecedor.getCidade());
-            stmt.setString(10, fornecedor.getEstado());
-            stmt.setInt(11, fornecedor.getID());
+            stmt.setString(2, fornecedor.getTelefone());
+            stmt.setString(3, fornecedor.getEndereco());
+            stmt.setString(4, fornecedor.getNumero());
+            stmt.setString(5, fornecedor.getComplemento());
+            stmt.setString(6, fornecedor.getCep());
+            stmt.setString(7, fornecedor.getBairro());
+            stmt.setString(8, fornecedor.getCidade());
+            stmt.setString(9, fornecedor.getEstado());
+            stmt.setString(10, fornecedor.getCnpj());
 
-            stmt.executeUpdate();
+           stmt.executeUpdate();
 
         }
         return retorno;
@@ -84,7 +82,7 @@ public class FornecedoresDAO {
             ResultSet resultados = stmt.executeQuery();
 
             while (resultados.next()) {
-                f.setID(resultados.getInt("id"));
+               
                 f.setNome(resultados.getString("nome"));
                 f.setCnpj(resultados.getString("cnpj"));
                 f.setTelefone(resultados.getString("telefone"));
@@ -103,8 +101,8 @@ public class FornecedoresDAO {
 
     public List<Fornecedores> listar() throws ClassNotFoundException, SQLException {
 
-        String sql = "SELECT id, nome,cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado"
-                + "FROM bartades WHERE enabled = true";
+        String sql = "SELECT id, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado"
+                + "FROM fornecedores AND ENABLED = true";
 
         List<Fornecedores> lista = new ArrayList<Fornecedores>();
 
@@ -133,13 +131,13 @@ public class FornecedoresDAO {
         return lista;
     }
 
-    public void remover(int id) throws ClassNotFoundException, SQLException {
+    public void remover(String cnpj) throws ClassNotFoundException, SQLException {
 
-        String sql = "UPDATE fornecedores SET ENABLED=false WHERE id= ?";
+        String sql = "UPDATE fornecedores SET ENABLED = false WHERE cnpj= ?";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);) {
-            stmt.setInt(1, id);
+            stmt.setString(1, cnpj);
             stmt.executeUpdate();
 
         }

@@ -3,6 +3,7 @@ package com.bartades.servlets;
 import com.bartades.dao.FornecedoresDAO;
 import com.bartades.model.Fornecedores;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,13 +47,16 @@ public class BuscarFornecedores extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String bt1 = request.getParameter("btAlterar");
-        String bt2 = request.getParameter("btExcluir");
 
         FornecedoresDAO forn = new FornecedoresDAO();
         Fornecedores fornecedor = new Fornecedores();
-        fornecedor.setID(Integer.parseInt(request.getParameter("codigoBusca")));
-        fornecedor.setNome(request.getParameter("nome"));
+
+        String bt1 = request.getParameter("btAlterar");
+        String bt2 = request.getParameter("btExcluir");
+
+        //  fornecedor.setID(Integer.parseInt(request.getParameter("codigoBusca")));
+        fornecedor.setCnpj(request.getParameter("cnpjBusca"));
+        fornecedor.setNome(request.getParameter("nomeBusca"));
         fornecedor.setTelefone(request.getParameter("telefoneBusca"));
         fornecedor.setEndereco(request.getParameter("enderecoBusca"));
         fornecedor.setNumero(request.getParameter("numeroBusca"));
@@ -61,18 +65,19 @@ public class BuscarFornecedores extends HttpServlet {
         fornecedor.setBairro(request.getParameter("bairroBusca"));
         fornecedor.setCidade(request.getParameter("cidadeBusca"));
         fornecedor.setEstado(request.getParameter("estadoBusca"));
+        fornecedor.setCnpj(request.getParameter("cnpjBusca"));
 
         try {
             if (bt1 != null) {
                 forn.atualizar(fornecedor);
             } else if (bt2 != null) {
-                forn.remover(Integer.parseInt(request.getParameter("codigoBusca")));
+                forn.remover(request.getParameter("cnpjBusca"));
             }
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Erro");
         }
 
-        request.getRequestDispatcher("bootstrap/buscarFornecedor.jsp").forward(request, response);
+        request.getRequestDispatcher("buscarFornecedor.jsp").forward(request, response);
         //response.sendRedirect("bootstrap/cliente.jsp");
 
     }

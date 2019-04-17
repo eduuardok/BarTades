@@ -42,7 +42,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="CadastroFornecedores.jsp">Cadastro</a>
-                                        <a class="dropdown-item" href="BuscarFornecedor.jsp">Buscar</a>
+                                        <a class="dropdown-item" href="buscarFornecedor.jsp">Buscar</a>
                                     </div>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>

@@ -244,7 +244,7 @@
                 #banner_popup {
                     position: absolute;
                     left:45%;
-                    top: 0.5%;
+                    top: 0.2%;
                     filter:alpha(opacity=70);
                     opacity: 0.7;
                     -moz-opacity:0.7;
