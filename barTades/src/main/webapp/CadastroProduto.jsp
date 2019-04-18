@@ -72,7 +72,7 @@
 								<label for="nomeProduto">Nome do produto</label> <input
 									type="text" class="form-control" id="nomeProduto"
 									value="${nomeProduto}" name="nomeProduto"
-									placeholder="Digite o nome do produto">
+									placeholder="Digite o nome do produto" required>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -89,7 +89,7 @@
 									type="text" class="form-control" id="valorCompraProduto"
 									value="${precoCompra}" name="valorCompraProduto"
 									placeholder="Valor de compra"
-									onKeyPress="return(moeda(this,'.',',',event))">
+									onKeyPress="return(moeda(this,'.',',',event))" required>
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -98,14 +98,14 @@
 									type="text" class="form-control" id="valorVendaProduto"
 									value="${precoVenda}" name="valorVendaProduto"
 									placeholder="Valor de venda"
-									onKeyPress="return(moeda(this,'.',',',event))">
+									onKeyPress="return(moeda(this,'.',',',event))" required>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="categoriaProduto">Categoria</label> <select
 									class="form-control" id="categoriaProduto"
-									name="categoriaProduto">
+									name="categoriaProduto" required>
 
 									<option value="${categoriaProduto}">${categoriaProduto}</option>
 
@@ -122,7 +122,7 @@
 							<div class="form-group">
 								<label for="fornecedorProduto">Fornecedor</label> <select
 									class="form-control" id="fornecedorProduto"
-									name="fornecedorProduto">
+									name="fornecedorProduto" required>
 
 
 									<option value="${fornecedorProduto}">${fornecedorProduto}</option>
@@ -142,7 +142,7 @@
 							<div class="form-group">
 								<label for="disponibilidadeProduto">Habilitação</label> <select
 									class="form-control" id="disponibilidadeProduto"
-									name="disponibilidadeProduto">
+									name="disponibilidadeProduto" required>
 
 									<c:if test="${action == 'editarProduto'}">
 										<option value="${disponibilidadeProduto}">
@@ -184,20 +184,19 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<p>Deseja salvar?</p>
+										<p>Deseja realmente salvar?</p>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Cancelar</button>
-										<button type="submit" class="btn btn-primary" name="idProduto"
-											value="${idProduto}">Sim</button>
+										<button type="submit" class="btn btn-primary" name="idProduto" 
+											value="${idProduto}" >Sim</button>
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						<!-- Modal de confirmação -->
-						
+
+						<!-- Modal de confirmação -->						
 							<div class="modal fade" id="produtoModalSucesso" tabindex="-1"
 							role="dialog" aria-labelledby="exampleModalLabel"
 							aria-hidden="true">

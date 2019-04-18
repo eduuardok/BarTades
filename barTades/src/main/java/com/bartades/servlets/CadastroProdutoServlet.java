@@ -37,10 +37,10 @@ public class CadastroProdutoServlet extends HttpServlet {
 		ProdutoController.SalvarProduto(nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
 				Double.parseDouble(valorCompra), fornecedorProduto, disponibilidadeProduto);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
-		dispatcher.forward(request, response);
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
+		//dispatcher.forward(request, response);
 
-		
+		response.sendRedirect("visualizarProdutos");
 
 	}
 
