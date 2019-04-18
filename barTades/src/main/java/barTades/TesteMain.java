@@ -9,9 +9,11 @@ import java.awt.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.bartades.controller.ProdutoController;
 import com.bartades.dao.FornecedoresDAO;
 import com.bartades.dao.UsuarioDAO;
 import com.bartades.model.Fornecedores;
+import com.bartades.model.Produto;
 import com.bartades.model.Usuario;
 
 /**
@@ -28,21 +30,13 @@ public class TesteMain {
 		//	System.out.println(u.getNome());
 		//}
 		
-		ArrayList<Fornecedores> listaFornecedores = FornecedoresDAO.listar();
-		
-		for(int i = 0; i < listaFornecedores.size(); i++) {
-			//System.out.println(f.getNome());
-			if(listaFornecedores.get(i).getNome().equals("FornecedorTesteDois")) {
-			System.out.println(listaFornecedores.get(i).getNome());
-			listaFornecedores.remove(i);
-		}
-		
-		}
-		
-		for(Fornecedores f : listaFornecedores) {
-			System.out.println("Novo array");
-			System.out.println(f.getNome());
-		}
+//		ArrayList<Produto> listaProdutos = ProdutoController.listarProdutos();
+//		
+//		for(Produto p : listaProdutos) {
+//			System.out.println(p.getDisponibilidade());
+//		}
+//		
+//		ProdutoController.AtualizarProduto(1, "testeUpdate", "testeUpdate", "Bebidas", 12.0, 13.0, "teste do brasil ltda", 0, 0);
 		
 	}
 

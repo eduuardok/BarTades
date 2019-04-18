@@ -134,7 +134,7 @@ public class ProdutoDAO {
             insert.setDouble(4, p.getPrecoVenda());
             insert.setDouble(5, p.getPrecoCompra());
             insert.setInt(6, encontrarIdFornecedor(p.getFornecedor()));
-            insert.setBoolean(7, p.isDisponivel());
+            insert.setBoolean(7, p.getDisponibilidade());
             
             
             int linhasAfetadas = insert.executeUpdate();
@@ -171,7 +171,7 @@ public class ProdutoDAO {
             update.setDouble(5, p.getPrecoCompra());
             update.setInt(6, encontrarIdFornecedor(p.getFornecedor()));
             update.setInt(7, p.getQuantidade());
-            update.setBoolean(8, p.isDisponivel());
+            update.setBoolean(8, p.getDisponibilidade());
             update.setInt(9, p.getId());
             
             int linhasAfetadas = update.executeUpdate();

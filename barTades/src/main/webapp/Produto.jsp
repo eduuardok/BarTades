@@ -34,7 +34,6 @@
 <body>
     <body>
         
-        <input type="hidden" class="teste" value="" />
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -89,6 +88,7 @@
                     <th scope="col">Fornecedor</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Quantidade em estoque</th>
+                    <th scope="col">Habilitado</th>
                     <th scope="col">Opções</th>
                 </tr>
             </thead>
@@ -105,6 +105,13 @@
                     <td>${produtos['fornecedor']}</td>
                     <td>${produtos['descricao']}</td>
                     <td>${produtos['quantidade']}</td>
+                    
+                    <td>
+                    <c:if test="${produtos['disponibilidade'] == true}">Habilitado</c:if>
+                    
+                    <c:if test="${produtos['disponibilidade'] == false}">Desabilitado</c:if>
+                    
+                    </td>
                     <td><a href="editarProduto?idProduto=${produtos['id']}"><button type="button" class="btn btn-outline-dark">Editar</button></a></td>
                 </tr>
             </c:forEach>
@@ -178,153 +185,7 @@
                 </div>
             </div>
         </footer>
->>>>>>> e8e6daf1ee6f1c7cb42dd335e21b65bdd22a0325
-
-	<input type="hidden" class="teste" value="" />
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<a class="navbar-brand" href="index.jsp">HOME</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link"
-								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-								role="button" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"> Produtos </a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
-										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
-								</div></li>
-							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
-						</ul>
-						<form class="form-inline my-2 my-lg-0">
-							<input class="form-control mr-sm-2" type="search"
-								placeholder="Buscar" aria-label="Search">
-							<button class="btn btn-outline-success my-2 my-sm-0"
-								type="submit">Buscar</button>
-						</form>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-	<br>
-	<h3>Visualização de produtos</h3>
-
-
-	<table class="table table-hover" action="visualizarProdutos">
-		<thead class="thead-dark">
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Nome</th>
-				<th scope="col">Categoria</th>
-				<th scope="col">Preço venda</th>
-				<th scope="col">Preço compra</th>
-				<th scope="col">Fornecedor</th>
-				<th scope="col">Descrição</th>
-				<th scope="col">Quantidade em estoque</th>
-				<th scope="col">Opções</th>
-			</tr>
-		</thead>
-		<tbody>
-
-
-			<c:forEach var="produtos" items="${listaDeProdutos}">
-				<tr>
-					<th scope="row">${produtos['id']}</th>
-					<td>${produtos['nome']}</td>
-					<td>${produtos['categoria']}</td>
-					<td>${produtos['precoVenda']}</td>
-					<td>${produtos['precoCompra']}</td>
-					<td>${produtos['fornecedor']}</td>
-					<td>${produtos['descricao']}</td>
-					<td>${produtos['quantidade']}</td>
-					<td><a href="editarProduto?idProduto=${produtos['id']}"><button
-								type="button" class="btn btn-outline-dark">Editar</button></a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<br>
-	<footer class="section footer-classic context-dark bg-image"
-		style="background: #2d3246;">
-		<br>
-		<div class="container">
-			<div class="row row-30">
-				<div class="col-md-4 col-xl-5">
-					<div class="pr-xl-4">
-						<a class="brand" href="index.html"><img
-							src="https://img.icons8.com/color/50/000000/bar.png"></a>
-						<p>N&oacute;s somos uma empresa focada no melhor atendimento e
-							experi&ecirc;ncia do nosso cliente.</p>
-						<!-- Rights -->
-						<p class="rights">
-							<span>ï¿½ï¿½ </span><span class="copyright-year">2019</span><span>ï¿½</span><span>BarTades</span><span>.ï¿½</span><span>All
-								Rights Reserved.</span>
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<dl class="contact-list">
-						<dt>Endere&ccedil;o:</dt>
-						<dd>798 South Park Avenue, Jaipur, Raj</dd>
-					</dl>
-					<dl class="contact-list">
-						<dt>E-mail:</dt>
-						<dd>
-							<a href="mailto:#">dkstudioin@gmail.com</a>
-						</dd>
-					</dl>
-					<dl class="contact-list">
-						<dt>Telefones:</dt>
-						<dd>
-							<a href="tel:#">+91 7568543012</a> <span>or</span> <a
-								href="tel:#">+91 9571195353</a>
-						</dd>
-					</dl>
-				</div>
-				<div class="col-md-4 col-xl-3">
-					<ul class="nav-list">
-						<li><a href="#">Usu&aacute;rios </a></li>
-						<li><a href="#">Fornecedores</a></li>
-						<li><a href="#">Franquias</a></li>
-						<li><a href="#">Produtos</a></li>
-						<li><a href="#">Contate-nos</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="row no-gutters social-container">
-			<div class="col">
-				<a class="social-inner" href="#"><span
-					class="icon mdi mdi-facebook"></span><span>Facebook</span></a>
-			</div>
-			<div class="col">
-				<a class="social-inner" href="#"><span
-					class="icon mdi mdi-instagram"></span><span>instagram</span></a>
-			</div>
-			<div class="col">
-				<a class="social-inner" href="#"><span
-					class="icon mdi mdi-twitter"></span><span>twitter</span></a>
-			</div>
-			<div class="col">
-				<a class="social-inner" href="#"><span
-					class="icon mdi mdi-youtube-play"></span><span>google</span></a>
-			</div>
-		</div>
-	</footer>
-
+        
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

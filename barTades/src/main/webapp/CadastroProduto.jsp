@@ -140,9 +140,22 @@
 								<label for="disponibilidadeProduto">Habilitação</label> <select
 									class="form-control" id="disponibilidadeProduto" 
 									name="disponibilidadeProduto">
+									
+									<c:if test="${action == 'editarProduto'}">
+									<option value="${disponibilidadeProduto}">
+									<c:if test="${disponibilidadeProduto == true}">Habilitado</c:if>
+									<c:if test="${disponibilidadeProduto == false}">Desabilitado</c:if>
+									</option>
+									<c:if test="${disponibilidadeProduto == true}"><option value="false">Desabilitado</option></c:if>
+									<c:if test="${disponibilidadeProduto == false}"><option value="true">Habilitado</option></c:if>
+									</c:if>
+									
+									<c:if test="${action == 'cadastroProduto'}">
 									<option value=""></option>
-									<option value="1">Habilitado</option>
-									<option value="0">Desabilitado</option>
+									<option value="true">Habilitado</option>
+									<option value="false">Desabilitado</option>
+									</c:if>
+									
 								</select>
 							</div>
 						</div>

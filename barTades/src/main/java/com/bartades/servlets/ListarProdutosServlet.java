@@ -35,6 +35,9 @@ public class ListarProdutosServlet extends HttpServlet {
 		try {
 			List<Produto> listaProdutos = ProdutoController.listarProdutos();
 			request.setAttribute("listaDeProdutos", listaProdutos);	
+			for(Produto p : listaProdutos) {
+				System.out.println(p.getDisponibilidade());
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("Produto.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {

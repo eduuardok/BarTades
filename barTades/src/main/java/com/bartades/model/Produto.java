@@ -112,7 +112,7 @@ public class Produto {
     	this.disponibilidade = disponibilidade;
     }
     
-    public boolean isDisponivel(){
+    public boolean getDisponibilidade(){
     	return this.disponibilidade;
     }
     

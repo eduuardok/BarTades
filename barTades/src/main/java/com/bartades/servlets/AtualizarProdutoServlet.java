@@ -41,6 +41,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		String descricaoProduto = request.getParameter("descricaoProduto");
 		String idProduto = request.getParameter("idProduto");
 		boolean disponibilidadeProduto = Boolean.parseBoolean(request.getParameter("disponibilidadeProduto"));
+		System.out.println(disponibilidadeProduto);
 		
 		ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
 				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto);
@@ -65,7 +66,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 			request.setAttribute("precoCompra", produto.get(0).getPrecoCompra());
 			request.setAttribute("fornecedorProduto", produto.get(0).getFornecedor());
 			request.setAttribute("descricaoProduto", produto.get(0).getDescricao());
-			request.setAttribute("disponibilidadeProduto", produto.get(0).isDisponivel());
+			request.setAttribute("disponibilidadeProduto", produto.get(0).getDisponibilidade());
 			request.setAttribute("idProduto", id);
 			request.setAttribute("action", "editarProduto");
 			ArrayList<Categoria> listaCategorias = CategoriaController.listarCategorias();
