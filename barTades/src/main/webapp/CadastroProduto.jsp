@@ -104,6 +104,8 @@
 									class="form-control" id="categoriaProduto" 
 									name="categoriaProduto">
 									
+									<option value="${categoriaProduto}">${categoriaProduto}</option>
+									
 									<c:forEach var="categorias" items="${listaCategorias}">
 									
 									<option value="${categorias['nome']}">${categorias['nome']}</option>
@@ -116,21 +118,31 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="fornecedorProduto">Fornecedor</label> <select
-									class="form-control" id="fornecedorProduto" value="${fornecedorProduto}"
+									class="form-control" id="fornecedorProduto" 
 									name="fornecedorProduto">
-									<option value="FornecedorTeste">FornecedorTeste</option>
-									<option value="FornecedorTesteDois">FornecedorTesteDois</option>
-
+									
+									
+									<option value="${fornecedorProduto}">${fornecedorProduto}</option>
+									
+									<c:forEach var="fornecedores" items="${listaFornecedores}">
+									
+		
+									<option value="${fornecedores['nome']}">${fornecedores['nome']}</option>
+													
+									
+									</c:forEach>
+									
 								</select>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label for="disponibilidadeProduto">Disponibilidade</label> <select
-									class="form-control" id="disponibilidadeProduto" value="${disponibilidadeProduto}"
+								<label for="disponibilidadeProduto">Habilitação</label> <select
+									class="form-control" id="disponibilidadeProduto" 
 									name="disponibilidadeProduto">
-									<option value="1">Disponivel</option>
-									<option value="0">Indisponivel</option>
+									<option value=""></option>
+									<option value="1">Habilitado</option>
+									<option value="0">Desabilitado</option>
 								</select>
 							</div>
 						</div>

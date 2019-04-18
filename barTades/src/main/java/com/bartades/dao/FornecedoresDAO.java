@@ -99,12 +99,12 @@ public class FornecedoresDAO {
         return f;
     }
 
-    public List<Fornecedores> listar() throws ClassNotFoundException, SQLException {
+    public static ArrayList<Fornecedores> listar() throws ClassNotFoundException, SQLException {
 
-        String sql = "SELECT id, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado"
-                + "FROM fornecedores AND ENABLED = true";
+        String sql = "SELECT id, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado \n"
+                + "FROM fornecedores where ENABLED = true";
 
-        List<Fornecedores> lista = new ArrayList<Fornecedores>();
+        ArrayList<Fornecedores> lista = new ArrayList<Fornecedores>();
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);) {

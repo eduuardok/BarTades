@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bartades.controller.CategoriaController;
 import com.bartades.controller.ProdutoController;
+import com.bartades.dao.FornecedoresDAO;
 import com.bartades.model.Categoria;
+import com.bartades.model.Fornecedores;
 
 @WebServlet(urlPatterns = "/cadastroProduto")
 public class CadastroProdutoServlet extends HttpServlet {
@@ -49,7 +51,9 @@ public class CadastroProdutoServlet extends HttpServlet {
 		
 		try {
 			ArrayList<Categoria> listaCategorias = CategoriaController.listarCategorias();
+			ArrayList<Fornecedores> listaFornecedores = FornecedoresDAO.listar();
 			request.setAttribute("listaCategorias", listaCategorias);
+			request.setAttribute("listaFornecedores", listaFornecedores);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

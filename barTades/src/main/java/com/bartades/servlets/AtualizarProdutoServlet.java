@@ -1,5 +1,6 @@
 package com.bartades.servlets;
 
+import java.awt.List;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,13 +16,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bartades.controller.CategoriaController;
 import com.bartades.controller.ProdutoController;
+import com.bartades.dao.FornecedoresDAO;
 import com.bartades.model.Categoria;
+import com.bartades.model.Fornecedores;
 import com.bartades.model.Produto;
 
 @WebServlet(urlPatterns = "/editarProduto")
 public class AtualizarProdutoServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	public void limparForm(HttpServletRequest request, HttpServletResponse response) {
+
+	}
 
 	private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
@@ -38,10 +45,8 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
 				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("visualizarProdutos");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
 		dispatcher.forward(request, response);
-
-		
 
 	}
 	
@@ -64,6 +69,18 @@ public class AtualizarProdutoServlet extends HttpServlet {
 			request.setAttribute("idProduto", id);
 			request.setAttribute("action", "editarProduto");
 			ArrayList<Categoria> listaCategorias = CategoriaController.listarCategorias();
+			for(int i = 0; i < listaCategorias.size(); i++) {
+				if(listaCategorias.get(i).getNome().equals(produto.get(0).getCategoria())) {
+				listaCategorias.remove(i);
+			}
+			}
+			ArrayList<Fornecedores> listaFornecedores = FornecedoresDAO.listar(); 
+			for(int i = 0; i < listaFornecedores.size(); i++) {
+				if(listaFornecedores.get(i).getNome().equals(produto.get(0).getFornecedor())) {
+				listaFornecedores.remove(i);
+			}
+			}
+			request.setAttribute("listaFornecedores", listaFornecedores);
 			request.setAttribute("listaCategorias", listaCategorias);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
