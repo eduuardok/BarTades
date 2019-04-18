@@ -54,7 +54,7 @@
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item"><a class="nav-link"
                                                         href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
-                               <li class="nav-item dropdown">
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Fornecedores
                                     </a>
@@ -99,7 +99,7 @@
 
                     <form role="form" action="${pageContext.request.contextPath}/buscarFornecedor" method="post">
                         <input type="hidden" name="cnpjBusca" value="${listaFornecedores.cnpj}">
-                      
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
