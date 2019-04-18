@@ -38,15 +38,14 @@
 								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item dropdown">
-        						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          						Produtos
-        						</a>
-        						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         					    <a class="dropdown-item" href="cadastroProduto">Cadastro</a>
-          						<a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
-        					</div>
-     					 </li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Produtos </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
+										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+								</div></li>
 							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
@@ -71,96 +70,155 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="nomeProduto">Nome do produto</label> <input
-									type="text" class="form-control" id="nomeProduto" value="${nomeProduto}"
-									name="nomeProduto" placeholder="Digite o nome do produto">
+									type="text" class="form-control" id="nomeProduto"
+									value="${nomeProduto}" name="nomeProduto"
+									placeholder="Digite o nome do produto">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="descricaoProduto">Descrição</label> <input
-									type="text" class="form-control" id="descricaoProduto" value ="${descricaoProduto}"
-									name="descricaoProduto" placeholder="Descrição do produto">
+									type="text" class="form-control" id="descricaoProduto"
+									value="${descricaoProduto}" name="descricaoProduto"
+									placeholder="Descrição do produto">
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="valorCompraProduto">Preço de compra</label> <input
-									type="text" class="form-control" id="valorCompraProduto" value = "${precoCompra}"
-									name="valorCompraProduto" placeholder="Valor de compra" 
+									type="text" class="form-control" id="valorCompraProduto"
+									value="${precoCompra}" name="valorCompraProduto"
+									placeholder="Valor de compra"
 									onKeyPress="return(moeda(this,'.',',',event))">
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="valorVendaProduto">Preço de venda</label> <input
-									type="text" class="form-control" id="valorVendaProduto" value = "${precoVenda}"
-									name="valorVendaProduto" placeholder="Valor de venda"
+									type="text" class="form-control" id="valorVendaProduto"
+									value="${precoVenda}" name="valorVendaProduto"
+									placeholder="Valor de venda"
 									onKeyPress="return(moeda(this,'.',',',event))">
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="categoriaProduto">Categoria</label> <select
-									class="form-control" id="categoriaProduto" 
+									class="form-control" id="categoriaProduto"
 									name="categoriaProduto">
-									
+
 									<option value="${categoriaProduto}">${categoriaProduto}</option>
-									
+
 									<c:forEach var="categorias" items="${listaCategorias}">
-									
-									<option value="${categorias['nome']}">${categorias['nome']}</option>
-									
+
+										<option value="${categorias['nome']}">${categorias['nome']}</option>
+
 									</c:forEach>
-								
+
 								</select>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="fornecedorProduto">Fornecedor</label> <select
-									class="form-control" id="fornecedorProduto" 
+									class="form-control" id="fornecedorProduto"
 									name="fornecedorProduto">
-									
-									
+
+
 									<option value="${fornecedorProduto}">${fornecedorProduto}</option>
-									
+
 									<c:forEach var="fornecedores" items="${listaFornecedores}">
-									
-		
-									<option value="${fornecedores['nome']}">${fornecedores['nome']}</option>
-													
-									
+
+
+										<option value="${fornecedores['nome']}">${fornecedores['nome']}</option>
+
+
 									</c:forEach>
-									
+
 								</select>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="disponibilidadeProduto">Habilitação</label> <select
-									class="form-control" id="disponibilidadeProduto" 
+									class="form-control" id="disponibilidadeProduto"
 									name="disponibilidadeProduto">
-									
+
 									<c:if test="${action == 'editarProduto'}">
-									<option value="${disponibilidadeProduto}">
-									<c:if test="${disponibilidadeProduto == true}">Habilitado</c:if>
-									<c:if test="${disponibilidadeProduto == false}">Desabilitado</c:if>
-									</option>
-									<c:if test="${disponibilidadeProduto == true}"><option value="false">Desabilitado</option></c:if>
-									<c:if test="${disponibilidadeProduto == false}"><option value="true">Habilitado</option></c:if>
+										<option value="${disponibilidadeProduto}">
+											<c:if test="${disponibilidadeProduto == true}">Habilitado</c:if>
+											<c:if test="${disponibilidadeProduto == false}">Desabilitado</c:if>
+										</option>
+										<c:if test="${disponibilidadeProduto == true}">
+											<option value="false">Desabilitado</option>
+										</c:if>
+										<c:if test="${disponibilidadeProduto == false}">
+											<option value="true">Habilitado</option>
+										</c:if>
 									</c:if>
-									
+
 									<c:if test="${action == 'cadastroProduto'}">
-									<option value=""></option>
-									<option value="true">Habilitado</option>
-									<option value="false">Desabilitado</option>
+										<option value=""></option>
+										<option value="true">Habilitado</option>
+										<option value="false">Desabilitado</option>
 									</c:if>
-									
+
 								</select>
 							</div>
 						</div>
 						<div class="col-md-12">
-							<button type="submit" class="btn btn-success" name="idProduto" value="${idProduto}">Cadastrar</button>
+							<button type="button" class="btn btn-success" data-toggle="modal"
+								data-target="#produtoModal">Cadastrar</button>
+						</div>
+						<!-- Modal de cadastro -->
+						<div class="modal fade" id="produtoModal" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Produto</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p>Deseja salvar?</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancelar</button>
+										<button type="submit" class="btn btn-primary" name="idProduto"
+											value="${idProduto}">Sim</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Modal de confirmação -->
+						
+							<div class="modal fade" id="produtoModalSucesso" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Sucesso!</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p>Produto cadastrado com sucesso!</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Prosseguir</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</form>

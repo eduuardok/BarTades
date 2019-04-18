@@ -41,11 +41,10 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		String descricaoProduto = request.getParameter("descricaoProduto");
 		String idProduto = request.getParameter("idProduto");
 		boolean disponibilidadeProduto = Boolean.parseBoolean(request.getParameter("disponibilidadeProduto"));
-		System.out.println(disponibilidadeProduto);
 		
-		ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
+		boolean testeModal = ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
 				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto);
-		
+		request.setAttribute("teste", testeModal);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
 		dispatcher.forward(request, response);
 
