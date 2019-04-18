@@ -45,9 +45,11 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		boolean testeModal = ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
 				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto);
 		request.setAttribute("teste", testeModal);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
-		dispatcher.forward(request, response);
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
+		//dispatcher.forward(request, response);
 
+		response.sendRedirect("visualizarProdutos");
+		
 	}
 	
 
