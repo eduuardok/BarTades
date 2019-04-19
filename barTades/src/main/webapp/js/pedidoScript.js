@@ -3,10 +3,52 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+console.log("entrou");
+$('#modalExemplo').on('shown.bs.modal', function () {
+    console.log("deu")
+    $('#modalExemplo').trigger('focus')
+})
+
+function teste(obj) {
+    console.log(obj.data - target);
+}
+
 
 function formataReal(valor) {
     return valor.toLocaleString('pt-BR'), event;
 }
+
+function formatQtde(obj) {
+
+    var result = "";
+    var letra = "";
+    var texto = obj.value;
+
+    for (var i = 0; i < texto.length; i++) {
+        letra = texto.substring(i, i + 1);
+        if (isNumber(letra)) {
+            result = result + letra;
+        }
+    }
+
+    obj.value = result;
+
+}
+
+function isNumber(letra) {
+
+    var result = false;
+
+    if (letra >= 0 || letra <= 9) {
+        result = true;
+    }
+
+    return result;
+
+}
+
+
+
 
 function moeda(a, e, r, t) {
     let n = ""
@@ -46,33 +88,45 @@ function moeda(a, e, r, t) {
 }
 
 var count = 2;
+var remover;
+
+function setRemover(texto) {
+    remover = texto;
+}
+
 function addRow(texto) {
     var doc = document.getElementById("container"); //.append(addNewRow(count));
     var texto = '<div class="row" id="form_produto' + count + '">' +
             document.getElementById(texto).innerHTML +
+            '<div class="col-md-1">' +
+            '   <div class="form-group">' +
+            '   <div>Remover</div> ' +
+            '   <button type="button" data-toggle="modal" data-target="#deleteModal" style="margin-top: 8px; margin-left: 23px" onclick="setRemover(' + count + ')" class="btn btn-outline-danger">-</button>' +
+            '</div>' +
             '</div>';
 
-    doc.insertAdjacentHTML("afterbegin", texto.replace("naoPodeRemover()", "deleteRow('form_produto" + count + "')"));
+
+
+    doc.insertAdjacentHTML("afterbegin", texto);
 
     count = count + 1;
 
 }
 
-function naoPodeRemover() {
-    alert("O primeiro produto nao pode ser removido.")
-}
 
-function deleteRow(texto) {
+function deleteRow() {
 
-    var doc = document.getElementById(texto);
+    var doc = document.getElementById('form_produto' + remover);
     doc.innerHTML = "";
 
 }
 
-;
 
-function addNewRow(count) {
-    var newrow = '';
-    return newrow;
-}
+
+
+
+
+
+
+
 
