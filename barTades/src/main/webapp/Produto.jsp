@@ -62,12 +62,13 @@
      					 </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
                             </ul>
+                            
                             <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search"
-                                       placeholder="Buscar" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0"
-                                        type="submit">Buscar</button>
+                                <input id="campoBusca" class="form-control mr-sm-2" type="text"
+                                       placeholder="Buscar produto" aria-label="Search">
                             </form>
+                             
+                  
                         </div>
                     </nav>
                 </div>
@@ -92,7 +93,8 @@
                     <th scope="col">Opções</th>
                 </tr>
             </thead>
-            <tbody>
+            
+            <tbody id="tabelaProdutos">
                     
                   
               <c:forEach var="produtos" items="${listaDeProdutos}">
@@ -197,5 +199,17 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+		
+<script>
+$(document).ready(function(){
+  $("#campoBusca").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tabelaProdutos tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 </body>
 </html>
