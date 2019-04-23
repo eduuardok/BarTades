@@ -53,6 +53,7 @@
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
                             </ul>
+                            <h3>Bem-vindo, ${sessionScope.usuario.nome}</h3>
                             <form class="form-inline my-2 my-lg-0">
                                 <input class="form-control mr-sm-2" type="search"
                                        placeholder="Buscar" aria-label="Search">

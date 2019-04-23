@@ -13,7 +13,44 @@ import com.bartades.model.Usuario;
 
 public class UsuarioDAO {
 
-	
+	public static Usuario encontrarUsuarioPorEmail(String email) throws SQLException, ClassNotFoundException {
+		
+		Usuario u = new Usuario();
+		
+		 String sql = "select u.id,\n" +
+	                "u.nome, \n" +
+	                "u.email, \n" +
+	                "u.telefone, \n" +
+	                "u.cpf, \n" +
+	                "u.sexo, \n" +
+	                "u.senha, \n" +
+	                "u.unidade_atuacao, \n" +
+	                "u.cargo \n" +
+	                "from usuarios u \n" +
+	                "where u.email = ?;";
+		
+		 try(Connection conn = InterfaceConexao.obterConexao();
+	                PreparedStatement select = conn.prepareStatement(sql);
+	                ){
+	                select.setString(1, email);
+	                ResultSet retorno = select.executeQuery();
+	                
+	                while(retorno.next()){
+	                	u = new Usuario(
+	                            retorno.getInt("id"),
+	                            retorno.getString("nome"),
+	                            retorno.getString("cpf"),
+	                            retorno.getString("email"),
+	                            retorno.getString("senha"),
+	                            retorno.getString("telefone"),
+	                            retorno.getString("sexo"),
+	                            retorno.getString("unidade_atuacao"),
+	                            retorno.getString("cargo"));
+	            }
+	                
+	        }
+		 return u;
+	}
 	
 	public static ArrayList<Usuario> encontrarUsuarioPorId(int id) throws ClassNotFoundException, SQLException {
 		
