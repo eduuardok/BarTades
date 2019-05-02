@@ -12,14 +12,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.bartades.controller.CategoriaController;
-import com.bartades.controller.ProdutoController;
+import com.bartades.dao.CategoriaDAO;
 import com.bartades.dao.FornecedoresDAO;
+import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Categoria;
 import com.bartades.model.Fornecedores;
+import com.bartades.model.Produto;
 
-@WebServlet(urlPatterns = "/cadastroProduto")
+/**
+ * 
+ * @author ELuna
+ *
+ */
+@WebServlet(name = "CadastrarProduto", urlPatterns = "/cadastroProduto")
 public class CadastroProdutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,12 +38,11 @@ public class CadastroProdutoServlet extends HttpServlet {
 		String valorVenda = request.getParameter("valorVendaProduto").replace(".", "").replace(",", ".");
 		String descricaoProduto = request.getParameter("descricaoProduto");
 		boolean disponibilidadeProduto = Boolean.parseBoolean(request.getParameter("disponibilidadeProduto"));
-
-		ProdutoController.SalvarProduto(nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
-				Double.parseDouble(valorCompra), fornecedorProduto, disponibilidadeProduto);
 		
-		//RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
-		//dispatcher.forward(request, response);
+		Produto p = new Produto(nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
+				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto);
+
+		ProdutoDAO.SalvarProduto(p);
 
 		response.sendRedirect("visualizarProdutos");
 
@@ -50,7 +54,7 @@ public class CadastroProdutoServlet extends HttpServlet {
 
 		
 		try {
-			ArrayList<Categoria> listaCategorias = CategoriaController.listarCategorias();
+			ArrayList<Categoria> listaCategorias = CategoriaDAO.listarCategorias();
 			ArrayList<Fornecedores> listaFornecedores = FornecedoresDAO.listar();
 			request.setAttribute("listaCategorias", listaCategorias);
 			request.setAttribute("listaFornecedores", listaFornecedores);

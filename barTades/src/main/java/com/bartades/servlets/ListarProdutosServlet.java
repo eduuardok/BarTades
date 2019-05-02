@@ -5,9 +5,8 @@
  */
 package com.bartades.servlets;
 
-import com.bartades.controller.ProdutoController;
+import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Produto;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,16 +23,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ELuna
  */
-@WebServlet(urlPatterns = "/visualizarProdutos")
+@WebServlet(name = "VisualizarProdutosServlet", urlPatterns = "/visualizarProdutos")
 public class ListarProdutosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		
 
 		try {
-			List<Produto> listaProdutos = ProdutoController.listarProdutos();
+			
+			List<Produto> listaProdutos = ProdutoDAO.listarProdutos();
 			request.setAttribute("listaDeProdutos", listaProdutos);	
 			RequestDispatcher rd = request.getRequestDispatcher("Produto.jsp");
 			rd.forward(request, response);

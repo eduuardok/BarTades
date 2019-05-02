@@ -8,8 +8,6 @@ package barTades;
 import java.awt.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import com.bartades.controller.ProdutoController;
 import com.bartades.dao.FornecedoresDAO;
 import com.bartades.dao.UsuarioDAO;
 import com.bartades.model.Fornecedores;

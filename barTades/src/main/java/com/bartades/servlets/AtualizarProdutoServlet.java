@@ -14,13 +14,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bartades.controller.CategoriaController;
-import com.bartades.controller.ProdutoController;
+
+import com.bartades.dao.CategoriaDAO;
 import com.bartades.dao.FornecedoresDAO;
+import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Categoria;
 import com.bartades.model.Fornecedores;
 import com.bartades.model.Produto;
 
+/**
+ * 
+ * @author ELuna
+ *
+ */
 @WebServlet(urlPatterns = "/editarProduto")
 public class AtualizarProdutoServlet extends HttpServlet {
 	
@@ -42,11 +48,12 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		String idProduto = request.getParameter("idProduto");
 		boolean disponibilidadeProduto = Boolean.parseBoolean(request.getParameter("disponibilidadeProduto"));
 		
-		boolean testeModal = ProdutoController.AtualizarProduto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
+		Produto p = new Produto(Integer.parseInt(idProduto), nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
 				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto);
+		
+		boolean testeModal = ProdutoDAO.AtualizarProduto(p);
+		
 		request.setAttribute("teste", testeModal);
-		//RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
-		//dispatcher.forward(request, response);
 
 		response.sendRedirect("visualizarProdutos");
 		
@@ -60,7 +67,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("idProduto"));
 		request.setAttribute("pagina", "ATUALIZAR PRODUTO");
 		try {
-			ArrayList<Produto> produto = ProdutoController.encontrarProdutoPorId(id);
+			ArrayList<Produto> produto = ProdutoDAO.encontrarProdutoPorId(id);
 			request.setAttribute("nomeProduto", produto.get(0).getNome());
 			request.setAttribute("categoriaProduto", produto.get(0).getCategoria());
 			request.setAttribute("precoVenda", produto.get(0).getPrecoVenda());
@@ -70,7 +77,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 			request.setAttribute("disponibilidadeProduto", produto.get(0).getDisponibilidade());
 			request.setAttribute("idProduto", id);
 			request.setAttribute("action", "editarProduto");
-			ArrayList<Categoria> listaCategorias = CategoriaController.listarCategorias();
+			ArrayList<Categoria> listaCategorias = CategoriaDAO.listarCategorias();
 			for(int i = 0; i < listaCategorias.size(); i++) {
 				if(listaCategorias.get(i).getNome().equals(produto.get(0).getCategoria())) {
 				listaCategorias.remove(i);
