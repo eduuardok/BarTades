@@ -1,39 +1,31 @@
 package com.bartades.servlets;
 
-import com.bartades.dao.FornecedoresDAO;
-import com.bartades.model.Fornecedores;
+import com.bartades.controller.EstadoController;
+import com.bartades.controller.FornecedorController;
+import com.bartades.model.Estado;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 /**
  *
  * @author Antonio Carlos
  */
-@WebServlet(name = "FornecedoresServlet", urlPatterns = {"/FornecedoresServlet"})
+@WebServlet(urlPatterns = {"/FornecedoresServlet"})
 public class FornecedoresServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("Fornecedores.jsp");
-        dispatcher.forward(request, response);
+    private static final long serialVersionUID = 1L;
 
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
 
         String nome = request.getParameter("nome");
         String cnpj = request.getParameter("cnpj");
@@ -44,24 +36,43 @@ public class FornecedoresServlet extends HttpServlet {
         String cep = request.getParameter("cep");
         String bairro = request.getParameter("bairro");
         String cidade = request.getParameter("cidade");
-        String estado = request.getParameter("estado");
+        String estado = request.getParameter("estadoFornecedor");
+        boolean disponibilidade = Boolean.parseBoolean(request.getParameter("disponibilidadeFornecedor"));
+        FornecedorController.SalvarFornecedor(nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado, disponibilidade);
 
-        // Cria um novo contato e salva
-        // através do DAO
-        Fornecedores novo = new Fornecedores(nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado);
-        FornecedoresDAO dao = new FornecedoresDAO();
+        //RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
+        //dispatcher.forward(request, response);
+        response.sendRedirect("visualizarFornecedor");
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
         try {
-            dao.incluir(novo);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CadastroUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            ArrayList<Estado> listarEstados = EstadoController.listarEstados();
+
+            request.setAttribute("listarEstados", listarEstados);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
-        // Usa a sessao para manter os dados após
-        // redirect (técnica POST-REDIRECT-GET),
-        // usado para evitar dupla submissão dos
-        // dados
-        HttpSession sessao = request.getSession();
-        sessao.setAttribute("novoFornecedor", novo);
-        response.sendRedirect("Fornecedores.jsp?gravou");
+        request.setAttribute("action", "FornecedoresServlet");
+        request.setAttribute("pagina", "CADASTRO DE FORNECEDORES");
+        request.getRequestDispatcher("CadastroFornecedores.jsp").forward(request, response);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
+        try {
+            processarRequisicao("POST", request, response);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(FornecedoresServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

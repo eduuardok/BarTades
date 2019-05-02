@@ -17,12 +17,13 @@ public class Fornecedores {
     private String bairro;
     private String cidade;
     private String estado;
+    private boolean disponibilidade;
 
     public Fornecedores() {
     }
 
     public Fornecedores(String nome, String cnpj, String telefone, String endereco, String numero, String complemento, String cep,
-            String bairro, String cidade, String estado) {
+            String bairro, String cidade, String estado, boolean disponibilidade) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.telefone = telefone;
@@ -33,10 +34,11 @@ public class Fornecedores {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.disponibilidade = disponibilidade;
     }
 
     public Fornecedores(int id, String nome, String cnpj, String telefone, String endereco, String numero, String complemento, String cep,
-            String bairro, String cidade, String estado) {
+            String bairro, String cidade, String estado, boolean disponibilidade) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.telefone = telefone;
@@ -47,6 +49,7 @@ public class Fornecedores {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.disponibilidade = disponibilidade;
     }
 
     /**
@@ -165,6 +168,14 @@ public class Fornecedores {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public void setDisponibilidade(boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
+    public boolean getDisponibilidade() {
+        return this.disponibilidade;
     }
 
     @Override

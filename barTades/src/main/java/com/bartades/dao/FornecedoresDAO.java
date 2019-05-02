@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -19,7 +18,7 @@ public class FornecedoresDAO {
         boolean retorno = false;
 
         String sql = "INSERT INTO fornecedores (nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado, enabled) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, true)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, fornecedor.getNome());
@@ -31,8 +30,8 @@ public class FornecedoresDAO {
             stmt.setString(7, fornecedor.getCep());
             stmt.setString(8, fornecedor.getBairro());
             stmt.setString(9, fornecedor.getCidade());
-            stmt.setString(10, fornecedor.getEstado());
-
+            stmt.setInt(10, encontrarIdEstado(fornecedor.getEstado()));
+            stmt.setBoolean(11, fornecedor.getDisponibilidade());
             int linhasAfetadas = stmt.executeUpdate();
 
             if (linhasAfetadas > 0) {
@@ -43,11 +42,31 @@ public class FornecedoresDAO {
         return retorno;
     }
 
-    public boolean atualizar(Fornecedores fornecedor) throws ClassNotFoundException, SQLException {
+    private static int encontrarIdEstado(String nomeEstado) throws ClassNotFoundException, SQLException {
+
+        String sql = "SELECT id FROM estado WHERE nome = ?";
+
+        int idEstado = 0;
+
+        try (Connection conn = InterfaceConexao.obterConexao();
+                PreparedStatement select = conn.prepareStatement(sql);) {
+            select.setString(1, nomeEstado);
+            ResultSet retorno = select.executeQuery();
+
+            while (retorno.next()) {
+                idEstado = retorno.getInt("id");
+            }
+
+        }
+
+        return idEstado;
+    }
+
+    public static boolean atualizar(Fornecedores fornecedor) throws ClassNotFoundException, SQLException {
 
         boolean retorno = false;
 
-        String sql = "UPDATE fornecedores SET nome=?,telefone=?, endereco=?, numero=?, complemento=?, cep=?, bairro=?, cidade=?, estado=?"
+        String sql = "UPDATE fornecedores SET nome=?,telefone=?, endereco=?, numero=?, complemento=?, cep=?, bairro=?, cidade=?, estado=?, enabled=?"
                 + "WHERE cnpj=?";
 
         try (Connection conn = InterfaceConexao.obterConexao();
@@ -61,10 +80,11 @@ public class FornecedoresDAO {
             stmt.setString(6, fornecedor.getCep());
             stmt.setString(7, fornecedor.getBairro());
             stmt.setString(8, fornecedor.getCidade());
-            stmt.setString(9, fornecedor.getEstado());
-            stmt.setString(10, fornecedor.getCnpj());
+            stmt.setInt(9, encontrarIdEstado(fornecedor.getEstado()));
+            stmt.setBoolean(10, fornecedor.getDisponibilidade());
+            stmt.setString(11, fornecedor.getCnpj());
 
-           stmt.executeUpdate();
+            stmt.executeUpdate();
 
         }
         return retorno;
@@ -82,7 +102,7 @@ public class FornecedoresDAO {
             ResultSet resultados = stmt.executeQuery();
 
             while (resultados.next()) {
-               
+
                 f.setNome(resultados.getString("nome"));
                 f.setCnpj(resultados.getString("cnpj"));
                 f.setTelefone(resultados.getString("telefone"));
@@ -101,7 +121,7 @@ public class FornecedoresDAO {
 
     public static ArrayList<Fornecedores> listar() throws ClassNotFoundException, SQLException {
 
-        String sql = "SELECT id, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado \n"
+        String sql = "SELECT id, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado, ENABLED \n"
                 + "FROM fornecedores where ENABLED = true";
 
         ArrayList<Fornecedores> lista = new ArrayList<Fornecedores>();
@@ -122,8 +142,9 @@ public class FornecedoresDAO {
                 String bairro = resultados.getString("bairro");
                 String cidade = resultados.getString("cidade");
                 String estado = resultados.getString("Estado");
+                boolean disponibilidade = resultados.getBoolean("ENABLED");
 
-                Fornecedores fornecedor = new Fornecedores(id, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado);
+                Fornecedores fornecedor = new Fornecedores(id, nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado, disponibilidade);
                 lista.add(fornecedor);
             }
 
@@ -131,16 +152,37 @@ public class FornecedoresDAO {
         return lista;
     }
 
-    public void remover(String cnpj) throws ClassNotFoundException, SQLException {
+    public static ArrayList<Fornecedores> listarFornecedores() throws ClassNotFoundException, SQLException {
 
-        String sql = "UPDATE fornecedores SET ENABLED = false WHERE cnpj= ?";
+        ArrayList<Fornecedores> listarFornecedores = new ArrayList();
+
+        String sql = "select fornecedores.id, fornecedores.nome, fornecedores.cnpj, fornecedores.telefone, fornecedores.endereco, fornecedores.numero, fornecedores.complemento, fornecedores.cep, fornecedores.bairro, fornecedores.cidade, fornecedores.enabled, estado.nome  as estado from fornecedores inner join estado on fornecedores.estado = estado.id;\n"
+                + "\n";
 
         try (Connection conn = InterfaceConexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql);) {
-            stmt.setString(1, cnpj);
-            stmt.executeUpdate();
+                PreparedStatement select = conn.prepareStatement(sql);
+                ResultSet retorno = select.executeQuery()) {
+
+            while (retorno.next()) {
+                Fornecedores f = new Fornecedores(
+                        retorno.getInt("id"),
+                        retorno.getString("nome"),
+                        retorno.getString("cnpj"),
+                        retorno.getString("telefone"),
+                        retorno.getString("endereco"),
+                        retorno.getString("numero"),
+                        retorno.getString("complemento"),
+                        retorno.getString("cep"),
+                        retorno.getString("bairro"),
+                        retorno.getString("cidade"),
+                        retorno.getString("estado"),
+                        retorno.getBoolean("enabled"));
+                listarFornecedores.add(f);
+            }
 
         }
+
+        return listarFornecedores;
     }
 
 }

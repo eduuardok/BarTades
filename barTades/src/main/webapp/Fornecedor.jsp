@@ -1,14 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+<%-- 
+    Document   : VisualizarProdutos
+    Created on : Apr 6, 2019, 9:56:38 PM
+    Author     : ELuna
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="ISO-8859-1">
         <script
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/produtoScript.js"></script>
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script text="javascript">
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+        </script>
         <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,11 +28,12 @@
               crossorigin="anonymous">
         <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-        <title>Cadastro de Fornecedores</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Visualizar Fornecedores</title>
     </head>
     <body>
-        <!-- Input para teste -->
-        <input type="hidden" class="teste" value="" />
+    <body>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -34,8 +47,9 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item"><a class="nav-link"
-                                                        href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
+                                <li class="nav-item"><a class="nav-link" href="CadastroUsuario.jsp">Usu&aacute;rios
+                                    </a></li>
+
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Fornecedores
@@ -45,102 +59,81 @@
                                         <a class="dropdown-item" href="visualizarFornecedor">Visualizar</a>
                                     </div>
                                 </li>
+
                                 <li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Produtos
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="cadastroProduto">Cadastro</a>
+                                        <a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+                                    </div>
+                                </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
                             </ul>
+
                             <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search"
-                                       placeholder="Buscar" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0"
-                                        type="submit">Buscar</button>
+                                <input id="campoBusca" class="form-control mr-sm-2" type="text"
+                                       placeholder="Bucar Fornecedor" aria-label="Search">
                             </form>
+
+
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
         <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                   <h3>${pagina}</h3>
-                    <!-- 				FORMULARIO DE CADASTRO -->
-                    <form role="form" action="${action}" method="POST">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label >Raz�o Social</label> <input
-                                        type="text" name="nome" class="form-control" placeholder="Digite sua raz�o social...">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label >CNPJ</label> <input type="text" name="cnpj" placeholder="Digite seu CNPJ..." class="form-control" maxlength="18">
-                                </div>
-                            </div>
+        <h3>Visualização de Fornecedores</h3>
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Telefone</label> <input type="text" name="telefone" class="form-control" placeholder="Digite seu telefone..." maxlength="14">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label >Rua</label> <input type="text" name="endereco" class="form-control" placeholder="Digite a rua..." maxlength="14">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>N�mero</label> <input type="text" name="numero" class="form-control" placeholder="Digite o n�mero..." maxlength="14">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Complemento</label> <input type="text" name="complemento" class="form-control" placeholder="Digite o complemento..." maxlength="14">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Cep</label> <input type="text" name="cep" class="form-control" placeholder="Digite seu CEP..." maxlength="14">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Bairro</label> <input type="text" name="bairro" class="form-control" placeholder="Digite seu Bairro..." maxlength="14">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Cidade</label> <input type="text" name="cidade" class="form-control" placeholder="Digite sua cidade..." maxlength="14">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="estadoFornecedor">Estados</label> <select
-                                        class="form-control" id="estadoFornecedor"
-                                        name="estadoFornecedor" required>
+        <table class="table table-hover" action="visualizarFornecedor" >
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Razao Social</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Complemento</th>
+                    <th scope="col">CEP</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Habilitado</th>
+                    <th scope="col">Opções</th>
+                </tr>
+            </thead>
 
-                                        <option value="${estadoFornecedor}">${estadoFornecedor}</option>
+            <tbody id="tabelaFornecedores">
 
-                                        <c:forEach var="estados" items="${listarEstados}">
 
-                                            <option value="${estados['nome']}">${estados['nome']}</option>
+                <c:forEach var="fornecedor" items="${listaDeFornecedores}">
+                    <tr> 	
+                        <th scope="row">${fornecedor['id']}</th>
+                        <td>${fornecedor['nome']}</td>
+                        <td>${fornecedor['cnpj']}</td>
+                        <td>${fornecedor['telefone']}</td>
+                        <td>${fornecedor['endereco']}</td>
+                        <td>${fornecedor['numero']}</td>
+                        <td>${fornecedor['complemento']}</td>
+                        <td>${fornecedor['cep']}</td>
+                        <td>${fornecedor['bairro']}</td>
+                        <td>${fornecedor['cidade']}</td>
+                        <td>${fornecedor['estado']}</td>
 
-                                        </c:forEach>
+                        <td>
+                            <c:if test="${fornecedor['enabled'] == true}">Habilitado</c:if>
 
-                                    </select>
-                                </div>
-                            </div>
+                            <c:if test="${fornecedor['enabled'] == false}">Desabilitado</c:if>
 
-                            <div class="col-md-12">
-                                <button type="submit" name="idFornecedor" value="${idFornecedor}"  class="btn btn-success">Cadastrar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                            </td>
+                            <td><a href="editarProduto?idProduto=${fornecedor['id']}"><button type="button" class="btn btn-outline-dark">Editar</button></a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
         <br>
         <footer class="section footer-classic context-dark bg-image"
                 style="background: #2d3246;">
@@ -155,7 +148,7 @@
                                 experi&ecirc;ncia do nosso cliente.</p>
                             <!-- Rights -->
                             <p class="rights">
-                                <span>�� </span><span class="copyright-year">2019</span><span>�</span><span>BarTades</span><span>.�</span><span>All
+                                <span>ï¿½ï¿½ </span><span class="copyright-year">2019</span><span>ï¿½</span><span>BarTades</span><span>.ï¿½</span><span>All
                                     Rights Reserved.</span>
                             </p>
                         </div>
@@ -221,6 +214,17 @@
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+        <script>
+            $(document).ready(function () {
+                $("#campoBusca").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#tabelaFornecedores tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
 
     </body>
 </html>
