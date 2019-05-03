@@ -6,7 +6,7 @@ package com.bartades.model;
  */
 public class Fornecedores {
 
-    private int ID;
+    private int _ID;
     private String nome;
     private String cnpj;
     private String telefone;
@@ -17,12 +17,11 @@ public class Fornecedores {
     private String bairro;
     private String cidade;
     private String estado;
+    private boolean disponibilidade;
 
-    public Fornecedores() {
-    }
-
+    
     public Fornecedores(String nome, String cnpj, String telefone, String endereco, String numero, String complemento, String cep,
-            String bairro, String cidade, String estado) {
+            String bairro, String cidade, String estado, boolean disponibilidade) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.telefone = telefone;
@@ -33,10 +32,13 @@ public class Fornecedores {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.disponibilidade = disponibilidade;
     }
 
     public Fornecedores(int id, String nome, String cnpj, String telefone, String endereco, String numero, String complemento, String cep,
-            String bairro, String cidade, String estado) {
+            String bairro, String cidade, String estado, boolean disponibilidade) {
+       
+        this._ID = id;
         this.nome = nome;
         this.cnpj = cnpj;
         this.telefone = telefone;
@@ -47,20 +49,16 @@ public class Fornecedores {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.disponibilidade = disponibilidade;
     }
 
+    public Fornecedores() {
+    }
     /**
      * @return the ID
      */
     public int getID() {
-        return ID;
-    }
-
-    /**
-     * @param ID the ID to set
-     */
-    public void setID(int ID) {
-        this.ID = ID;
+        return this._ID;
     }
 
     /**
@@ -165,6 +163,14 @@ public class Fornecedores {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public void setDisponibilidade(boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
+    public boolean getDisponibilidade() {
+        return this.disponibilidade;
     }
 
     @Override

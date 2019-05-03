@@ -80,3 +80,38 @@ primary key (id));
 insert into categoria (nome) values ('Bebidas');
 insert into categoria (nome) values ('Porções');
 insert into categoria (nome) values ('Aperitivos');
+
+create table estado (
+id int not null auto_increment,
+nome varchar(100),
+primary key (id));
+
+insert into estado (nome) values ('Acre');
+insert into estado (nome) values ('Alagoas');
+insert into estado (nome) values ('Amapá');
+insert into estado (nome) values ('Amazonas');
+insert into estado (nome) values ('Bahia');
+insert into estado (nome) values ('Ceará');
+insert into estado (nome) values ('Distrito Federal');
+insert into estado (nome) values ('Espírito Santo');
+insert into estado (nome) values ('Goiás');
+insert into estado (nome) values ('Maranhão');
+insert into estado (nome) values ('Mato Grosso');
+insert into estado (nome) values ('Mato Grosso do Sul');
+insert into estado (nome) values ('Minas Gerais');
+insert into estado (nome) values ('Pará');
+insert into estado (nome) values ('Paraíba');
+insert into estado (nome) values ('Paraná');
+insert into estado (nome) values ('Pernambuco');
+insert into estado (nome) values ('Piauí');
+insert into estado (nome) values ('Rio de Janeiro');
+insert into estado (nome) values ('Rio Grande do Norte');
+insert into estado (nome) values ('Rio Grande do Sul');
+insert into estado (nome) values ('Rondônia');
+insert into estado (nome) values ('Roraima');
+insert into estado (nome) values ('Santa Catarina');
+insert into estado (nome) values ('São Paulo');
+insert into estado (nome) values ('Sergipe');
+insert into estado (nome) values ('Tocantins');
+
+
