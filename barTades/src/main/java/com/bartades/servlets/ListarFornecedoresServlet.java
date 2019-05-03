@@ -7,10 +7,11 @@ package com.bartades.servlets;
 
 /**
  *
- * @author suporte_vi
+ * @author Antonio Carlos
  */
 
-import com.bartades.controller.FornecedorController;
+
+import com.bartades.dao.FornecedoresDAO;
 import com.bartades.model.Fornecedores;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -34,7 +35,7 @@ public class ListarFornecedoresServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			List<Fornecedores> listarFornecedores = FornecedorController.listarFornecedores();
+			List<Fornecedores> listarFornecedores = FornecedoresDAO.listarFornecedores();
 			request.setAttribute("listaDeFornecedores", listarFornecedores);	
 			RequestDispatcher rd = request.getRequestDispatcher("Fornecedor.jsp");
 			rd.forward(request, response);

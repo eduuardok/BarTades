@@ -64,55 +64,83 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                   <h3>${pagina}</h3>
+                    <h3>${pagina}</h3>
                     <!-- 				FORMULARIO DE CADASTRO -->
                     <form role="form" action="${action}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label >Razão Social</label> <input
-                                        type="text" name="nome" class="form-control" placeholder="Digite sua razão social...">
+                                    <label >Razão Social</label> 
+                                    <input type="text" name="nome" value="${nome}" class="form-control" placeholder="Digite sua razão social...">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label >CNPJ</label> <input type="text" name="cnpj" placeholder="Digite seu CNPJ..." class="form-control" maxlength="18">
+                                    <label >CNPJ</label> <input type="text" name="cnpj" value="${cnpj}" placeholder="Digite seu CNPJ..." class="form-control" maxlength="18">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Telefone</label> <input type="text" name="telefone" class="form-control" placeholder="Digite seu telefone..." maxlength="14">
+                                    <label>Telefone</label> <input type="text" name="telefone" value="${telefone}" class="form-control" placeholder="Digite seu telefone..." maxlength="14">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label >Rua</label> <input type="text" name="endereco" class="form-control" placeholder="Digite a rua..." maxlength="14">
+                                    <label >Rua</label> <input type="text" name="endereco" value="${endereco}" class="form-control" placeholder="Digite a rua..." maxlength="14">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Número</label> <input type="text" name="numero" class="form-control" placeholder="Digite o número..." maxlength="14">
+                                    <label>Número</label> <input type="text" name="numero" value="${numero}" class="form-control" placeholder="Digite o número..." maxlength="14">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Complemento</label> <input type="text" name="complemento" class="form-control" placeholder="Digite o complemento..." maxlength="14">
+                                    <label>Complemento</label> <input type="text" value="${complemento}" name="complemento" class="form-control" placeholder="Digite o complemento..." maxlength="14">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Cep</label> <input type="text" name="cep" class="form-control" placeholder="Digite seu CEP..." maxlength="14">
+                                    <label>Cep</label> <input type="text" name="cep" value="${cep}" class="form-control" placeholder="Digite seu CEP..." maxlength="14">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Bairro</label> <input type="text" name="bairro" class="form-control" placeholder="Digite seu Bairro..." maxlength="14">
+                                    <label>Bairro</label> <input type="text" value="${bairro}" name="bairro" class="form-control" placeholder="Digite seu Bairro..." maxlength="14">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Cidade</label> <input type="text" name="cidade" class="form-control" placeholder="Digite sua cidade..." maxlength="14">
+                                    <label>Cidade</label> <input type="text"  value="${cidade}" name="cidade" class="form-control" placeholder="Digite sua cidade..." maxlength="14">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="disponibilidadeFornecedor">Disponibilidade</label> <select
+                                        class="form-control" id="disponibilidadeProduto"
+                                        name="disponibilidadeFornecedor" required>
+
+                                        <c:if test="${action == 'editarFornecedor'}">
+                                            <option value="${disponibilidadeFornecedor}">
+                                                <c:if test="${disponibilidadeFornecedor == true}">Habilitado</c:if>
+                                                <c:if test="${disponibilidadeFornecedor == false}">Desabilitado</c:if>
+                                                </option>
+                                            <c:if test="${disponibilidadeFornecedor == true}">
+                                                <option value="false">Desabilitado</option>
+                                            </c:if>
+                                            <c:if test="${disponibilidadeFornecedor == false}">
+                                                <option value="true">Habilitado</option>
+                                            </c:if>
+                                        </c:if>
+
+                                        <c:if test="${action == 'FornecedoresServlet'}">
+                                            <option value=""></option>
+                                            <option value="true">Habilitado</option>
+                                            <option value="false">Desabilitado</option>
+                                        </c:if>
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -134,7 +162,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <button type="submit" name="idFornecedor" value="${idFornecedor}"  class="btn btn-success">Cadastrar</button>
+                                <button type="submit" name="idFornecedor" value="${idFornecedor}" class="btn btn-success">Cadastrar</button>
                             </div>
                         </div>
                     </form>

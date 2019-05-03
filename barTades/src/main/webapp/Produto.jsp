@@ -99,7 +99,7 @@
                   
               <c:forEach var="produtos" items="${listaDeProdutos}">
                 <tr> 	
-                    <th scope="row">${produtos['id']}</th>
+                    <th scope="row"> ${produtos['id']} </th>
                     <td>${produtos['nome']}</td>
                     <td>${produtos['categoria']}</td>
                     <td>${produtos['precoVenda']}</td>

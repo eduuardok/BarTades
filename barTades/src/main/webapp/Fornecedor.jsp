@@ -111,7 +111,7 @@
 
                 <c:forEach var="fornecedor" items="${listaDeFornecedores}">
                     <tr> 	
-                        <th scope="row">${fornecedor['id']}</th>
+                       <th scope="row"> ${fornecedor['ID']} </th>
                         <td>${fornecedor['nome']}</td>
                         <td>${fornecedor['cnpj']}</td>
                         <td>${fornecedor['telefone']}</td>
@@ -124,12 +124,12 @@
                         <td>${fornecedor['estado']}</td>
 
                         <td>
-                            <c:if test="${fornecedor['enabled'] == true}">Habilitado</c:if>
+                            <c:if test="${fornecedor['disponibilidade'] == true}">Habilitado</c:if>
 
-                            <c:if test="${fornecedor['enabled'] == false}">Desabilitado</c:if>
+                            <c:if test="${fornecedor['disponibilidade'] == false}">Desabilitado</c:if>
 
                             </td>
-                            <td><a href="editarProduto?idProduto=${fornecedor['id']}"><button type="button" class="btn btn-outline-dark">Editar</button></a></td>
+                            <td><a href="editarFornecedor?idFornecedor=${fornecedor['ID']}"><button type="button" class="btn btn-outline-dark">Editar</button></a></td>
                     </tr>
                 </c:forEach>
             </tbody>

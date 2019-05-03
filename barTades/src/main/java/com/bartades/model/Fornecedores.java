@@ -6,7 +6,7 @@ package com.bartades.model;
  */
 public class Fornecedores {
 
-    private int ID;
+    private int _ID;
     private String nome;
     private String cnpj;
     private String telefone;
@@ -19,9 +19,7 @@ public class Fornecedores {
     private String estado;
     private boolean disponibilidade;
 
-    public Fornecedores() {
-    }
-
+    
     public Fornecedores(String nome, String cnpj, String telefone, String endereco, String numero, String complemento, String cep,
             String bairro, String cidade, String estado, boolean disponibilidade) {
         this.nome = nome;
@@ -39,6 +37,8 @@ public class Fornecedores {
 
     public Fornecedores(int id, String nome, String cnpj, String telefone, String endereco, String numero, String complemento, String cep,
             String bairro, String cidade, String estado, boolean disponibilidade) {
+       
+        this._ID = id;
         this.nome = nome;
         this.cnpj = cnpj;
         this.telefone = telefone;
@@ -52,18 +52,13 @@ public class Fornecedores {
         this.disponibilidade = disponibilidade;
     }
 
+    public Fornecedores() {
+    }
     /**
      * @return the ID
      */
     public int getID() {
-        return ID;
-    }
-
-    /**
-     * @param ID the ID to set
-     */
-    public void setID(int ID) {
-        this.ID = ID;
+        return this._ID;
     }
 
     /**
