@@ -21,67 +21,67 @@ import com.bartades.model.Usuario;
  * @author ELuna
  *
  */
-@WebFilter(filterName = "AutorizacaoFilter", servletNames = { "CadastrarProduto" })
+@WebFilter(urlPatterns = {"/WEB-INF/jsp/*"}, servletNames = {"CadastrarProduto", "AtualizarProduto", "Home", "VisualizarProdutos", "EditarUsuario", 
+		"BuscarFornecedores", "CadastrarFranquia", "CadastrarUsuario", "FornecedoresServlet", "VisualizarUsuarios", "LogoutServlet"})
 
 public class AutorizacaoFilter implements Filter {
 	
 	
-	private boolean verificarAcesso(Usuario usuario, HttpServletRequest req,
-			HttpServletResponse resp) {
-			String pagina = req.getRequestURI();
-			if (usuario != null && pagina.endsWith("Produto.jsp")) {
-			return true;
-			} else {
-			return false;
-			}
-	}
+	 @Override
+	    public void doFilter(
+	            ServletRequest request,
+	            ServletResponse response,
+	            FilterChain chain) throws IOException, ServletException {
+	        
+	        HttpServletRequest httpRequest = (HttpServletRequest) request;
+	        HttpServletResponse httpResponse = (HttpServletResponse) response;
+	    
+	        
+	        HttpSession sessao = httpRequest.getSession();
+	        
+	        
+	        if (sessao.getAttribute("usuario") == null) {
+	        	
+	            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
+	            return;
+	        }
 
-	
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		// 1) OBTEM AS INFORMACOES DO USUARIO DA SESSAO
-		// A) CAST DOS PARÂMETROS RECEBIDOS
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		// B) TENTA RECUPERAR A SESSÃO DO USUÁRIO
-		HttpSession sessao = httpRequest.getSession();
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		// 2) NA LÓGICA IMPLEMENTADA, SE EXISTIR OBJETO DO USUÁRIO SIGNIFICA
-		// QUE USUÁRIO ESTÁ LOGADO
-		// CASO CONTRÁRIO, REDIRECIONA PARA TELA DE LOGIN
-		if (sessao.getAttribute("usuario") == null) {
-			httpResponse.sendRedirect("login.jsp");
-			return;
-		}
-		
-		try {
-			// 3) VERIFICAR SE USUARIO PODE ACESSAR PAGINA
-			if (verificarAcesso(usuario, httpRequest, httpResponse)) {
-				// CHAMADA QUE ENVIA A REQUISIÇÃO PARA O PRÓXIMO FILTRO OU SERVLET
-				chain.doFilter(request, response);
-			} else {
-				// SE NAO PODER ACESSAR, APRESENTA ERRO
-				httpResponse.sendRedirect("erroNaoAutorizado.jsp");
-			}
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-	}
+	        
+	        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+	       
+	        if (verificarAcesso(usuario, httpRequest, httpResponse)) {
+	           
+	            chain.doFilter(request, response);
+	            
+	        } else {
+	        	httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
+	        }
+	        
+	    }
+	 
+	 private boolean verificarAcesso(Usuario usuario,
+	            HttpServletRequest request,
+	            HttpServletResponse response) {
+	        String paginaAcessada = request.getRequestURI();
+	        if (paginaAcessada.endsWith("/home") || paginaAcessada.endsWith("/cadastroProduto") 
+	        		|| paginaAcessada.endsWith("/editarProduto") || paginaAcessada.endsWith("/visualizarProdutos")
+	        		|| paginaAcessada.endsWith("/editarUsuario") || paginaAcessada.endsWith("/buscarFornecedor")
+	        		|| paginaAcessada.endsWith("/cadastroFranquia") || paginaAcessada.endsWith("/cadastroUsuario")
+	        		|| paginaAcessada.endsWith("/FornecedoresServlet") || paginaAcessada.endsWith("/visualizarUsuarios")
+	        		|| paginaAcessada.endsWith("/logout")) {
+	            return true;
+	        } else {
+	        return false;
+	        }
+	 }
+	    @Override
+	    public void init(FilterConfig filterConfig) throws ServletException {
+	    }
 
-	/**
-	 * ROTINA PARA DESTRUIÇÃO DO FILTRO
-	 */
-	@Override
-	public void destroy() {
-	}
+	    @Override
+	    public void destroy() {
+	    }
 
-	/**
-	 * ROTINA DE INICIALIZAÇÃO DO FILTRO
-	 */
-	@Override
-	public void init(FilterConfig filterConfig) {
-	}
 }
 	
 

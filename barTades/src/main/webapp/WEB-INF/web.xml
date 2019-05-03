@@ -8,20 +8,4 @@
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
     
-    <filter>
-
-            <filter-name>AutorizacaoFilter</filter-name>
-
-            <filter-class>com.bartades.filter.AutorizacaoFilter</filter-class>
-
-      </filter>
-
-      <filter-mapping>
-
-            <filter-name>AutorizacaoFilter</filter-name>
-
-            <url-pattern>/webapp/*</url-pattern>
-
-      </filter-mapping>
-    
 </web-app>

@@ -4,6 +4,9 @@ import java.sql.SQLException;
 
 import com.bartades.dao.UsuarioDAO;
 import com.bartades.model.Usuario;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class loginService {
 	
@@ -18,5 +21,14 @@ public class loginService {
 		}
 		
 	}
-
+	
+	public static boolean isUsuarioLogado(HttpServletRequest request, HttpServletResponse response, HttpSession sessao) {
+		
+		if(sessao.getAttribute("usuario") != null) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 }

@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<a class="navbar-brand" href="index.jsp">HOME</a>
+					<a class="navbar-brand" href="home">HOME</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,9 +35,17 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item"><a class="nav-link"
-								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
+								href="cadastroUsuario">Usu&aacute;rios </a></li>
+							<li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Fornecedores
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="FornecedoresServlet">Cadastro</a>
+                                        <a class="dropdown-item" href="buscarFornecedor">Buscar</a>
+                                    </div>
+                                </li>
+							<li class="nav-item"><a class="nav-link" href="cadastroFranquia">Franquias</a></li>
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 								role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -46,7 +54,10 @@
 									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
 										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
 								</div></li>
-							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
+							
+							<li class="nav-item"><a class="nav-link" href="#">Bem vindo, ${sessionScope.usuario.nome}</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="logout">Fazer logout</a></li>
+                            
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
 							<input class="form-control mr-sm-2" type="search"
@@ -71,7 +82,7 @@
 							<div class="form-group">
 								<label for="nomeProduto">Nome do produto</label> <input
 									type="text" class="form-control" id="nomeProduto"
-									value="${nomeProduto}" name="nomeProduto"
+									value="${produto.nome}" name="nomeProduto"
 									placeholder="Digite o nome do produto" required>
 							</div>
 						</div>
@@ -79,7 +90,7 @@
 							<div class="form-group">
 								<label for="descricaoProduto">Descrição</label> <input
 									type="text" class="form-control" id="descricaoProduto"
-									value="${descricaoProduto}" name="descricaoProduto"
+									value="${produto.descricao}" name="descricaoProduto"
 									placeholder="Descrição do produto">
 							</div>
 						</div>
@@ -87,7 +98,7 @@
 							<div class="form-group">
 								<label for="valorCompraProduto">Preço de compra</label> <input
 									type="text" class="form-control" id="valorCompraProduto"
-									value="${precoCompra}" name="valorCompraProduto"
+									value="${produto.precoCompra}" name="valorCompraProduto"
 									placeholder="Valor de compra"
 									onKeyPress="return(moeda(this,'.',',',event))" required>
 							</div>
@@ -96,7 +107,7 @@
 							<div class="form-group">
 								<label for="valorVendaProduto">Preço de venda</label> <input
 									type="text" class="form-control" id="valorVendaProduto"
-									value="${precoVenda}" name="valorVendaProduto"
+									value="${produto.precoVenda}" name="valorVendaProduto"
 									placeholder="Valor de venda"
 									onKeyPress="return(moeda(this,'.',',',event))" required>
 							</div>
@@ -107,7 +118,7 @@
 									class="form-control" id="categoriaProduto"
 									name="categoriaProduto" required>
 
-									<option value="${categoriaProduto}">${categoriaProduto}</option>
+									<option value="${produto.categoria}">${produto.categoria}</option>
 
 									<c:forEach var="categorias" items="${listaCategorias}">
 
@@ -125,7 +136,7 @@
 									name="fornecedorProduto" required>
 
 
-									<option value="${fornecedorProduto}">${fornecedorProduto}</option>
+									<option value="${produto.fornecedor}">${produto.fornecedor}</option>
 
 									<c:forEach var="fornecedores" items="${listaFornecedores}">
 
@@ -145,14 +156,14 @@
 									name="disponibilidadeProduto" required>
 
 									<c:if test="${action == 'editarProduto'}">
-										<option value="${disponibilidadeProduto}">
-											<c:if test="${disponibilidadeProduto == true}">Habilitado</c:if>
-											<c:if test="${disponibilidadeProduto == false}">Desabilitado</c:if>
+										<option value="${produto.disponibilidade}">
+											<c:if test="${produto.disponibilidade == true}">Habilitado</c:if>
+											<c:if test="${produto.disponibilidade == false}">Desabilitado</c:if>
 										</option>
-										<c:if test="${disponibilidadeProduto == true}">
+										<c:if test="${produto.disponibilidade == true}">
 											<option value="false">Desabilitado</option>
 										</c:if>
-										<c:if test="${disponibilidadeProduto == false}">
+										<c:if test="${produto.disponibilidade == false}">
 											<option value="true">Habilitado</option>
 										</c:if>
 									</c:if>
@@ -190,7 +201,7 @@
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Cancelar</button>
 										<button type="submit" class="btn btn-primary" name="idProduto" 
-											value="${idProduto}" >Sim</button>
+											value="${produto.id}" >Sim</button>
 									</div>
 								</div>
 							</div>

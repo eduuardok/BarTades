@@ -63,7 +63,7 @@ public class CadastroProdutoServlet extends HttpServlet {
 		}
 		request.setAttribute("action", "cadastroProduto");
 		request.setAttribute("pagina", "CADASTRO DE PRODUTO");
-		request.getRequestDispatcher("CadastroProduto.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/CadastroProduto.jsp").forward(request, response);
 
 	}
 

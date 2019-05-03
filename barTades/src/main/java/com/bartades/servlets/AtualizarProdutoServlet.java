@@ -27,15 +27,11 @@ import com.bartades.model.Produto;
  * @author ELuna
  *
  */
-@WebServlet(urlPatterns = "/editarProduto")
+@WebServlet(name = "AtualizarProduto", urlPatterns = "/editarProduto")
 public class AtualizarProdutoServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public void limparForm(HttpServletRequest request, HttpServletResponse response) {
-
-	}
-
 	private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 
@@ -68,14 +64,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 		request.setAttribute("pagina", "ATUALIZAR PRODUTO");
 		try {
 			ArrayList<Produto> produto = ProdutoDAO.encontrarProdutoPorId(id);
-			request.setAttribute("nomeProduto", produto.get(0).getNome());
-			request.setAttribute("categoriaProduto", produto.get(0).getCategoria());
-			request.setAttribute("precoVenda", produto.get(0).getPrecoVenda());
-			request.setAttribute("precoCompra", produto.get(0).getPrecoCompra());
-			request.setAttribute("fornecedorProduto", produto.get(0).getFornecedor());
-			request.setAttribute("descricaoProduto", produto.get(0).getDescricao());
-			request.setAttribute("disponibilidadeProduto", produto.get(0).getDisponibilidade());
-			request.setAttribute("idProduto", id);
+			request.setAttribute("produto", (Produto) produto.get(0));
 			request.setAttribute("action", "editarProduto");
 			ArrayList<Categoria> listaCategorias = CategoriaDAO.listarCategorias();
 			for(int i = 0; i < listaCategorias.size(); i++) {
@@ -95,7 +84,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("CadastroProduto.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/CadastroProduto.jsp").forward(request, response);
 
 	}
 

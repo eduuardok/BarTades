@@ -25,7 +25,7 @@ import com.bartades.model.Usuario;
  *
  * @author Victor
  */
-@WebServlet(urlPatterns = "/visualizarUsuarios")
+@WebServlet(name = "VisualizarUsuarios", urlPatterns = "/visualizarUsuarios")
 public class ListarUsuariosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

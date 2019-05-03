@@ -16,11 +16,8 @@
 <script src="js/produtoScript.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script text="javascript">
-	$(function() {
-		$('[data-toggle="popover"]').popover()
-	})
-</script>
+
+
 <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -31,14 +28,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Visualizar produtos</title>
 </head>
+
 <body>
+
     <body>
-        
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <a class="navbar-brand" href="index.jsp">HOME</a>
+                        <a class="navbar-brand" href="home">HOME</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent"
                                 aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -47,10 +46,18 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item"><a class="nav-link" href="CadastroUsuario.jsp">Usu&aacute;rios
+                                <li class="nav-item"><a class="nav-link" href="cadastroUsuario">Usu&aacute;rios
                                     </a></li>
-                                <li class="nav-item"><a class="nav-link" href="CadastroFornecedores.jsp">Fornecedores</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
+                               <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Fornecedores
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="FornecedoresServlet">Cadastro</a>
+                                        <a class="dropdown-item" href="buscarFornecedor">Buscar</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="cadastroFranquia">Franquias</a></li>
                                 <li class="nav-item dropdown">
         						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           						Produtos
@@ -60,7 +67,10 @@
           						<a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
         					</div>
      					 </li>
-                                <li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
+                                
+                                <li class="nav-item"><a class="nav-link" href="#">Bem vindo, ${sessionScope.usuario.nome}</a> </li>
+                                <li class="nav-item"><a class="nav-link" href="logout">Fazer logout</a></li>
+                                
                             </ul>
                             
                             <form class="form-inline my-2 my-lg-0">
@@ -188,6 +198,8 @@
             </div>
         </footer>
         
+
+        
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
@@ -212,4 +224,5 @@ $(document).ready(function(){
 </script>
 
 </body>
+
 </html>

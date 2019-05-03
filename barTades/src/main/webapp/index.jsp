@@ -51,9 +51,11 @@
                                         <a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
                                     </div>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Bem vindo, ${sessionScope.usuario.nome}</a> </li>
+                                <li class="nav-item"><a class="nav-link" href="logout">Fazer logout</a></li>
+                                
                             </ul>
-                            <h3>Bem-vindo, ${sessionScope.usuario.nome}</h3>
+                            
                             <form class="form-inline my-2 my-lg-0">
                                 <input class="form-control mr-sm-2" type="search"
                                        placeholder="Buscar" aria-label="Search">

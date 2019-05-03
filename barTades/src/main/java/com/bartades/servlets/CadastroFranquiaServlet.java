@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bartades.controller.FranquiaController;
 
-@WebServlet(urlPatterns = "/cadastroFranquia")
+@WebServlet(name = "CadastrarFranquia", urlPatterns = "/cadastroFranquia")
 public class CadastroFranquiaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

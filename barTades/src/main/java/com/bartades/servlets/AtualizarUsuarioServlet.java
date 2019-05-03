@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bartades.controller.UsuarioController;
 import com.bartades.model.Usuario;
 
-@WebServlet(urlPatterns = "/editarUsuario")
+@WebServlet(name = "EditarUsuario", urlPatterns = "/editarUsuario")
 public class AtualizarUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

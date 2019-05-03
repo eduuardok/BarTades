@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = { "/login" })
+@WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -30,10 +30,10 @@ public class LoginServlet extends HttpServlet {
 			Usuario usuarioLogin = UsuarioDAO.encontrarUsuarioPorEmail(email);
 			sessao.setAttribute("loginValido", "true");
 			sessao.setAttribute("usuario", usuarioLogin);
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("home");
 		} else {
 			sessao.setAttribute("loginInvalido", "true");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("login");
 		}
 		
 	}
