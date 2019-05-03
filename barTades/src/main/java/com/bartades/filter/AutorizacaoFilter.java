@@ -21,7 +21,7 @@ import com.bartades.model.Usuario;
  * @author ELuna
  *
  */
-@WebFilter(urlPatterns = {"/WEB-INF/jsp/*"}, servletNames = {"CadastrarProduto", "AtualizarProduto", "Home", "VisualizarProdutos", "EditarUsuario", 
+@WebFilter(filterName = "AutenticacaoFilter", urlPatterns = {"/WEB-INF/jsp/*"}, servletNames = {"CadastrarProduto", "AtualizarProduto", "Home", "VisualizarProdutos", "EditarUsuario", 
 		"BuscarFornecedores", "CadastrarFranquia", "CadastrarUsuario", "FornecedoresServlet", "VisualizarUsuarios", "LogoutServlet"})
 
 public class AutorizacaoFilter implements Filter {
