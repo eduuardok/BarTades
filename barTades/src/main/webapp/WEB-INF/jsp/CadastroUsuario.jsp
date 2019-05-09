@@ -174,7 +174,7 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<p>Produto cadastrado com sucesso!</p>
+										<p>Usuário cadastrado com sucesso!</p>
 									</div>
 									<div class="modal-footer">
 										<button type="submit" name="idUsuario" value="${idUsuario}"

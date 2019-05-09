@@ -12,69 +12,86 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bartades.controller.UsuarioController;
+import com.bartades.dao.FranquiaDAO;
+import com.bartades.model.Franquia;
 import com.bartades.model.Usuario;
 
 @WebServlet(name = "EditarUsuario", urlPatterns = "/editarUsuario")
 public class AtualizarUsuarioServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, ClassNotFoundException, SQLException {
-		
-		String nome = request.getParameter("nomeUsuario");
-		String cpf = request.getParameter("cpfUsuario");
-		String email = request.getParameter("emailUsuario");
-		String senha = request.getParameter("senhaUsuario");
-		String telefone = request.getParameter("telefoneUsuario");
-		String sexo = request.getParameter("sexoUsuario");
-		String cargo = request.getParameter("nivelAcessoUsuario");
-		String unidadeAtuacao = request.getParameter("unidadeAtuacaoUsuario");
-		int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-		
-		Usuario user = new Usuario(idUsuario, nome, cpf, email, senha, telefone, sexo, unidadeAtuacao, cargo);
+    private static final long serialVersionUID = 1L;
 
-		UsuarioController.atualizarUsuario(user);
-		
-		response.sendRedirect("visualizarUsuarios");
+    private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
 
-	}
+        String nome = request.getParameter("nomeUsuario");
+        String cpf = request.getParameter("cpfUsuario");
+        String email = request.getParameter("emailUsuario");
+        String senha = request.getParameter("senhaUsuario");
+        String telefone = request.getParameter("telefoneUsuario");
+        String sexo = request.getParameter("sexoUsuario");
+        String cargo = request.getParameter("nivelAcessoUsuario");
+        String unidadeAtuacao = request.getParameter("unidadeAtuacaoUsuario");
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+        Usuario user = new Usuario(idUsuario, nome, cpf, email, senha, telefone, sexo, unidadeAtuacao, cargo);
 
-		int id = Integer.parseInt(request.getParameter("idUsuario"));
-		request.setAttribute("pagina", "ATUALIZAR USUARIO");
-		try {
-			ArrayList<Usuario> usuario = UsuarioController.encontrarUsuarioPorId(id);
-			request.setAttribute("nomeUsuario", usuario.get(0).getNome());
-			request.setAttribute("emailUsuario", usuario.get(0).getEmail());
-			request.setAttribute("telefoneUsuario", usuario.get(0).getTelefone());
-			request.setAttribute("cpfUsuario", usuario.get(0).getCPF());
-			request.setAttribute("sexoUsuario", usuario.get(0).getSexo());
-			request.setAttribute("unidadeAtuacaoUsuario", usuario.get(0).getUnidadeAtuacao());
-			request.setAttribute("cargoUsuario", usuario.get(0).getCargo());
-			request.setAttribute("idUsuario", usuario.get(0).getId());
-			request.setAttribute("action", "editarUsuario");
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
+        UsuarioController.atualizarUsuario(user);
 
-		request.getRequestDispatcher("/WEB-INF/jsp/CadastroUsuario.jsp").forward(request, response);
+        response.sendRedirect("visualizarUsuarios");
 
-	}
+    }
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-		
-		try {
-			processarRequisicao("POST", request, response);
-		} catch (ClassNotFoundException | SQLException e) {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
 
-			e.printStackTrace();
-		}
+        try {
+            ArrayList<Franquia> franquias = FranquiaDAO.listarFranquias();
+            request.setAttribute("listaFranquias", franquias);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } 
 
-	}
+        int id = Integer.parseInt(request.getParameter("idUsuario"));
+        request.setAttribute("pagina", "ATUALIZAR USUARIO");
+        try {
+            ArrayList<Usuario> usuario = UsuarioController.encontrarUsuarioPorId(id);
+            request.setAttribute("nomeUsuario", usuario.get(0).getNome());
+            request.setAttribute("emailUsuario", usuario.get(0).getEmail());
+            request.setAttribute("telefoneUsuario", usuario.get(0).getTelefone());
+            request.setAttribute("cpfUsuario", usuario.get(0).getCPF());
+            request.setAttribute("sexoUsuario", usuario.get(0).getSexo());
+            request.setAttribute("unidadeAtuacaoUsuario", usuario.get(0).getUnidadeAtuacao());
+            request.setAttribute("cargoUsuario", usuario.get(0).getCargo());
+            request.setAttribute("idUsuario", usuario.get(0).getId());
+            request.setAttribute("action", "editarUsuario");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        request.getRequestDispatcher("/WEB-INF/jsp/CadastroUsuario.jsp").forward(request, response);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
+        try {
+            ArrayList<Franquia> franquias = FranquiaDAO.listarFranquias();
+            request.setAttribute("listaFranquias", franquias);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            processarRequisicao("POST", request, response);
+        } catch (ClassNotFoundException | SQLException e) {
+
+            e.printStackTrace();
+        }
+
+    }
 
 }

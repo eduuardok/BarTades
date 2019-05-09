@@ -114,4 +114,11 @@ insert into estado (nome) values ('São Paulo');
 insert into estado (nome) values ('Sergipe');
 insert into estado (nome) values ('Tocantins');
 
+insert into funcoes (nome, nivel_acesso) values ('Diretor',1);
+insert into funcoes (nome, nivel_acesso) values ('Gerente',2);
+
+insert into unidades (nome, estado, endereco) values ('UND SP', 'SP', 'x');
+insert into unidades (nome, estado, endereco) values ('UND RJ', 'RJ', 'x');
+
+insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Vitor', 'admin@admin.com', '11960940481', '437', 'M', '123456', 1,1);
 
