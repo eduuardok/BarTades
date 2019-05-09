@@ -123,14 +123,14 @@
 									Atua&ccedil;&atilde;o </label> <select class="form-control"
 									id="unidadeAtuacaoUsuario" name="unidadeAtuacaoUsuario">
 									<option value="Und. São Paulo">Und. São Paulo</option>
-									<option value="2">UnidadeTeste2</option>
+									<option value="UnidadeTeste2">UnidadeTeste2</option>
 
 								</select>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<button type="submit" class="btn btn-success"
-								name="idUsuarioHidden" value="${idUsuarioHidden}">Cadastrar</button>
+								name="idUsuario" value="${idUsuario}">Cadastrar</button>
 						</div>
 					</div>
 				</form>

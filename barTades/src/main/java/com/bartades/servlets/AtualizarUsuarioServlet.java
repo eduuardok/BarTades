@@ -29,7 +29,8 @@ public class AtualizarUsuarioServlet extends HttpServlet {
 		String sexo = request.getParameter("sexoUsuario");
 		String cargo = request.getParameter("nivelAcessoUsuario");
 		String unidadeAtuacao = request.getParameter("unidadeAtuacaoUsuario");
-		int idUsuario = Integer.parseInt(request.getParameter("idUsuarioHidden"));
+		int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+		
 		Usuario user = new Usuario(idUsuario, nome, cpf, email, senha, telefone, sexo, unidadeAtuacao, cargo);
 
 		UsuarioController.atualizarUsuario(user);
@@ -53,7 +54,7 @@ public class AtualizarUsuarioServlet extends HttpServlet {
 			request.setAttribute("sexoUsuario", usuario.get(0).getSexo());
 			request.setAttribute("unidadeAtuacaoUsuario", usuario.get(0).getUnidadeAtuacao());
 			request.setAttribute("cargoUsuario", usuario.get(0).getCargo());
-			request.setAttribute("idUsuario", id);
+			request.setAttribute("idUsuario", usuario.get(0).getId());
 			request.setAttribute("action", "editarUsuario");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

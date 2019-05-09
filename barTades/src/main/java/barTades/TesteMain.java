@@ -22,10 +22,10 @@ public class TesteMain {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
-		//ArrayList<Usuario> usuario = UsuarioDAO.encontrarUsuarioPorId(9);
+//		ArrayList<Usuario> usuario = UsuarioDAO.listarUsuarios();
 
 		//for (Usuario u : usuario) {
-		//	System.out.println(u.getNome());
+	//		System.out.println(u.getNome());
 		//}
 		
 //		ArrayList<Produto> listaProdutos = ProdutoController.listarProdutos();
