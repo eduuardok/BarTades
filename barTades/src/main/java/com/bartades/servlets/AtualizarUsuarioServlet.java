@@ -20,8 +20,6 @@ public class AtualizarUsuarioServlet extends HttpServlet {
 
 	private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
-
-		
 		
 		String nome = request.getParameter("nomeUsuario");
 		String cpf = request.getParameter("cpfUsuario");
@@ -31,13 +29,12 @@ public class AtualizarUsuarioServlet extends HttpServlet {
 		String sexo = request.getParameter("sexoUsuario");
 		String cargo = request.getParameter("nivelAcessoUsuario");
 		String unidadeAtuacao = request.getParameter("unidadeAtuacaoUsuario");
-		int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+		int idUsuario = Integer.parseInt(request.getParameter("idUsuarioHidden"));
 		Usuario user = new Usuario(idUsuario, nome, cpf, email, senha, telefone, sexo, unidadeAtuacao, cargo);
 
 		UsuarioController.atualizarUsuario(user);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("visualizarProdutos");
-		dispatcher.forward(request, response);
+		
+		response.sendRedirect("visualizarUsuarios");
 
 	}
 
@@ -62,16 +59,13 @@ public class AtualizarUsuarioServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		request.getRequestDispatcher("CadastroUsuario.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/CadastroUsuario.jsp").forward(request, response);
 
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-
-		String idUsuario = request.getParameter("idUsuario");
-		System.out.println("Id:"+idUsuario);
 		
 		try {
 			processarRequisicao("POST", request, response);

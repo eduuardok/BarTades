@@ -33,20 +33,20 @@ public class ListarProdutosServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		//HttpSession sessao = request.getSession();
-		
-		//if(loginService.isUsuarioLogado(request, response, sessao)) {
+
+		// HttpSession sessao = request.getSession();
+
+		// if(loginService.isUsuarioLogado(request, response, sessao)) {
 		try {
-			
+
 			List<Produto> listaProdutos = ProdutoDAO.listarProdutos();
-			request.setAttribute("listaDeProdutos", listaProdutos);	
+			request.setAttribute("listaDeProdutos", listaProdutos);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Produto.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {
 			Logger.getLogger(ListarProdutosServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		
+
 //		} else {
 //			response.sendRedirect("login");
 //		}
@@ -55,7 +55,7 @@ public class ListarProdutosServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
-}
-	
+
+	}
+
 }

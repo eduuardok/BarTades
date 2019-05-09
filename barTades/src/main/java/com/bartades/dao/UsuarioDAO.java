@@ -170,7 +170,7 @@ public class UsuarioDAO {
         
         boolean retorno = false;
         
-        String sql = "UPDATE usuarios set nome = ?, email = ?, telefone = ?, cpf = ?, sexo = ?, senha = ?, unidade_atuacao = ?, cargo ? WHERE id = ?;";
+        String sql = "UPDATE usuarios set nome = ?, email = ?, telefone = ?, cpf = ?, sexo = ?, senha = ?, unidade_atuacao = ?, cargo = ? WHERE id = ?;";
         
         try(Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement update = conn.prepareStatement(sql);

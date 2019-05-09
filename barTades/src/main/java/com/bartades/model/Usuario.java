@@ -132,5 +132,12 @@ public class Usuario {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha
+				+ ", telefone=" + telefone + ", sexo=" + sexo + ", unidadeAtuacao=" + unidadeAtuacao + ", cargo="
+				+ cargo + "]";
+	}
 
 }

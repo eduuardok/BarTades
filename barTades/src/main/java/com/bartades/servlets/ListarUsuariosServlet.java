@@ -34,9 +34,12 @@ public class ListarUsuariosServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+
+
 			List<Usuario> listaUsuarios = UsuarioController.listarUsuarios();
+
 			request.setAttribute("listaDeUsuarios", listaUsuarios);
-			RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Usuario.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {
 			Logger.getLogger(ListarProdutosServlet.class.getName()).log(Level.SEVERE, null, ex);

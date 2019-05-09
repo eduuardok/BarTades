@@ -20,8 +20,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-
-		request.getRequestDispatcher("CadastroUsuario.jsp");
+		request.getRequestDispatcher("/WEB-INF/jsp/CadastroUsuario.jsp").forward(request, response);
 
 	}
 
@@ -29,6 +28,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
+		System.out.print("Entrou no POST");
 		
 		String nome = request.getParameter("nomeUsuario");
 		String cpf = request.getParameter("cpfUsuario");

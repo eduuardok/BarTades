@@ -17,8 +17,6 @@
 <title>Cadastro de Usu&aacute;rios</title>
 </head>
 <body>
-	<!-- Input para teste -->
-	<input type="hidden" name="idUsuario" value="${idUsuario}" />
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -113,9 +111,8 @@
 								<label for="nivelAcessoUsuario">Cargo</label> <select
 									class="form-control" id="nivelAcessoUsuario"
 									name="nivelAcessoUsuario">
-									<option value="${cargoUsuario}" selected>${cargoUsuario}</option>
 									<option value="Gerente">Gerente</option>
-									<option value="Peão">Peão</option>
+									<option value="Diretor">Diretor</option>
 
 								</select>
 							</div>
@@ -125,14 +122,15 @@
 								<label for="unidadeAtuacaoUsuario">Unidade de
 									Atua&ccedil;&atilde;o </label> <select class="form-control"
 									id="unidadeAtuacaoUsuario" name="unidadeAtuacaoUsuario">
-									<option value="MBars Curitiba">MBars Curitiba</option>
+									<option value="Und. São Paulo">Und. São Paulo</option>
 									<option value="2">UnidadeTeste2</option>
 
 								</select>
 							</div>
 						</div>
 						<div class="col-md-12">
-							<button type="submit" class="btn btn-success">Cadastrar</button>
+							<button type="submit" class="btn btn-success"
+								name="idUsuarioHidden" value="${idUsuarioHidden}">Cadastrar</button>
 						</div>
 					</div>
 				</form>

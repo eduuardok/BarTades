@@ -16,6 +16,7 @@ public class UsuarioController {
 	}
 
 	public static ArrayList<Usuario> listarUsuarios() throws ClassNotFoundException, SQLException {
+		
 		return UsuarioDAO.listarUsuarios();
 	}
 
