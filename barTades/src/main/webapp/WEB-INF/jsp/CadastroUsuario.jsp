@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,14 +31,39 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Usu&aacute;rios </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="cadastroUsuario">Cadastro</a> <a
+										class="dropdown-item" href="visualizarUsuarios">Visualizar</a>
+								</div></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Fornecedores </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="FornecedoresServlet">Cadastro</a>
+									<a class="dropdown-item" href="visualizarFornecedor">Visualizar</a>
+								</div></li>
 							<li class="nav-item"><a class="nav-link"
-								href="CadastroUsuario.jsp">Usu&aacute;rios </a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="CadastroProduto.jsp">Produtos</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
+								href="CadastroFranquia.jsp">Franquias</a></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Produtos </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
+										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+								</div></li>
+							<li class="nav-item"><a class="nav-link" href="#">Bem
+									vindo, ${sessionScope.usuario.nome}</a></li>
+							<li class="nav-item"><a class="nav-link" href="logout">Fazer
+									logout</a></li>
+
 						</ul>
+
 						<form class="form-inline my-2 my-lg-0">
 							<input class="form-control mr-sm-2" type="search"
 								placeholder="Buscar" aria-label="Search">
@@ -122,15 +148,40 @@
 								<label for="unidadeAtuacaoUsuario">Unidade de
 									Atua&ccedil;&atilde;o </label> <select class="form-control"
 									id="unidadeAtuacaoUsuario" name="unidadeAtuacaoUsuario">
-									<option value="Und. São Paulo">Und. São Paulo</option>
-									<option value="UnidadeTeste2">UnidadeTeste2</option>
+
+									<c:forEach var="franquias" items="${listaFranquias}">
+										<option value="${franquias['nome']}">${franquias['nome']}</option>
+									</c:forEach>
 
 								</select>
 							</div>
 						</div>
 						<div class="col-md-12">
-							<button type="submit" class="btn btn-success"
-								name="idUsuario" value="${idUsuario}">Cadastrar</button>
+							<button type="button" class="btn btn-success" data-toggle="modal"
+								data-target="#produtoModalSucesso">Cadastrar</button>
+						</div>
+
+						<div class="modal fade" id="produtoModalSucesso" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Sucesso!</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p>Produto cadastrado com sucesso!</p>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" name="idUsuario" value="${idUsuario}"
+											class="btn btn-primary">Prosseguir</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</form>

@@ -32,9 +32,7 @@ public class ListarUsuariosServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		try {
-
 
 			List<Usuario> listaUsuarios = UsuarioController.listarUsuarios();
 
@@ -49,6 +47,17 @@ public class ListarUsuariosServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		try {
+
+			List<Usuario> listaUsuarios = UsuarioController.listarUsuarios();
+
+			request.setAttribute("listaDeUsuarios", listaUsuarios);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Usuario.jsp");
+			rd.forward(request, response);
+		} catch (ClassNotFoundException | SQLException ex) {
+			Logger.getLogger(ListarProdutosServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
 
 	}
 

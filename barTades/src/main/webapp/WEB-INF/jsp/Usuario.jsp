@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<a class="navbar-brand" href="#">HOME</a>
+					<a class="navbar-brand" href="index.jsp">HOME</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -33,22 +33,24 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 								role="button" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false"> Usu&aacute;rios </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="cadastroUsuarios">Cadastro</a> <a
+									<a class="dropdown-item" href="cadastroUsuario">Cadastro</a> <a
 										class="dropdown-item" href="visualizarUsuarios">Visualizar</a>
 								</div></li>
-							<li class="nav-item"><a class="nav-link" href="#">Fornecedores</a></li>
-							<li class="nav-item"><a class="nav-link" href="Usuario.jsp">Usu&aacute;rios
-							</a></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Fornecedores </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="FornecedoresServlet">Cadastro</a>
+									<a class="dropdown-item" href="visualizarFornecedor">Visualizar</a>
+								</div></li>
 							<li class="nav-item"><a class="nav-link"
-								href="CadastroFornecedores.jsp">Fornecedores</a></li>
-
-							<li class="nav-item"><a class="nav-link" href="#">Franquias</a></li>
+								href="CadastroFranquia.jsp">Franquias</a></li>
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 								role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -57,8 +59,13 @@
 									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
 										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
 								</div></li>
-							<li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Bem
+									vindo, ${sessionScope.usuario.nome}</a></li>
+							<li class="nav-item"><a class="nav-link" href="logout">Fazer
+									logout</a></li>
+
 						</ul>
+
 						<form class="form-inline my-2 my-lg-0">
 							<input class="form-control mr-sm-2" type="search"
 								placeholder="Buscar" aria-label="Search">
@@ -92,7 +99,6 @@
 				</thead>
 				<tbody>
 					<c:forEach var="usuarios" items="${listaDeUsuarios}">
-						<p>${listaDeUsuarios}</p>
 						<tr>
 							<td>${usuarios['id']}</td>
 							<td>${usuarios['nome']}</td>

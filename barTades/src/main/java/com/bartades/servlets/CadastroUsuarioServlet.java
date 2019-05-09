@@ -1,17 +1,21 @@
 package com.bartades.servlets;
 
-import com.bartades.controller.UsuarioController;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.bartades.controller.UsuarioController;
+import com.bartades.dao.FranquiaDAO;
+import com.bartades.model.Franquia;
 import com.bartades.model.Usuario;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet(name = "CadastrarUsuario", urlPatterns = "/cadastroUsuario")
 public class CadastroUsuarioServlet extends HttpServlet {
@@ -20,6 +24,18 @@ public class CadastroUsuarioServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+		
+		
+		try {
+			ArrayList<Franquia> franquias = FranquiaDAO.listarFranquias();
+			request.setAttribute("listaFranquias", franquias);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("action", "cadastroUsuario");
+		request.setAttribute("pagina", "CADASTRO DE USUARIO");
+		
 		request.getRequestDispatcher("/WEB-INF/jsp/CadastroUsuario.jsp").forward(request, response);
 
 	}
@@ -27,8 +43,6 @@ public class CadastroUsuarioServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-
-		System.out.print("Entrou no POST");
 		
 		String nome = request.getParameter("nomeUsuario");
 		String cpf = request.getParameter("cpfUsuario");
@@ -46,7 +60,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
 			Logger.getLogger(CadastroUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		
-		request.getRequestDispatcher("Usuario.jsp").forward(request, response);
+		request.getRequestDispatcher("visualizarUsuarios").forward(request, response);
 
 	}
 

@@ -18,7 +18,7 @@ public class InterfaceConexao {
     private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
     private final static String URL = "jdbc:mysql://localhost:3306/bartades?useTimezone=true&serverTimezone=UTC";
     private final static String USUARIO = "root";
-    private final static String SENHA = ""; //<-- lembrar de trocar testebase1
+    private final static String SENHA = "victor123"; //<-- lembrar de trocar testebase1
     
     
     protected static Connection obterConexao() throws ClassNotFoundException, SQLException{
