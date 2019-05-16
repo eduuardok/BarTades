@@ -97,7 +97,7 @@
                 <div class="col-md-12">
                     <h3>${pagina}</h3>
                     <!-- FORMULARIO DE CADASTRO -->
-                    <form name="cadPedido" action="${action}" method="POST">
+                    <form name="cadastroPedido" action="${action}" method="POST">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -142,6 +142,7 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
+
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">

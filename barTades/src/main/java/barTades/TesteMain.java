@@ -13,6 +13,8 @@ import com.bartades.dao.UsuarioDAO;
 import com.bartades.model.Fornecedores;
 import com.bartades.model.Produto;
 import com.bartades.model.Usuario;
+import com.bartades.model.Categoria;
+import com.bartades.dao.CategoriaDAO;
 
 /**
  *
@@ -21,11 +23,10 @@ import com.bartades.model.Usuario;
 public class TesteMain {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-
-		ArrayList<Usuario> usuario = UsuarioDAO.listarUsuarios();
-
-		for (Usuario u : usuario) {
-			System.out.println(u.getNome());
+            
+                ArrayList<Categoria> categorias = CategoriaDAO.listarCategorias();
+		for (Categoria c : categorias) {
+			System.out.println(c.getNome());
 		}
 		
 //		ArrayList<Produto> listaProdutos = ProdutoController.listarProdutos();
