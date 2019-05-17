@@ -135,8 +135,8 @@
                                 <div class="row" id="form_produto1">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="categoriaProduto">Categoria</label> <select class="form-control"
-                                                                                                    id="categoriaProduto" name="categoriaProduto">
+                                            <label for="categoriaProduto">Categoria</label> 
+                                            <select class="form-control" id="categoriaProduto" name="categoriaProduto" onselect="atualizarProdutos()">
                                                 <c:forEach var="categorias" items="${listaCategorias}">
                                                     <option value="${categorias['nome']}">${categorias['nome']}</option>
                                                 </c:forEach>
@@ -147,8 +147,11 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="produto">Produto</label>
-                                            <input type="text" class="form-control" id="produto" value="${produto}"
-                                                   name="produto" placeholder="Produto">
+                                            <select class="form-control" id="produtos" name="produtos">
+                                                <c:forEach var="produtos" items="${listaProdutos}">
+                                                    <option value="${produtos['nome']}">${produtos['nome']}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -187,12 +190,16 @@
                                 <button type="submit" name="idProduto" value="${idProduto}"
                                         class="btn btn-success">Cadastrar</button>
                             </div>
-
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
+        <div id="result">
+
+        </div>
+        <button type="button" class="btn btn-outline-success" onClick="deleteRow()">aaa</button>
         <br>
         <footer class="section footer-classic context-dark bg-image" style="background: #2d3246;">
             <br>

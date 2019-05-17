@@ -56,7 +56,7 @@ public class CadastroPedidoServelet extends HttpServlet {
             listaCategorias = CategoriaDAO.listarCategorias();
             request.setAttribute("listaCategorias", listaCategorias);
             listaProdutos = obterProdutosPorCategoria(listaCategorias.get(0).getNome());
-            request.Set<String> hashSet = new HashSet<String>();
+            request.setAttribute("listaProdutos", listaProdutos);
             
             for (Produto p : listaProdutos) {
                 System.out.println(p.getNome());
