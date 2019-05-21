@@ -30,10 +30,12 @@ public class ProdutoDAO {
                 + "p.preco_compra, \n"
                 + "f.nome as fornecedor, \n"
                 + "p.quantidade_disponivel, \n"
-                + "p.disponibilidade \n"
+                + "p.disponibilidade, \n"
+                + "u.nome as unidade \n"
                 + "from produtos p \n"
                 + "join categoria c on p.categoria = c.id \n"
                 + "join fornecedores f on p.id_fornecedor = f.id \n"
+                + "join unidades u on p.id_franquia = u.id \n"
                 + "where p.id = ?;";
 
         try (Connection conn = InterfaceConexao.obterConexao();
@@ -51,7 +53,8 @@ public class ProdutoDAO {
                         retorno.getDouble("preco_compra"),
                         retorno.getString("fornecedor"),
                         retorno.getInt("quantidade_disponivel"),
-                        retorno.getBoolean("disponibilidade"));
+                        retorno.getBoolean("disponibilidade"),
+                        retorno.getString("unidade"));
                 produtoRetorno.add(p);
             }
 
@@ -79,10 +82,12 @@ public class ProdutoDAO {
                 + "p.preco_compra, \n"
                 + "f.nome as fornecedor, \n"
                 + "p.quantidade_disponivel, \n"
-                + "p.disponibilidade \n"
+                + "p.disponibilidade, \n"
+                + "u.nome as unidade \n"
                 + "from produtos p \n"
                 + "join categoria c on p.categoria = c.id \n"
-                + "join fornecedores f on p.id_fornecedor = f.id";
+                + "join fornecedores f on p.id_fornecedor = f.id \n"
+                + "join unidades u on p.id_franquia = u.id ";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement select = conn.prepareStatement(sql);
@@ -98,7 +103,8 @@ public class ProdutoDAO {
                         retorno.getDouble("preco_compra"),
                         retorno.getString("fornecedor"),
                         retorno.getInt("quantidade_disponivel"),
-                        retorno.getBoolean("disponibilidade"));
+                        retorno.getBoolean("disponibilidade"),
+                        retorno.getString("unidade"));
                 listaProdutos.add(p);
             }
 
@@ -119,7 +125,7 @@ public class ProdutoDAO {
 
         boolean retorno = false;
 
-        String sql = "INSERT INTO produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, disponibilidade, quantidade_disponivel) values (?, ?, ?, ?, ?, ?, ?, 0);";
+        String sql = "INSERT INTO produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, disponibilidade, quantidade_disponivel, id_franquia) values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement insert = conn.prepareStatement(sql);) {
@@ -130,6 +136,9 @@ public class ProdutoDAO {
             insert.setDouble(5, p.getPrecoCompra());
             insert.setInt(6, encontrarIdFornecedor(p.getFornecedor()));
             insert.setBoolean(7, p.getDisponibilidade());
+            insert.setInt(8, 0);
+            insert.setInt(9, encontrarIdUnidade(p.getUnidade()));
+            
 
             int linhasAfetadas = insert.executeUpdate();
 
@@ -153,7 +162,7 @@ public class ProdutoDAO {
 
         boolean retorno = false;
 
-        String sql = "UPDATE produtos set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ?, quantidade_disponivel = ?, disponibilidade = ? WHERE id = ?;";
+        String sql = "UPDATE produtos set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ?, quantidade_disponivel = ?, disponibilidade = ?, id_franquia = ? WHERE id = ?;";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement update = conn.prepareStatement(sql);) {
@@ -165,7 +174,8 @@ public class ProdutoDAO {
             update.setInt(6, encontrarIdFornecedor(p.getFornecedor()));
             update.setInt(7, p.getQuantidade());
             update.setBoolean(8, p.getDisponibilidade());
-            update.setInt(9, p.getId());
+            update.setInt(9, encontrarIdUnidade(p.getUnidade()));
+            update.setInt(10, p.getId());
 
             int linhasAfetadas = update.executeUpdate();
 
@@ -205,6 +215,60 @@ public class ProdutoDAO {
 
         return idCategoria;
     }
+    
+    /**
+     * Este método retorna todos os produtos de uma categoria
+     * 
+     * @param categoria = String nome da categoria
+     * @return ArrayList do tipo Produto
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public static ArrayList<Produto> encontrarProdutoPorCategoria(String categoria) throws ClassNotFoundException, SQLException {
+
+        ArrayList<Produto> produtoRetorno = new ArrayList<Produto>();
+
+        String sql = "select p.id,\n"
+                + "p.nome, \n"
+                + "p.descricao, \n"
+                + "c.nome as categoria, \n"
+                + "p.preco_venda, \n"
+                + "p.preco_compra, \n"
+                + "f.nome as fornecedor, \n"
+                + "p.quantidade_disponivel, \n"
+                + "p.disponibilidade, \n"
+                + "u.nome as unidade \n"
+                + "from produtos p \n"
+                + "join categoria c on p.categoria = c.id \n"
+                + "join fornecedores f on p.id_fornecedor = f.id \n"
+                + "join unidades u on p.id_franquia = u.id \n"
+                + "where c.nome = ?;";
+
+        try (Connection conn = InterfaceConexao.obterConexao();
+                PreparedStatement select = conn.prepareStatement(sql);) {
+            select.setString(1, categoria);
+            ResultSet retorno = select.executeQuery();
+
+            while (retorno.next()) {
+                Produto p = new Produto(
+                        retorno.getInt("ID"),
+                        retorno.getString("nome"),
+                        retorno.getString("descricao"),
+                        retorno.getString("categoria"),
+                        retorno.getDouble("preco_venda"),
+                        retorno.getDouble("preco_compra"),
+                        retorno.getString("fornecedor"),
+                        retorno.getInt("quantidade_disponivel"),
+                        retorno.getBoolean("disponibilidade"),
+                        retorno.getString("unidade"));
+                produtoRetorno.add(p);
+            }
+
+        }
+        return produtoRetorno;
+    }
+    
+    
 
     /**
      * (Este é um método auxilar) Utilizado para encontrar o id do fornecedor no
@@ -234,5 +298,34 @@ public class ProdutoDAO {
 
         return idFornecedor;
     }
+    
+    /**
+     * Método auxiliar para encontrar o id da unidade no banco de dados
+     * 
+     * @param nomeUnidade = String nome da unidade
+     * @return id = id da unidade cadastrada no banco
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+	private static int encontrarIdUnidade(String nomeUnidade) throws ClassNotFoundException, SQLException {
+
+		String sql = "SELECT id FROM unidades WHERE nome = ?";
+
+		int idUnidade = 0;
+
+		try (Connection conn = InterfaceConexao.obterConexao();
+				PreparedStatement select = conn.prepareStatement(sql);) {
+			select.setString(1, nomeUnidade);
+			ResultSet retorno = select.executeQuery();
+
+			while (retorno.next()) {
+				idUnidade = retorno.getInt("id");
+			}
+
+		}
+
+		return idUnidade;
+
+	}
 
 }

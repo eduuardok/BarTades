@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.bartades.dao.CategoriaDAO;
 import com.bartades.dao.FornecedoresDAO;
+import com.bartades.dao.FranquiaDAO;
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Categoria;
 import com.bartades.model.Fornecedores;
+import com.bartades.model.Franquia;
 import com.bartades.model.Produto;
 
 /**
@@ -38,9 +40,10 @@ public class CadastroProdutoServlet extends HttpServlet {
 		String valorVenda = request.getParameter("valorVendaProduto").replace(".", "").replace(",", ".");
 		String descricaoProduto = request.getParameter("descricaoProduto");
 		boolean disponibilidadeProduto = Boolean.parseBoolean(request.getParameter("disponibilidadeProduto"));
+		String unidadeProduto = request.getParameter("unidadeProduto");
 		
 		Produto p = new Produto(nomeProduto, descricaoProduto, categoriaProduto, Double.parseDouble(valorVenda),
-				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto);
+				Double.parseDouble(valorCompra), fornecedorProduto, 0, disponibilidadeProduto, unidadeProduto);
 
 		ProdutoDAO.SalvarProduto(p);
 
@@ -56,8 +59,10 @@ public class CadastroProdutoServlet extends HttpServlet {
 		try {
 			ArrayList<Categoria> listaCategorias = CategoriaDAO.listarCategorias();
 			ArrayList<Fornecedores> listaFornecedores = FornecedoresDAO.listar();
+			ArrayList<Franquia> listaUnidades = FranquiaDAO.listarFranquias();
 			request.setAttribute("listaCategorias", listaCategorias);
 			request.setAttribute("listaFornecedores", listaFornecedores);
+			request.setAttribute("listaUnidades", listaUnidades);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

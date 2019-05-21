@@ -69,6 +69,7 @@ preco_compra numeric(65,2),
 id_fornecedor int,
 quantidade_disponivel int (4),
 disponibilidade boolean,
+id_franquia int(4),
 primary key(id),
 foreign key (id_fornecedor) references fornecedores(id));
 

@@ -65,6 +65,7 @@
         						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
          					    <a class="dropdown-item" href="cadastroProduto">Cadastro</a>
           						<a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+          						<a class="dropdown-item" href="compraProduto">Compra</a>
         					</div>
      					 </li>
                                 
@@ -99,6 +100,7 @@
                     <th scope="col">Fornecedor</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Quantidade em estoque</th>
+                    <th scope="col">Unidade</th>
                     <th scope="col">Habilitado</th>
                     <th scope="col">Opções</th>
                 </tr>
@@ -117,7 +119,7 @@
                     <td>${produtos['fornecedor']}</td>
                     <td>${produtos['descricao']}</td>
                     <td>${produtos['quantidade']}</td>
-                    
+                    <td>${produtos['unidade']}</td>
                     <td>
                     <c:if test="${produtos['disponibilidade'] == true}">Habilitado</c:if>
                     

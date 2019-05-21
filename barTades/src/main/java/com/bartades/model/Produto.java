@@ -20,8 +20,11 @@ public class Produto {
     private String fornecedor;
     private int quantidade;
     private boolean disponibilidade;
+    private String unidade;
     
-    public Produto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade, boolean disponibilidade){
+    
+    
+    public Produto(String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade, boolean disponibilidade, String unidade){
         
         this.nome = nome;
         this.descricao = descricao;
@@ -31,10 +34,11 @@ public class Produto {
         this.fornecedor = fornecedor;
         this.quantidade = quantidade;
         this.disponibilidade = disponibilidade;
+        this.unidade = unidade;
         
     }
     
-    public Produto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade, boolean disponibilidade){
+    public Produto(int id, String nome, String descricao, String categoria, double precoVenda, double precoCompra, String fornecedor, int quantidade, boolean disponibilidade, String unidade){
         
         this._ID = id;
         this.nome = nome;
@@ -45,7 +49,13 @@ public class Produto {
         this.fornecedor = fornecedor;
         this.quantidade = quantidade;
         this.disponibilidade = disponibilidade;
+        this.unidade = unidade;
         
+    }
+    
+    public Produto(String nome, int quantidade) {
+    	this.nome = nome;
+    	this.quantidade = quantidade;
     }
     
     public int getId(){
@@ -114,6 +124,18 @@ public class Produto {
     
     public boolean getDisponibilidade(){
     	return this.disponibilidade;
+    }
+    
+    public void setUnidade(String unidade) {
+    	this.unidade = unidade;
+    }
+    
+    public String getUnidade() {
+    	return this.unidade;
+    }
+    
+    public void adicionarQuantidade(int quantidade) {
+    	this.quantidade += quantidade;
     }
     
 }

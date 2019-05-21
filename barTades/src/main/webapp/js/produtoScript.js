@@ -46,3 +46,35 @@ function moeda(a, e, r, t) {
     }
     return !1
 }
+
+function filtrarCombo(){
+$(document).ready(function(){
+	$('select[name=categoriaProduto]').on('change', function(){
+		$('select[name=produto]').empty();
+		$.ajax({
+			type: 'GET',
+			url: 'ProdutoAjaxServlet',
+			data: 'categoria='+$('select[name=categoriaProduto]').val(),
+			statusCode:{
+				404: function(){
+					alert('Pagina não encontrada'); 
+				},
+				500: function(){
+					alert('Erro no servidor');
+				},
+				200: function(responseText){
+					
+					var resposta = responseText.split(',');
+					
+					for(i in resposta){
+						if(resposta[i] != '')
+					$('select[name=produto]').append('<option value = "' + resposta[i] + '">' +resposta[i]+ '</option')
+					}
+				}
+			
+			}
+		});
+	})
+});
+
+}

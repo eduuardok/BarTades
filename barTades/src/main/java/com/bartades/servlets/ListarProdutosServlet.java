@@ -34,9 +34,6 @@ public class ListarProdutosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// HttpSession sessao = request.getSession();
-
-		// if(loginService.isUsuarioLogado(request, response, sessao)) {
 		try {
 
 			List<Produto> listaProdutos = ProdutoDAO.listarProdutos();
@@ -47,9 +44,6 @@ public class ListarProdutosServlet extends HttpServlet {
 			Logger.getLogger(ListarProdutosServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-//		} else {
-//			response.sendRedirect("login");
-//		}
 	}
 
 	@Override

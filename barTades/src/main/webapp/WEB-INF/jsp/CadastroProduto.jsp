@@ -51,8 +51,9 @@
 								role="button" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false"> Produtos </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
-										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> 
+									<a class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+									<a class="dropdown-item" href="compraProduto">Compra</a>
 								</div></li>
 							
 							<li class="nav-item"><a class="nav-link" href="#">Bem vindo, ${sessionScope.usuario.nome}</a> </li>
@@ -143,6 +144,23 @@
 
 										<option value="${fornecedores['nome']}">${fornecedores['nome']}</option>
 
+
+									</c:forEach>
+
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="categoriaProduto">Unidade</label> <select
+									class="form-control" id="unidadeProduto"
+									name="unidadeProduto" required>
+
+									<option value="${produto.unidade}">${produto.unidade}</option>
+
+									<c:forEach var="unidades" items="${listaUnidades}">
+
+										<option value="${unidades['nome']}">${unidades['nome']}</option>
 
 									</c:forEach>
 

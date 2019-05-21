@@ -9,6 +9,7 @@ import java.awt.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import com.bartades.dao.FornecedoresDAO;
+import com.bartades.dao.ProdutoDAO;
 import com.bartades.dao.UsuarioDAO;
 import com.bartades.model.Fornecedores;
 import com.bartades.model.Produto;
@@ -24,18 +25,15 @@ public class TesteMain {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
             
-                ArrayList<Categoria> categorias = CategoriaDAO.listarCategorias();
-		for (Categoria c : categorias) {
-			System.out.println(c.getNome());
-		}
+ 
 		
-//		ArrayList<Produto> listaProdutos = ProdutoController.listarProdutos();
-//		
-//		for(Produto p : listaProdutos) {
-//			System.out.println(p.getDisponibilidade());
-//		}
-//		
-//		ProdutoController.AtualizarProduto(1, "testeUpdate", "testeUpdate", "Bebidas", 12.0, 13.0, "teste do brasil ltda", 0, 0);
+		ArrayList<Produto> listaProdutos = ProdutoDAO.listarProdutos();
+	
+		for(Produto p : listaProdutos) {
+		System.out.println(p.getUnidade());
+	}
+	
+//	ProdutoController.AtualizarProduto(1, "testeUpdate", "testeUpdate", "Bebidas", 12.0, 13.0, "teste do brasil ltda", 0, 0);
 		
 	}
 
