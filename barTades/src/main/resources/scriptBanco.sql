@@ -115,6 +115,20 @@ insert into estado (nome) values ('São Paulo');
 insert into estado (nome) values ('Sergipe');
 insert into estado (nome) values ('Tocantins');
 
+create table pedidos_compra(
+id int auto_increment not null,
+qtde_produtos int (2),
+valor_total_compra double,
+primary key (id));
+
+create table produtos_pedidos_compra (
+id int auto_increment not null,
+id_pedido int,
+id_produto int,
+quantidade int,
+valor_total double,
+primary key (id));
+
 insert into fornecedores (nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado, enabled) values ('Fornecedor Bonzão', '9812662000130','11960940481','Rua Vicente Decara Neto', '77', '-', '05819000', 'Santa José Fina', 'São Paulo', 'SP', 1);
 
 insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Coca Cola Lata','Refrigerante',1,5,3,1,100,1);
@@ -133,4 +147,4 @@ insert into funcoes (nome, nivel_acesso) values ('Gerente',2);
 insert into unidades (nome, estado, endereco) values ('UND SP', 'SP', 'x');
 insert into unidades (nome, estado, endereco) values ('UND RJ', 'RJ', 'x');
 
-insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Vitor', 'admin@admin.comprodutos', '11960940481', '437', 'M', '123456', 1,1);
+insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Vitor', 'admin@admin.com', '11960940481', '437', 'M', '123456', 1,1);

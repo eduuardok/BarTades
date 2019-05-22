@@ -21,6 +21,7 @@ public class Produto {
     private int quantidade;
     private boolean disponibilidade;
     private String unidade;
+    private double valorTotalCompra;
     
     
     
@@ -53,9 +54,12 @@ public class Produto {
         
     }
     
-    public Produto(String nome, int quantidade) {
-    	this.nome = nome;
+    
+    //Construtor utilizado na compra
+    public Produto(int _ID, int quantidade, double precoCompra) {
+    	this._ID = _ID;
     	this.quantidade = quantidade;
+    	this.precoCompra = precoCompra;
     }
     
     public int getId(){
@@ -132,6 +136,14 @@ public class Produto {
     
     public String getUnidade() {
     	return this.unidade;
+    }
+    
+    public void setValorTotalCompra(double valorTotalCompra) {
+    	this.valorTotalCompra = valorTotalCompra;
+    }
+    
+    public double getValorTotalCompra() {
+    	return this.valorTotalCompra;
     }
     
     public void adicionarQuantidade(int quantidade) {

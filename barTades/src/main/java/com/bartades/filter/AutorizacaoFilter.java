@@ -22,7 +22,7 @@ import com.bartades.model.Usuario;
  *
  */
 @WebFilter(filterName = "AutenticacaoFilter", urlPatterns = {"/WEB-INF/jsp/*"}, servletNames = {"CadastrarProduto", "AtualizarProduto", "Home", "VisualizarProdutos", "EditarUsuario", 
-		"BuscarFornecedores", "CadastrarFranquia", "CadastrarUsuario", "FornecedoresServlet", "VisualizarUsuarios", "LogoutServlet", "CadastroPedido"})
+		"BuscarFornecedores", "CadastrarFranquia", "CadastrarUsuario", "FornecedoresServlet", "VisualizarUsuarios", "LogoutServlet", "CadastroPedido", "ComprarProduto"})
 
 public class AutorizacaoFilter implements Filter {
 	
@@ -34,7 +34,7 @@ public class AutorizacaoFilter implements Filter {
 	            ServletResponse response,
 	            FilterChain chain) throws IOException, ServletException {
 	        
-                System.out.println("teste");
+            
 	        HttpServletRequest httpRequest = (HttpServletRequest) request;
 	        HttpServletResponse httpResponse = (HttpServletResponse) response;
 	    
@@ -70,7 +70,7 @@ public class AutorizacaoFilter implements Filter {
 	        		|| paginaAcessada.endsWith("/editarUsuario") || paginaAcessada.endsWith("/buscarFornecedor")
 	        		|| paginaAcessada.endsWith("/cadastroFranquia") || paginaAcessada.endsWith("/cadastroUsuario")
 	        		|| paginaAcessada.endsWith("/FornecedoresServlet") || paginaAcessada.endsWith("/visualizarUsuarios")
-	        		|| paginaAcessada.endsWith("/logout") || paginaAcessada.endsWith("/CadastroPedido")) {
+	        		|| paginaAcessada.endsWith("/logout") || paginaAcessada.endsWith("/CadastroPedido") || paginaAcessada.endsWith("/compraProduto")) {
 	            return true;
 	        } else {
 	        return false;

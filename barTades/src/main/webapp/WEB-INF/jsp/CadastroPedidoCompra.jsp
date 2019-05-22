@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 
 <script src="js/produtoScript.js"></script>
 <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
@@ -15,12 +15,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<!--  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	-->
 
-
-
-<script>
+<script type="text/javascript" charset="ISO-8859-1">
 //metodo dinamico
 
 $(document).ready(function(){
@@ -56,7 +52,6 @@ function returnQtdeTotalProdutos(){
 	
 	$(document).ready(function() {
 			$('select[name=categoriaProduto0]').on('change', function() {
-				console.log(testeTar);
 				$('select[name=produto'+testeTar+']').empty();
 				$('#quantidadeProduto'+testeTar).val("");
 				$('#valorCompraProduto'+testeTar).val("");
@@ -69,16 +64,18 @@ function returnQtdeTotalProdutos(){
 					statusCode : {
 						200 : function(responseText) {
 							var resposta = responseText.split(',');
-								for (i in resposta) {
-									if (resposta[i] != '')
-										$('select[name=produto'+testeTar+']').append('<option value = "' + resposta[i] + '">'+ resposta[i]+ '</option')
+							for (i in resposta) {
+							var id = resposta[i].split(':')[0];
+							var nome = resposta[i].split(':')[1];
+									if (resposta[i] != ''){
+										$('select[name=produto'+testeTar+']').append('<option value = "' + id + '">'+ nome + '</option')
 										}
 									}
 								}
-							});
+							}
 						})
-					});
-
+					})
+	})
 //pega valor compra produto dinamico
 $(document).ready(function(){
 	$('select[name=produto0]').on('change', function(){
@@ -105,6 +102,8 @@ $(document).ready(function(){
 $(document).ready(function() {
 	
 		$('#addLinha').on('click', function(){			
+			if(qtdProdutos < 10){
+				console.log('qtde produtos: ' + qtdProdutos)
 			var f = $('#formProduto0'), c = f.clone(true, true);
 			c.attr('id', 'formProduto' + qtdProdutos);
 			c.find("#categoriaProduto0").attr('name', 'categoriaProduto'+ qtdProdutos);
@@ -127,6 +126,9 @@ $(document).ready(function() {
 		}
 			qtdProdutos++;
 			$('#qtdeProdutos').val(qtdProdutos);
+			} else {
+				$('#maxProdutos').modal('show');
+			}
 		})
 	}) 
 	
@@ -140,13 +142,31 @@ $(document).ready(function() {
 		})
 	})
 
+	//verifica duplicidade de produto dinamico
+	
+	$(document).ready(function(){
+		$('select[name=produto0]').on('change', function(){
+			
+			var produto = $('select[name=produto'+testeTar+']').val();
+			var quantidade = qtdProdutos;
+			
+			for(var i = 0; i <= quantidade; i++){
+				if(i != testeTar){
+				if(produto == $('select[name=produto'+i+']').val()){
+					$('select[name=produto'+testeTar+']').val("");
+					$('#valorCompraProduto'+testeTar).val("");
+					$('#dupProdutos').modal('show');
+				}
+			}
+		}
+	})
+})
 </script>
 
 <title>Compra de produtos</title>
 </head>
 <body>
-	<!-- Input para teste -->
-	<input type="hidden" class="teste" value="" />
+	
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -204,27 +224,12 @@ $(document).ready(function() {
 		<div class="row">
 			<div class="col-md-12">
 				<h3>${pagina}</h3>
-				<!-- FORMULARIO DE CADASTRO -->
-				<!--  
-				<div name="checagemQuantidade" id="checagemQuantidade">
-				<label for="categoriaProduto">Selecione a quantidade de produtos que deseja comprar</label>
-				<select name="quantidadeProdutos" id="quantidadeProdutos" class="form-control" required> 
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				</select>
 				
-				</div>
-				-->
 				<form name="compraProduto" id="compraProduto" action="${action}"
-					method="POST">
-					
-					<div name="maxProdutos" id="maxProdutos">Só é possível adicionar até 10 produtos</div>
+					method="POST" >
 					
 					<div class="row" id="formProduto0">
-						
+					
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="categoriaProduto">Categoria</label> <select
@@ -235,7 +240,7 @@ $(document).ready(function() {
 
 									<c:forEach var="categorias" items="${listaCategorias}">
 
-										<option value="${categorias['nome']}">${categorias['nome']}</option>
+										<option value="${categorias['id']}">${categorias['nome']}</option>
 
 									</c:forEach>
 
@@ -311,6 +316,54 @@ $(document).ready(function() {
 										data-dismiss="modal">Cancelar</button>
 									<button type="submit" class="btn btn-primary" name="qtdeProdutos" id="qtdeProdutos"
 										>Sim</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Modal de aviso maximo de produtos -->
+					<div class="modal fade" id="maxProdutos" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Quantidade máxima adicionada</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>Máximo de 10 produtos adicionados</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Ok</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Modal de produto duplicado -->
+					<div class="modal fade" id="dupProdutos" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Produto já selecionado</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>Este produto já foi selecionado! Por favor selecione outro</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Ok</button>
 								</div>
 							</div>
 						</div>
@@ -396,10 +449,6 @@ $(document).ready(function() {
 		</div>
 	</footer>
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"

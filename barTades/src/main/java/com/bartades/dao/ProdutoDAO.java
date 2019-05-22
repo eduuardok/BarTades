@@ -57,7 +57,7 @@ public class ProdutoDAO {
                         retorno.getString("unidade"));
                 produtoRetorno.add(p);
             }
-
+            conn.close();
         }
         return produtoRetorno;
     }
@@ -107,7 +107,7 @@ public class ProdutoDAO {
                         retorno.getString("unidade"));
                 listaProdutos.add(p);
             }
-
+            conn.close();
         }
 
         return listaProdutos;
@@ -145,7 +145,7 @@ public class ProdutoDAO {
             if (linhasAfetadas > 0) {
                 retorno = true;
             }
-
+            conn.close();
         }
         return retorno;
     }
@@ -162,7 +162,7 @@ public class ProdutoDAO {
 
         boolean retorno = false;
 
-        String sql = "UPDATE produtos set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ?, quantidade_disponivel = ?, disponibilidade = ?, id_franquia = ? WHERE id = ?;";
+        String sql = "UPDATE produtos set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ?, disponibilidade = ?, id_franquia = ? WHERE id = ?;";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement update = conn.prepareStatement(sql);) {
@@ -172,17 +172,17 @@ public class ProdutoDAO {
             update.setDouble(4, p.getPrecoVenda());
             update.setDouble(5, p.getPrecoCompra());
             update.setInt(6, encontrarIdFornecedor(p.getFornecedor()));
-            update.setInt(7, p.getQuantidade());
-            update.setBoolean(8, p.getDisponibilidade());
-            update.setInt(9, encontrarIdUnidade(p.getUnidade()));
-            update.setInt(10, p.getId());
+            
+            update.setBoolean(7, p.getDisponibilidade());
+            update.setInt(8, encontrarIdUnidade(p.getUnidade()));
+            update.setInt(9, p.getId());
 
             int linhasAfetadas = update.executeUpdate();
 
             if (linhasAfetadas > 0) {
                 retorno = true;
             }
-
+            conn.close();
         }
         return retorno;
     }
@@ -210,7 +210,7 @@ public class ProdutoDAO {
             while (retorno.next()) {
                 idCategoria = retorno.getInt("id");
             }
-
+            conn.close();
         }
 
         return idCategoria;
@@ -224,7 +224,7 @@ public class ProdutoDAO {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public static ArrayList<Produto> encontrarProdutoPorCategoria(String categoria) throws ClassNotFoundException, SQLException {
+    public static ArrayList<Produto> encontrarProdutoPorCategoria(int categoria) throws ClassNotFoundException, SQLException {
 
         ArrayList<Produto> produtoRetorno = new ArrayList<Produto>();
 
@@ -242,11 +242,11 @@ public class ProdutoDAO {
                 + "join categoria c on p.categoria = c.id \n"
                 + "join fornecedores f on p.id_fornecedor = f.id \n"
                 + "join unidades u on p.id_franquia = u.id \n"
-                + "where c.nome = ?;";
+                + "where p.categoria = ? and p.disponibilidade = 1;";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement select = conn.prepareStatement(sql);) {
-            select.setString(1, categoria);
+            select.setInt(1, categoria);
             ResultSet retorno = select.executeQuery();
 
             while (retorno.next()) {
@@ -263,7 +263,7 @@ public class ProdutoDAO {
                         retorno.getString("unidade"));
                 produtoRetorno.add(p);
             }
-
+            conn.close();
         }
         return produtoRetorno;
     }
@@ -293,7 +293,7 @@ public class ProdutoDAO {
             while (retorno.next()) {
                 idFornecedor = retorno.getInt("id");
             }
-
+            conn.close();
         }
 
         return idFornecedor;
@@ -321,7 +321,7 @@ public class ProdutoDAO {
 			while (retorno.next()) {
 				idUnidade = retorno.getInt("id");
 			}
-
+			conn.close();
 		}
 
 		return idUnidade;
