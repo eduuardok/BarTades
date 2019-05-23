@@ -119,6 +119,8 @@ create table pedidos_compra(
 id int auto_increment not null,
 qtde_produtos int (2),
 valor_total_compra double,
+data_pedido date,
+usuario_pedido int,
 primary key (id));
 
 create table produtos_pedidos_compra (

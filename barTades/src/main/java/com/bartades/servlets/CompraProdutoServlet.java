@@ -41,22 +41,24 @@ public class CompraProdutoServlet extends HttpServlet {
 		
 		Usuario user = (Usuario) request.getSession().getAttribute("usuario");
 		
+		//percorre os produtos cadastrados na tela
 		for(int i = 0; i < qtdeProdutos; i++) {
 			Produto p = new Produto(Integer.parseInt(request.getParameter("produto"+i)), Integer.parseInt(request.getParameter("quantidadeProduto"+i)), Double.parseDouble(request.getParameter("valorCompraProduto"+i)));
 			produtos.add(p);
 		}
 		
+		
 		PedidoCompraProduto p1 = new PedidoCompraProduto(produtos.size(), produtos, user.getId());
 		p1.calculaValorTotalProduto();
 		p1.calculaValorTotalPedido();
 		
+		//salva a compra no bd e retorna o codigo do pedido
 		int codigoPedido = CompraProdutoDAO.SalvarPedido(p1);
-		
-		ArrayList<Produto> listaGeral = ProdutoDAO.listarProdutos();
-		//int CODIGOPEDIDO,  int quantidadeProdutos, ArrayList<Produto> produtos, double valorTotalPedido
+	
+		//atribui o codigo a um novo objeto
 		PedidoCompraProduto p2 = new PedidoCompraProduto(codigoPedido, p1.getQuantidadeProdutos(), p1.getProdutos(), p1.getValorTotalPedido());
-		p2.encontrarNomeProdutos(listaGeral);
 		
+		//salva os produtos da compra no bd e faz a alteração no estoque
 		CompraProdutoDAO.SalvarDetalhe(p2);
 		
 		response.sendRedirect("visualizarProdutos");

@@ -143,6 +143,13 @@ public class CompraProdutoDAO {
 		return retorno;
 	}
 	
+	/**
+	 * Este método lista todos os pedidos de compra cadastrados no bd
+	 * 
+	 * @return ArrayList do tipo PedidoCompraProduto
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	 public static ArrayList<PedidoCompraProduto> listarPedidosCompra() throws ClassNotFoundException, SQLException {
 
 	        ArrayList<PedidoCompraProduto> listaPedidos = new ArrayList<PedidoCompraProduto>();
@@ -171,6 +178,14 @@ public class CompraProdutoDAO {
 	    }
 	 
 	 
+	 /**
+	  * Este método encontra os produtos de um determinado pedido
+	  * 
+	  * @param CODIGOPEDIDO = int - codigo do pedido
+	  * @return - ArrayList do tipo Produto
+	  * @throws ClassNotFoundException
+	  * @throws SQLException
+	  */
 	 private static ArrayList<Produto> produtosPedidoCompra(int CODIGOPEDIDO) throws ClassNotFoundException, SQLException {
 		 
 		 ArrayList<Produto> listaProdutosPedidos = new ArrayList<Produto>();
@@ -196,6 +211,13 @@ public class CompraProdutoDAO {
 	        return listaProdutosPedidos;
 	 }
 	 
+	 /**
+	  * Este método encontra um pedido pelo codigo
+	  * @param idPedido = int - codigo do pedido
+	  * @return ArrayList do tipo PedidoCompraProduto com 1 elemento
+	  * @throws ClassNotFoundException
+	  * @throws SQLException
+	  */
 	 public static ArrayList<PedidoCompraProduto> EncontrarPedidoCompraPorId(int idPedido) throws ClassNotFoundException, SQLException {
 
 	        ArrayList<PedidoCompraProduto> listaPedidos = new ArrayList<PedidoCompraProduto>();
