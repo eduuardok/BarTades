@@ -24,6 +24,29 @@
         <title>Cadastro de Produtos</title>
     </head>
 
+    <script>
+
+        var container = '';
+
+
+        $(document).ready(function () {
+            $('#formularioPedido').on('click', function (e) {
+                console.log('elemento: ', e.target);
+                container = e.target;
+            })
+
+            //$('#').data('id');
+        })
+
+        $(document).ready(function () {
+            $('#formularioPedido').on('click', function () {
+                container = $()
+                console.log('id da div: ', container);
+            })
+        })
+
+    </script>
+
     <body>
 
         <!-- The Modal -->
@@ -133,23 +156,22 @@
                                     <h5>Produtos:</h5>
                                 </div>
                             </div>
-                            <div class="col-md-12" id="container">
+                            <div class="col-md-12" id="formularioPedido">
                                 <div class="row" id="form_produto1">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="categoriaProduto">Categoria</label> 
-                                            <select class="form-control" id="categoriaProduto" name="categoriaProduto" onselect="atualizarProdutos()">
+                                            <select class="form-control" id="categoriaProduto" name="categoriaProduto" onselect="atualizarProdutos()" data-id="1">
                                                 <c:forEach var="categorias" items="${listaCategorias}">
                                                     <option value="${categorias['nome']}">${categorias['nome']}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
-
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="produto">Produto</label>
-                                            <select class="form-control" id="produtos" name="produtos">
+                                            <select class="form-control" id="produtos" name="produtos" data-id="1">
                                                 <c:forEach var="produtos" items="${listaProdutos}">
                                                     <option value="${produtos['nome']}">${produtos['nome']}</option>
                                                 </c:forEach>
@@ -158,10 +180,11 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="valorDesconto">Valor de Desconto</label> <input type="text"
-                                                                                                        class="form-control" id="valorDesconto" value="${valorDesconto}"
-                                                                                                        name="valorDesconto" placeholder="Valor de Desconto"
-                                                                                                        onKeyPress="return(moeda(this, '.', ',', event))">
+                                            <label for="valorDesconto">Valor de Desconto</label> 
+                                            <input type="text"
+                                                   class="form-control" id="valorDesconto" value="${valorDesconto}"
+                                                   name="valorDesconto" placeholder="Valor de Desconto"
+                                                   onKeyPress="return(moeda(this, '.', ',', event))">
                                         </div>
                                     </div>
                                     <div class="col-md-2">

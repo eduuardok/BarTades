@@ -4,74 +4,15 @@
  * and open the template in the editor.
  */
 
-console.log("entrou");
-$('#modalExemplo').on('shown.bs.modal', function () {
-    console.log("deu")
-    $('#modalExemplo').trigger('focus')
-})
+/**
+ * Função para criar um objeto XMLHTTPRequest
+ */
 
 /**
-  * Função para criar um objeto XMLHTTPRequest
-  */
- function CriaRequest() {
-     try{
-         request = new XMLHttpRequest();        
-     }catch (IEAtual){
-          
-         try{
-             request = new ActiveXObject("Msxml2.XMLHTTP");       
-         }catch(IEAntigo){
-          
-             try{
-                 request = new ActiveXObject("Microsoft.XMLHTTP");          
-             }catch(falha){
-                 request = false;
-             }
-         }
-     }
-      
-     if (!request) 
-         alert("Seu Navegador não suporta Ajax!");
-     else
-         return request;
- }
-  
- /**
-  * Função para enviar os dados
-  */
- function getDados() {
-      
-     // Declaração de Variáveis
-     var nome   = document.getElementById("txtnome").value;
-     var result = document.getElementById("Resultado");
-     var xmlreq = CriaRequest();
-      
-     // Exibi a imagem de progresso
-     result.innerHTML = '<img src="Progresso1.gif"/>';
-      
-     // Iniciar uma requisição
-     xmlreq.open("GET", "Contato.php?txtnome=" + nome, true);
-      
-     // Atribui uma função para ser executada sempre que houver uma mudança de ado
-     xmlreq.onreadystatechange = function(){
-          
-         // Verifica se foi concluído com sucesso e a conexão fechada (readyState=4)
-         if (xmlreq.readyState == 4) {
-              
-             // Verifica se o arquivo foi encontrado com sucesso
-             if (xmlreq.status == 200) {
-                 result.innerHTML = xmlreq.responseText;
-             }else{
-                 result.innerHTML = "Erro: " + xmlreq.statusText;
-             }
-         }
-     };
-     xmlreq.send(null);
- }
+ * Função para enviar os dados
+ */
 
-function teste(obj) {
-    console.log(obj.data - target);
-}
+
 
 
 function formataReal(valor) {
@@ -155,7 +96,7 @@ function setRemover(texto) {
 }
 
 function addRow(texto) {
-    var doc = document.getElementById("container"); //.append(addNewRow(count));
+    var doc = document.getElementById("formularioPedido"); //.append(addNewRow(count));
     var texto = '<div class="row" id="form_produto' + count + '">' +
             document.getElementById(texto).innerHTML +
             '<div class="col-md-1">' +
@@ -167,87 +108,19 @@ function addRow(texto) {
 
 
 
-    doc.insertAdjacentHTML("afterbegin", texto);
+    doc.insertAdjacentHTML("afterbegin", texto.replace('data-id="1', 'data-id="' + count));
 
     count = count + 1;
 
 }
 
- function abc() {
-     alert("entrou");
-     
- }
+
 
 function deleteRow() {
     CriarRequest();
 
-   // var doc = document.getElementById('form_produto' + remover);
-   // doc.innerHTML = "";
+    var doc = document.getElementById('formularioPedido' + remover);
+    doc.innerHTML = "";
 
 }
-
-
- 
- function CriaRequest() {
-     alert("teste");
-     try{
-         request = new XMLHttpRequest();        
-     }catch (IEAtual){
-          
-         try{
-             request = new ActiveXObject("Msxml2.XMLHTTP");       
-         }catch(IEAntigo){
-          
-             try{
-                 request = new ActiveXObject("Microsoft.XMLHTTP");          
-             }catch(falha){
-                 request = false;
-             }
-         }
-     }
-      
-     if (!request) 
-         alert("Seu Navegador não suporta Ajax!");
-     else
-         return request;
- }
-  
- /**
-  * Função para enviar os dados
-  */
- function getDados() {
-      
-     // Declaração de Variáveis
-     var nome   = 'aperitivos' //document.getElementById("txtnome").value;
-     var result = document.getElementById("Resultado");
-     var xmlreq = CriaRequest();
-      
-     // Exibi a imagem de progresso
-     result.innerHTML = '<img src="Progresso1.gif"/>';
-      
-     // Iniciar uma requisição
-     xmlreq.open("GET", "Contato.php?txtnome=" + nome, true);
-      
-     // Atribui uma função para ser executada sempre que houver uma mudança de ado
-     xmlreq.onreadystatechange = function(){
-          
-         // Verifica se foi concluído com sucesso e a conexão fechada (readyState=4)
-         if (xmlreq.readyState == 4) {
-              
-             // Verifica se o arquivo foi encontrado com sucesso
-             if (xmlreq.status == 200) {
-                 result.innerHTML = xmlreq.responseText;
-             }else{
-                 result.innerHTML = "Erro: " + xmlreq.statusText;
-             }
-         }
-     };
-     xmlreq.send(null);
- }
-
-
-
-
-
-
 
