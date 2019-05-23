@@ -12,10 +12,12 @@ import com.bartades.dao.FornecedoresDAO;
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.dao.UsuarioDAO;
 import com.bartades.model.Fornecedores;
+import com.bartades.model.PedidoCompraProduto;
 import com.bartades.model.Produto;
 import com.bartades.model.Usuario;
 import com.bartades.model.Categoria;
 import com.bartades.dao.CategoriaDAO;
+import com.bartades.dao.CompraProdutoDAO;
 
 /**
  *
@@ -27,13 +29,15 @@ public class TesteMain {
             
  
 		
-		ArrayList<Produto> listaProdutos = ProdutoDAO.listarProdutos();
+		ArrayList<PedidoCompraProduto> listaProdutos = CompraProdutoDAO.EncontrarPedidoCompraPorId(16);
 	
-		for(Produto p : listaProdutos) {
-		System.out.println(p.getUnidade());
-	}
+		ArrayList<Produto> listaGeral = ProdutoDAO.listarProdutos();
+		
+		for(PedidoCompraProduto p : listaProdutos) {
+			p.encontrarNomeProdutos(listaGeral);
+		System.out.println(p.toString());
+	   }
 	
-//	ProdutoController.AtualizarProduto(1, "testeUpdate", "testeUpdate", "Bebidas", 12.0, 13.0, "teste do brasil ltda", 0, 0);
 		
 	}
 

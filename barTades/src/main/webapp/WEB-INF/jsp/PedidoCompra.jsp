@@ -1,9 +1,3 @@
-<%-- 
-    Document   : VisualizarProdutos
-    Created on : Apr 6, 2019, 9:56:38 PM
-    Author     : ELuna
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -26,7 +20,7 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Visualizar produtos</title>
+<title>Visualizar pedidos</title>
 </head>
 
 <body>
@@ -77,7 +71,7 @@
                             
                             <form class="form-inline my-2 my-lg-0">
                                 <input id="campoBusca" class="form-control mr-sm-2" type="text"
-                                       placeholder="Buscar produto" aria-label="Search">
+                                       placeholder="Buscar pedido" aria-label="Search">
                             </form>
                              
                   
@@ -87,47 +81,32 @@
             </div>
         </div>
         <br>
-        <h3>Visualização de produtos</h3>
+        <h3>Visualização de pedidos</h3>
 	
 		
-        <table class="table table-hover" action="visualizarProdutos" >
+        <table class="table table-hover" action="visualizarCompras" >
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Preço venda</th>
-                    <th scope="col">Preço compra</th>
-                    <th scope="col">Fornecedor</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Quantidade em estoque</th>
-                    <th scope="col">Unidade</th>
-                    <th scope="col">Habilitado</th>
-                    <th scope="col">Opções</th>
+                    <th scope="col">Código</th>
+                    <th scope="col">Quantidade de produtos</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Valor total do pedido</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Ação</th>
                 </tr>
             </thead>
             
             <tbody id="tabelaProdutos">
                     
                   
-              <c:forEach var="produtos" items="${listaDeProdutos}">
+              <c:forEach var="pedidos" items="${listaDePedidos}">
                 <tr> 	
-                    <th scope="row"> ${produtos['id']} </th>
-                    <td>${produtos['nome']}</td>
-                    <td>${produtos['categoria']}</td>
-                    <td>${produtos['precoVenda']}</td>
-                    <td>${produtos['precoCompra']}</td>
-                    <td>${produtos['fornecedor']}</td>
-                    <td>${produtos['descricao']}</td>
-                    <td>${produtos['quantidade']}</td>
-                    <td>${produtos['unidade']}</td>
-                    <td>
-                    <c:if test="${produtos['disponibilidade'] == true}">Habilitado</c:if>
-                    
-                    <c:if test="${produtos['disponibilidade'] == false}">Desabilitado</c:if>
-                    
-                    </td>
-                    <td><a href="editarProduto?idProduto=${produtos['id']}"><button type="button" class="btn btn-outline-dark">Editar</button></a></td>
+                    <th scope="row"> ${pedidos.getCodigoPedido()} </th>
+                    <td>${pedidos['quantidadeProdutos']}</td>
+                    <td>${pedidos['dataPedido']}</td>
+                    <td>${pedidos['valorTotalPedido']}</td>
+                    <td>${pedidos['nomeUsuarioPedido']}</td>
+                    <td><a href="visualizarPedidosCompra?idPedido=${pedidos.getCodigoPedido()}"><button type="button" class="btn btn-outline-dark">Visualizar</button></a></td>
                 </tr>
             </c:forEach>
             </tbody>

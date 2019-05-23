@@ -54,8 +54,10 @@
 								role="button" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false"> Produtos </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> <a
-										class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> 
+									<a	class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+									<a class="dropdown-item" href="compraProduto">Comprar</a>
+									<a class="dropdown-item" href="visualizarPedidosCompra">Visualizar Compras</a>
 								</div></li>
 							<li class="nav-item"><a class="nav-link" href="#">Bem
 									vindo, ${sessionScope.usuario.nome}</a></li>

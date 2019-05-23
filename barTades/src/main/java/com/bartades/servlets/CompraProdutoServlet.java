@@ -22,6 +22,7 @@ import com.bartades.model.Fornecedores;
 import com.bartades.model.Franquia;
 import com.bartades.model.PedidoCompraProduto;
 import com.bartades.model.Produto;
+import com.bartades.model.Usuario;
 
 
 @WebServlet(name = "ComprarProduto", urlPatterns = "/compraProduto")
@@ -38,13 +39,14 @@ public class CompraProdutoServlet extends HttpServlet {
 		
 		int qtdeProdutos = Integer.parseInt(request.getParameter("qtdeProdutos"));
 		
+		Usuario user = (Usuario) request.getSession().getAttribute("usuario");
 		
 		for(int i = 0; i < qtdeProdutos; i++) {
 			Produto p = new Produto(Integer.parseInt(request.getParameter("produto"+i)), Integer.parseInt(request.getParameter("quantidadeProduto"+i)), Double.parseDouble(request.getParameter("valorCompraProduto"+i)));
 			produtos.add(p);
 		}
 		
-		PedidoCompraProduto p1 = new PedidoCompraProduto(produtos.size(), produtos);
+		PedidoCompraProduto p1 = new PedidoCompraProduto(produtos.size(), produtos, user.getId());
 		p1.calculaValorTotalProduto();
 		p1.calculaValorTotalPedido();
 		
@@ -53,7 +55,7 @@ public class CompraProdutoServlet extends HttpServlet {
 		ArrayList<Produto> listaGeral = ProdutoDAO.listarProdutos();
 		//int CODIGOPEDIDO,  int quantidadeProdutos, ArrayList<Produto> produtos, double valorTotalPedido
 		PedidoCompraProduto p2 = new PedidoCompraProduto(codigoPedido, p1.getQuantidadeProdutos(), p1.getProdutos(), p1.getValorTotalPedido());
-		p2.encontrarProdutos(listaGeral);
+		p2.encontrarNomeProdutos(listaGeral);
 		
 		CompraProdutoDAO.SalvarDetalhe(p2);
 		
