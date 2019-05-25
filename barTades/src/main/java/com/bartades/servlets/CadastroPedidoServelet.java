@@ -32,19 +32,6 @@ public class CadastroPedidoServelet extends HttpServlet {
 
     }
 
-    private ArrayList<Produto> obterProdutosPorCategoria(String categoria) throws ClassNotFoundException, ClassNotFoundException, ClassNotFoundException, SQLException {
-
-        ArrayList<Produto> listaProdutos = ProdutoDAO.listarProdutos();
-        ArrayList<Produto> listaProdutoCategoria = new ArrayList<Produto>();
-
-        for (Produto p : listaProdutos) {
-            if (p.getCategoria().equals(categoria)) {
-                listaProdutoCategoria.add(p);
-            }
-        }
-        return listaProdutoCategoria;
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -55,12 +42,7 @@ public class CadastroPedidoServelet extends HttpServlet {
         try {
             listaCategorias = CategoriaDAO.listarCategorias();
             request.setAttribute("listaCategorias", listaCategorias);
-            listaProdutos = obterProdutosPorCategoria(listaCategorias.get(0).getNome());
-            request.setAttribute("listaProdutos", listaProdutos);
-            
-            for (Produto p : listaProdutos) {
-                System.out.println(p.getNome());
-            }
+
 
         } catch (ClassNotFoundException | SQLException e) {
         }

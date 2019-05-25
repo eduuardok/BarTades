@@ -106,9 +106,7 @@ function addRow(texto) {
             '</div>' +
             '</div>';
 
-
-
-    doc.insertAdjacentHTML("afterbegin", texto.replace('data-id="1', 'data-id="' + count));
+    doc.insertAdjacentHTML("afterbegin", texto.replace('categoriaProduto1','categoriaProduto' + count).replace('produtos1', 'produtos' + count).replace('valorDesconto1','valorDesconto' + count).replace('quantidade1','quantidade'+count));
 
     count = count + 1;
 

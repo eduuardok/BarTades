@@ -1,14 +1,11 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 
     <head>
         <meta charset="ISO-8859-1">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/pedidoScript.js"></script>
         <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -17,8 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cadastro de Produtos</title>
@@ -27,23 +23,77 @@
     <script>
 
         var container = '';
-
+        var tar = '';
 
         $(document).ready(function () {
-            $('#formularioPedido').on('click', function (e) {
+            $('#formularioPedido').on('change', function (e) {
                 console.log('elemento: ', e.target);
                 container = e.target;
+                atribuirTar();
+                if (container.getAttribute('id') == 'categoriaProduto' && tar != '') {
+                    $('select[name=produtos' + tar + ']').empty();
+                    $('#valorDesconto' + tar).val("");
+                    $('#quantidade' + tar).val("");
+                    $('select[name=produtos' + tar + ']').append('<option value = ""></option>');
+                    $.ajax({
+                        type: 'GET',
+                        url: 'CadastroPedidoAjax',
+                        data: 'categoria=' + $('select[name=categoriaProduto' + tar + ']').val(),
+                        statusCode: {
+                            200: function (responseText) {
+                                var resposta = responseText.split(',');
+                                for (i in resposta) {
+                                    var id = resposta[i].split(':')[0];
+                                    var nome = resposta[i].split(':')[1];
+                                    if (resposta[i] != '') {
+                                        $('select[name=produtos' + tar + ']').append('<option value = "' + id + '">' + nome + '</option')
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+                if (container.getAttribute('id') == 'produtos' && tar != '') {
+                    $(document).ready(function () {
+                        $('select[name=produtos' + tar + ']').on('change', function () {
+                            $('[name=valorUnitario'+ tar +']').val("");
+                            $.ajax({
+                                type: 'GET',
+                                url: 'ProdutoAjaxServlet',
+                                data: 'produto=' + $('select[name=produtos' + tar + ']').val(),
+                                statusCode: {
+                                    200: function (responseText) {
+                                        var resposta = responseText;
+                                        $('[name=valorUnitario' + tar + ']').val(resposta);
+                                        $('[name=valorTotal' + tar + ']').val( $('[name=quantidade' + tar + ']').val() * resposta) ;
+                                    }
+                                }
+                            })
+                        })
+                    })
+                }
             })
 
             //$('#').data('id');
         })
 
+        function atribuirTar() {
+            if (container.id == 'categoriaProduto') {
+                tar = container.getAttribute('name').replace('categoriaProduto', '');
+            }
+        }
+
+
         $(document).ready(function () {
-            $('#formularioPedido').on('click', function () {
-                container = $()
-                console.log('id da div: ', container);
+            $('select[name=categoriaProduto1' + tar + ']').on('change', function () {
+
+
             })
         })
+
+
+
+
 
     </script>
 
@@ -99,11 +149,11 @@
                                         Produtos
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> 
-									<a	class="dropdown-item" href="visualizarProdutos">Visualizar</a>
-									<a class="dropdown-item" href="compraProduto">Comprar</a>
-									<a class="dropdown-item" href="visualizarPedidosCompra">Visualizar Compras</a>
-								</div>
+                                        <a class="dropdown-item" href="cadastroProduto">Cadastro</a> 
+                                        <a	class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+                                        <a class="dropdown-item" href="compraProduto">Comprar</a>
+                                        <a class="dropdown-item" href="visualizarPedidosCompra">Visualizar Compras</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Contate-nos</a></li>
                             </ul>
@@ -158,12 +208,13 @@
                             </div>
                             <div class="col-md-12" id="formularioPedido">
                                 <div class="row" id="form_produto1">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="categoriaProduto">Categoria</label> 
-                                            <select class="form-control" id="categoriaProduto" name="categoriaProduto" onselect="atualizarProdutos()" data-id="1">
+                                            <select class="form-control" id="categoriaProduto" name="categoriaProduto1" onselect="atualizarProdutos()">
+                                                <option value=""></option>
                                                 <c:forEach var="categorias" items="${listaCategorias}">
-                                                    <option value="${categorias['nome']}">${categorias['nome']}</option>
+                                                    <option value="${categorias['id']}">${categorias['nome']}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -171,28 +222,36 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="produto">Produto</label>
-                                            <select class="form-control" id="produtos" name="produtos" data-id="1">
-                                                <c:forEach var="produtos" items="${listaProdutos}">
-                                                    <option value="${produtos['nome']}">${produtos['nome']}</option>
-                                                </c:forEach>
+                                            <select class="form-control" id="produtos" name="produtos1">
+
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="valorDesconto">Valor de Desconto</label> 
+                                            <label for="valorUnitario">Valor Unitário</label> 
                                             <input type="text"
-                                                   class="form-control" id="valorDesconto" value="${valorDesconto}"
-                                                   name="valorDesconto" placeholder="Valor de Desconto"
+                                                   class="form-control" id="valorUnitario" value="${valorUnitario}"
+                                                   name="valorUnitario1" placeholder="Valor Unitário"
                                                    onKeyPress="return(moeda(this, '.', ',', event))">
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <div class="form-group">
-                                            <label for="quantidade">Quantidade</label>
+                                            <label for="quantidade">Qtde</label>
                                             <input type="text" class="form-control" id="quantidade" value="${quantidade}"
-                                                   name="quantidade" placeholder="Quantidade"
+                                                   name="quantidade1" placeholder="Qtde"
                                                    onKeyup="return(formatQtde(this))">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div clas="form-group">
+                                            <label for="valorTotal">Valor Total</label>
+                                            <input type="text"
+                                                   class="form-control" id="valorTotal" value="${valorTotal}"
+                                                   name="valorTotal1" placeholder="Valor Total"
+                                                   onKeyPress="return(moeda(this, '.', ',', event))"
+                                                   onChange="return(moeda(this, '.', ',', event))" >
                                         </div>
                                     </div>
 
@@ -289,12 +348,7 @@
             </div>
         </footer>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/?/pop?/1.14.7/umd/popper.min.js"
-                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+
         <script src="https://stackpath.bootstrapcdn.com/?/4.?/js/bootstrap.min.js"
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
