@@ -156,7 +156,39 @@ public class FornecedoresDAO {
 
         return listarFornecedores;
     }
+    
+    public static ArrayList<Fornecedores> encontrarIdPorNome(String nome) throws ClassNotFoundException, SQLException {
 
+        ArrayList<Fornecedores> fornecedorRetorno = new ArrayList<Fornecedores>();
+
+        String sql = "select fornecedores.id, fornecedores.nome, fornecedores.cnpj, fornecedores.telefone, fornecedores.endereco, fornecedores.numero, fornecedores.complemento, fornecedores.cep, fornecedores.bairro, fornecedores.cidade, fornecedores.enabled, estado.nome  as estado from fornecedores inner join estado on fornecedores.estado = estado.id where fornecedores.nome=?;";
+
+        try (Connection conn = InterfaceConexao.obterConexao();
+                PreparedStatement select = conn.prepareStatement(sql);) {
+            select.setString(1, nome);
+            ResultSet retorno = select.executeQuery();
+
+            while (retorno.next()) {
+                Fornecedores f = new Fornecedores(
+                        retorno.getInt("ID"),
+                        retorno.getString("nome"),
+                        retorno.getString("cnpj"),
+                        retorno.getString("telefone"),
+                        retorno.getString("endereco"),
+                        retorno.getString("numero"),
+                        retorno.getString("complemento"),
+                        retorno.getString("cep"),
+                        retorno.getString("bairro"),
+                        retorno.getString("cidade"),
+                        retorno.getString("estado"),
+                        retorno.getBoolean("enabled"));
+                fornecedorRetorno.add(f);
+            }
+
+        }
+        return fornecedorRetorno;
+    }
+    
     public static ArrayList<Fornecedores> encontrarFornecedorPorId(int id) throws ClassNotFoundException, SQLException {
 
         ArrayList<Fornecedores> fornecedorRetorno = new ArrayList<Fornecedores>();

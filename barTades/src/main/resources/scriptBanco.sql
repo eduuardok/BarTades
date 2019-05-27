@@ -37,12 +37,9 @@ primary key (id));
 
 create table pedidos(
 id int not null auto_increment,
-comanda varchar(15),
 cliente_nome varchar(255),
-cliente_cpf varchar(15),
-acrescimo numeric(65,2),
-desconto numeric(65,2),
 unidade_venda int(3),
+tipo_pagamento varchar(255),
 primary key (id));
 
 create table produtos_pedidos(
@@ -133,15 +130,15 @@ primary key (id));
 
 insert into fornecedores (nome, cnpj, telefone, endereco, numero, complemento, cep, bairro, cidade, estado, enabled) values ('Fornecedor Bonzão', '9812662000130','11960940481','Rua Vicente Decara Neto', '77', '-', '05819000', 'Santa José Fina', 'São Paulo', 'SP', 1);
 
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Coca Cola Lata','Refrigerante',1,5,3,1,100,1);
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Fanta Laranja Lata','Refrigerante','1','4','2','1','100',1);
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Fanta Uva Lata','Refrigerante','1','4','2','1','100',1);
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Frango','Fritas','2','12','8','1','100',1);
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Batata Frita','Fritas','2','13','9','1','100',1);
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Polenta','Fritas','2','15','10','1','100',1);
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Calabresa','Carne','3','20','8','1','100',1);
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Queijo','Frios','3','18','9','1','100',1);
-insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade) values ('Presunto','Frios','3','17','10','1','100',1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Coca Cola Lata','Refrigerante',1,5,3,1,100,1,1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Fanta Laranja Lata','Refrigerante','1','4','2','1','100',1,1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Fanta Uva Lata','Refrigerante','1','4','2','1','100',1,1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Frango','Fritas','2','12','8','1','100',1,1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Batata Frita','Fritas','2','13','9','1','100',1,1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Polenta','Fritas','2','15','10','1','100',1,1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Calabresa','Carne','3','20','8','1','100',1,1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Queijo','Frios','3','18','9','1','100',1,1);
+insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Presunto','Frios','3','17','10','1','100',1,1);
 
 insert into funcoes (nome, nivel_acesso) values ('Diretor',1);
 insert into funcoes (nome, nivel_acesso) values ('Gerente',2);

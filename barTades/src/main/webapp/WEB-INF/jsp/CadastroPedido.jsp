@@ -24,7 +24,12 @@
 
         var container = '';
         var tar = '';
-
+        
+        function zerarProdutos(formulario) {
+            $('select[name=produtos'+formulario+']').empty();
+            $('select[name=produtos'+formulario+']').append('<option value = ""></option>');
+        }
+        
         $(document).ready(function () {
             $('#formularioPedido').on('change', function (e) {
                 console.log('elemento: ', e.target);
@@ -76,6 +81,8 @@
 
             //$('#').data('id');
         })
+
+
 
         function atribuirTar() {
             if (container.id == 'categoriaProduto') {
@@ -189,7 +196,7 @@
                                     <label for="unidade">Unidade</label>
                                     <select class="form-control" id="unidade" name="unidade">
                                         <c:forEach var="unidades" items="${listaUnidades}">
-                                            <option value="${unidades['nome']}">${unidades['nome']}</option>
+                                            <option value="${unidades['id']}">${unidades['nome']}</option>
                                         </c:forEach>
                                     </select>
                                 </div>

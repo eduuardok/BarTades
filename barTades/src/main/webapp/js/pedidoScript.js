@@ -107,7 +107,8 @@ function addRow(texto) {
             '</div>';
 
     doc.insertAdjacentHTML("afterbegin", texto.replace('categoriaProduto1','categoriaProduto' + count).replace('produtos1', 'produtos' + count).replace('valorDesconto1','valorDesconto' + count).replace('quantidade1','quantidade'+count));
-
+    zerarProdutos(count);
+    
     count = count + 1;
 
 }

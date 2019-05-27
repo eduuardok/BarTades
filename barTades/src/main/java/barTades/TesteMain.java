@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import com.bartades.dao.FornecedoresDAO;
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.dao.UsuarioDAO;
+import com.bartades.dao.PedidoDAO;
 import com.bartades.model.Fornecedores;
 import com.bartades.model.PedidoCompraProduto;
 import com.bartades.model.Produto;
+import com.bartades.model.Pedido;
 import com.bartades.model.Usuario;
 import com.bartades.model.Categoria;
 import com.bartades.dao.CategoriaDAO;
@@ -25,20 +27,20 @@ import com.bartades.dao.CompraProdutoDAO;
  */
 public class TesteMain {
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+        Pedido f = new Pedido("Cartão", 1, "Vitão");
+        
+        for (Produto p: ProdutoDAO.listarProdutos()) {
             
- 
-		
-		ArrayList<PedidoCompraProduto> listaProdutos = CompraProdutoDAO.EncontrarPedidoCompraPorId(16);
-	
-		ArrayList<Produto> listaGeral = ProdutoDAO.listarProdutos();
-		
-		for(PedidoCompraProduto p : listaProdutos) {
-			p.encontrarNomeProdutos(listaGeral);
-		System.out.println(p.toString());
-	   }
-	
-		
-	}
+            f.adicionarProduto(p);
+            
+        }
+        
+        PedidoDAO pedidao = new PedidoDAO();
+        
+        pedidao.SalvarPedido(f);
+        
+    }
 
 }

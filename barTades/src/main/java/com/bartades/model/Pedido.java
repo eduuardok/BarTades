@@ -6,7 +6,7 @@
 package com.bartades.model;
 import com.bartades.model.Produto;
 import java.util.LinkedList;
-
+import com.bartades.model.Franquia;
 /**
  *
  * @author vitor.lsantos5
@@ -16,10 +16,10 @@ public class Pedido {
     private int ID;
     private LinkedList<Produto>produtos;
     private String tipoPagamento;
-    private String unidade;
+    private int unidade;
     private String nomeCliente;
 
-    public Pedido(int ID, String tipoPagamento, String unidade, String nomeCliente) {
+    public Pedido(int ID, String tipoPagamento, int unidade, String nomeCliente) {
 
         this.ID = ID;
         this.tipoPagamento = tipoPagamento;
@@ -29,7 +29,7 @@ public class Pedido {
 
     }
 
-    public Pedido(String tipoPagamento, String unidade, String nomeCliente) {
+    public Pedido(String tipoPagamento, int unidade, String nomeCliente) {
 
         this.tipoPagamento = tipoPagamento;
         this.unidade = unidade;
@@ -39,21 +39,19 @@ public class Pedido {
     }
 
     public void removerProduto(Produto p) {
-        
         for(Produto produto: produtos) {
-            
             if(produto.equals(p)) {
                 produtos.remove(produto.getId());
             }
-            
         }
-        
     }
     
     public void adicionarProduto(Produto p) {
-        
         produtos.add(p);
-        
+    }
+    
+    public LinkedList<Produto> getProdutos() {
+        return this.produtos;
     }
     
     public int getID() {
@@ -68,11 +66,11 @@ public class Pedido {
         this.tipoPagamento = tipoPagamento;
     }
 
-    public String getUnidade() {
+    public int getUnidade() {
         return this.unidade;
     }
 
-    public void setUnidade(String unidade) {
+    public void setUnidade(int unidade) {
         this.unidade = unidade;
     }
 

@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Produto;
+import com.bartades.model.Franquia;
+import com.bartades.dao.FranquiaDAO;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -37,16 +39,19 @@ public class CadastroPedidoServelet extends HttpServlet {
             throws IOException, ServletException {
 
         ArrayList<Categoria> listaCategorias = null;
-        ArrayList<Produto> listaProdutos = null;
+        ArrayList<Franquia> listaUnidades = null;
 
         try {
             listaCategorias = CategoriaDAO.listarCategorias();
             request.setAttribute("listaCategorias", listaCategorias);
-
-
         } catch (ClassNotFoundException | SQLException e) {
         }
 
+        try {
+            listaUnidades = FranquiaDAO.listarFranquias();
+            request.setAttribute("listaUnidades", listaCategorias);
+        } catch (ClassNotFoundException | SQLException e) {
+        }
 
         request.setAttribute("action", "CadastroPedido");
         request.setAttribute("pagina", "CADASTRO DE PEDIDO");
