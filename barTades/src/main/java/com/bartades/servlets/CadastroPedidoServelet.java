@@ -21,6 +21,7 @@ import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Produto;
 import com.bartades.model.Franquia;
 import com.bartades.dao.FranquiaDAO;
+import com.bartades.model.Pedido;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -30,8 +31,13 @@ public class CadastroPedidoServelet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     //private LinkedList<Produto> produtos;
 
-    private void newProduto(String classeProduto) {
+    private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
 
+        Pedido p; 
+        p = new Pedido(request.getParameter("tipoPagamento"), Integer.valueOf(request.getParameter("unidade")), request.getParameter("emailUsuario"));
+
+        
     }
 
     @Override
@@ -58,4 +64,5 @@ public class CadastroPedidoServelet extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/jsp/CadastroPedido.jsp").forward(request, response);
 
     }
+
 }

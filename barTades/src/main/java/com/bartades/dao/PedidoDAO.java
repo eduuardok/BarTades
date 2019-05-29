@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import static javafx.beans.binding.Bindings.select;
 
@@ -33,25 +34,30 @@ public class PedidoDAO {
         boolean retorno = false;
         int idPedido = -1;
 
-        String sql = "insert into pedidos(cliente_nome, unidade_venda, forma_pagamento) values (?,?,?);";
+        String sql = "insert into pedidos(cliente_nome, unidade_venda, tipo_pagamento) values (?,?,?);";
 
         try (Connection conn = InterfaceConexao.obterConexao();
-                PreparedStatement insert = conn.prepareStatement(sql);) {
+                PreparedStatement insert = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
             insert.setString(1, p.getNomeCliente());
             insert.setInt(2, p.getUnidade());
             insert.setString(3, p.getTipoPagamento());
 
-            int linhasAfetadas = insert.executeUpdate();
+            insert.executeUpdate();
 
-            if (linhasAfetadas > 0) {
+            ResultSet rs = insert.getGeneratedKeys();
+
+            if (rs.next()) {
+                idPedido = rs.getInt(1);
+            }
+
+            if (idPedido > 0) {
                 retorno = true;
             }
             conn.close();
         }
 
-        idPedido = getUltimoID();
-
-        if (idPedido >= 0) {
+        if (idPedido >= 0 && retorno) {
 
             for (Produto produto : p.getProdutos()) {
 
@@ -66,37 +72,30 @@ public class PedidoDAO {
 
                     int linhasAfetadas = insert.executeUpdate();
 
-                    if (linhasAfetadas > 0 && retorno) {
-                        retorno = true;
-                    } else {
-                        retorno = false;
-                    }
+                    retorno = (linhasAfetadas > 0 && retorno);
+
                     conn.close();
 
                 }
 
+                sql = "update produtos set quantidade_disponivel = quantidade_disponivel - ? where id = ?;";
+
+                try (Connection conn = InterfaceConexao.obterConexao();
+                        PreparedStatement update = conn.prepareStatement(sql);) {
+
+                    update.setInt(1, produto.getQuantidade());
+                    update.setInt(2, produto.getId());
+
+                    int linhasAfetadas = update.executeUpdate();
+
+                    retorno = (linhasAfetadas > 0 && retorno);
+
+                    conn.close();
+
+                }
             }
         }
-
         return retorno;
-    }
-
-    public static int getUltimoID() throws ClassNotFoundException, SQLException {
-
-        int id = -1;
-
-        String sql = "select max(p.id) from pedidos p group by id";
-
-        try (Connection conn = InterfaceConexao.obterConexao();
-                PreparedStatement select = conn.prepareStatement(sql);) {
-            ResultSet retorno = select.executeQuery();
-
-            while (retorno.next()) {
-                id = retorno.getInt("id");
-            }
-        }
-
-        return id;
     }
 
     /**
@@ -107,34 +106,28 @@ public class PedidoDAO {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public static boolean AtualizarPedido(Produto p) throws ClassNotFoundException, SQLException {
+    public static boolean deletarProduto(Pedido p, int idProduto) throws ClassNotFoundException, SQLException {
 
         boolean retorno = false;
 
-        String sql = "UPDATE pedidos set nome = ?, descricao = ?, categoria = ?, preco_venda = ?, preco_compra = ?, id_fornecedor = ?, disponibilidade = ?, id_franquia = ? WHERE id = ?;";
+        String sql = "DELETE FROM produtos_pedidos where id_pedido = ? and id_produtos = ?;";
 
         try (Connection conn = InterfaceConexao.obterConexao();
-                PreparedStatement update = conn.prepareStatement(sql);) {
-            update.setString(1, p.getNome());
-            update.setString(2, p.getDescricao());
-            update.setInt(3, encontrarIdCategoria(p.getCategoria()));
-            update.setDouble(4, p.getPrecoVenda());
-            update.setDouble(5, p.getPrecoCompra());
-            update.setInt(6, encontrarIdFornecedor(p.getFornecedor()));
+                PreparedStatement delete = conn.prepareStatement(sql);) {
 
-            update.setBoolean(7, p.getDisponibilidade());
-            update.setInt(8, encontrarIdUnidade(p.getUnidade()));
-            update.setInt(9, p.getId());
+            delete.setInt(1, p.getID());
+            delete.setInt(2, idProduto);
 
-            int linhasAfetadas = update.executeUpdate();
+            int linhasAfetadas = delete.executeUpdate();
 
-            if (linhasAfetadas > 0) {
-                retorno = true;
-            }
-            conn.close();
+            retorno = linhasAfetadas > 0;
+
         }
+
         return retorno;
+
     }
+
 
     /**
      * (Este é um método auxiliar) Utilizado para encontrar o id da categoria no

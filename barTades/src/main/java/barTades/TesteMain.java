@@ -20,6 +20,7 @@ import com.bartades.model.Usuario;
 import com.bartades.model.Categoria;
 import com.bartades.dao.CategoriaDAO;
 import com.bartades.dao.CompraProdutoDAO;
+import java.util.LinkedList;
 
 /**
  *
@@ -29,17 +30,16 @@ public class TesteMain {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
+        ArrayList<Produto> listaProdutos = ProdutoDAO.listarProdutos();
         Pedido f = new Pedido("Cartão", 1, "Vitão");
         
-        for (Produto p: ProdutoDAO.listarProdutos()) {
+        for (Produto p: listaProdutos) {
             
             f.adicionarProduto(p);
             
         }
-        
-        PedidoDAO pedidao = new PedidoDAO();
-        
-        pedidao.SalvarPedido(f);
+
+        PedidoDAO.SalvarPedido(f);
         
     }
 

@@ -106,7 +106,7 @@ function addRow(texto) {
             '</div>' +
             '</div>';
 
-    doc.insertAdjacentHTML("afterbegin", texto.replace('categoriaProduto1','categoriaProduto' + count).replace('produtos1', 'produtos' + count).replace('valorDesconto1','valorDesconto' + count).replace('quantidade1','quantidade'+count));
+    doc.insertAdjacentHTML("afterbegin", texto.replace('categoriaProduto1','categoriaProduto' + count).replace('form_produto1','form_produto' + count).replace('produtos1', 'produtos' + count).replace('valorDesconto1','valorDesconto' + count).replace('quantidade1','quantidade'+count));
     zerarProdutos(count);
     
     count = count + 1;
@@ -116,9 +116,8 @@ function addRow(texto) {
 
 
 function deleteRow() {
-    CriarRequest();
 
-    var doc = document.getElementById('formularioPedido' + remover);
+    var doc = document.getElementById('form_produto' + remover);
     doc.innerHTML = "";
 
 }
