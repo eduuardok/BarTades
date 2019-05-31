@@ -37,7 +37,7 @@ public class ListarFornecedoresServlet extends HttpServlet {
 		try {
 			List<Fornecedores> listarFornecedores = FornecedoresDAO.listarFornecedores();
 			request.setAttribute("listaDeFornecedores", listarFornecedores);	
-			RequestDispatcher rd = request.getRequestDispatcher("Fornecedor.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Fornecedor.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {
 			Logger.getLogger(ListarFornecedoresServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -82,7 +82,7 @@ public class AtualizarFranquiaServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.getRequestDispatcher("CadastroFranquia.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/CadastroFranquia.jsp").forward(request, response);
 
     }
 

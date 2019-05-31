@@ -6,7 +6,7 @@ create table fornecedores(
 id int not null auto_increment,
 nome varchar(150),
 cnpj varchar (18),
-telefone varchar(13),
+telefone varchar(14),
 endereco varchar(200),
 numero varchar(12),
 complemento varchar(50),

@@ -54,7 +54,7 @@ public class CadastroFranquiaServlet extends HttpServlet {
         }
         request.setAttribute("action", "cadastroFranquia");
         request.setAttribute("pagina", "CADASTRO DE FRANQUIA");
-        request.getRequestDispatcher("CadastroFranquia.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/CadastroFranquia.jsp").forward(request, response);
 
     }
 

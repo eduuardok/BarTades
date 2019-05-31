@@ -84,7 +84,7 @@ public class AtualizarFornecedorServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.getRequestDispatcher("CadastroFornecedores.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/CadastroFornecedores.jsp").forward(request, response);
 
     }
 

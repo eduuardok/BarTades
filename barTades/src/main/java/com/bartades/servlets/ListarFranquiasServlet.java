@@ -36,7 +36,7 @@ public class ListarFranquiasServlet extends HttpServlet {
 		try {
 			List<Franquia> listarFranquias = FranquiaDAO.listarFranquias();
 			request.setAttribute("listaDeFranquias", listarFranquias);	
-			RequestDispatcher rd = request.getRequestDispatcher("Franquia.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Franquia.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {
 			Logger.getLogger(ListarFranquiasServlet.class.getName()).log(Level.SEVERE, null, ex);

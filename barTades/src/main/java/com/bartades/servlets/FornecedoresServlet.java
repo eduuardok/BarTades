@@ -61,7 +61,7 @@ public class FornecedoresServlet extends HttpServlet {
         }
         request.setAttribute("action", "FornecedoresServlet");
         request.setAttribute("pagina", "CADASTRO DE FORNECEDORES");
-        request.getRequestDispatcher("CadastroFornecedores.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/CadastroFornecedores.jsp").forward(request, response);
 
     }
 

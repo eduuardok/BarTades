@@ -12,119 +12,120 @@
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
               crossorigin="anonymous">
+        <script src="js/franquiaScript.js"></script>
         <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
         <title>Cadastro de Franquia</title>
     </head>
     <body>
         <div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<a class="navbar-brand" href="index.jsp">HOME</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-								role="button" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"> Usu&aacute;rios </a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="cadastroUsuario">Cadastro</a>
-									<a class="dropdown-item" href="visualizarUsuarios">Visualizar</a>
-								</div></li>
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-								role="button" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"> Fornecedores </a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="FornecedoresServlet">Cadastro</a>
-									<a class="dropdown-item" href="visualizarFornecedor">Visualizar</a>
-								</div></li>
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-								role="button" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"> Franquias </a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="cadastroFranquia">Cadastro</a>
-									<a class="dropdown-item" href="visualizarFranquia">Visualizar</a>
-								</div></li>
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-								role="button" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"> Produtos </a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="cadastroProduto">Cadastro</a> 
-									<a	class="dropdown-item" href="visualizarProdutos">Visualizar</a>
-									<a class="dropdown-item" href="compraProduto">Comprar</a>
-									<a class="dropdown-item" href="visualizarPedidosCompra">Visualizar Compras</a>
-								</div></li>
-							<li class="nav-item"><a class="nav-link" href="#">Bem
-									vindo, ${sessionScope.usuario.nome}</a></li>
-							<li class="nav-item"><a class="nav-link" href="logout">Fazer
-									logout</a></li>
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" href="index.jsp">HOME</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown"><a
+                                        class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"> Usu&aacute;rios </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="cadastroUsuario">Cadastro</a>
+                                        <a class="dropdown-item" href="visualizarUsuarios">Visualizar</a>
+                                    </div></li>
+                                <li class="nav-item dropdown"><a
+                                        class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"> Fornecedores </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="FornecedoresServlet">Cadastro</a>
+                                        <a class="dropdown-item" href="visualizarFornecedor">Visualizar</a>
+                                    </div></li>
+                                <li class="nav-item dropdown"><a
+                                        class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"> Franquias </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="cadastroFranquia">Cadastro</a>
+                                        <a class="dropdown-item" href="visualizarFranquia">Visualizar</a>
+                                    </div></li>
+                                <li class="nav-item dropdown"><a
+                                        class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"> Produtos </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="cadastroProduto">Cadastro</a> 
+                                        <a	class="dropdown-item" href="visualizarProdutos">Visualizar</a>
+                                        <a class="dropdown-item" href="compraProduto">Comprar</a>
+                                        <a class="dropdown-item" href="visualizarPedidosCompra">Visualizar Compras</a>
+                                    </div></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Bem
+                                        vindo, ${sessionScope.usuario.nome}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="logout">Fazer
+                                        logout</a></li>
 
-						</ul>
+                            </ul>
 
-						<form class="form-inline my-2 my-lg-0">
-							<input class="form-control mr-sm-2" type="search"
-								placeholder="Buscar" aria-label="Search">
-							<button class="btn btn-outline-success my-2 my-sm-0"
-								type="submit">Buscar</button>
-						</form>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
+                            <form class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" type="search"
+                                       placeholder="Buscar" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0"
+                                        type="submit">Buscar</button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
         <br>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h3>${pagina}</h3>
                     <!-- 				FORMULARIO DE CADASTRO -->
-                    <form role="form" action="${action}" method="POST">
+                    <form role="form" name="cadFranquia" action="${action}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nome</label> 
-                                    <input type="text" name="nome" value="${nome}" class="form-control" placeholder="Digite o nome da franquia...">
+                                    <input type="text" name="nome" value="${nome}" class="form-control" required="true" maxlength="150" placeholder="Digite o nome da franquia...">
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label >Rua</label> <input type="text" name="endereco" value="${endereco}" class="form-control" placeholder="Digite a rua..." maxlength="14">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Número</label> <input type="text" name="numero" value="${numero}" class="form-control" placeholder="Digite o número..." maxlength="14">
+                                    <label >Rua</label> <input type="text" name="endereco" required="true" value="${endereco}" class="form-control" placeholder="Digite a rua..." maxlength="150">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Complemento</label> <input type="text" value="${complemento}" name="complemento" class="form-control" placeholder="Digite o complemento..." maxlength="14">
+                                    <label>Número</label> <input type="text" name="numero" required="true" value="${numero}" class="form-control" placeholder="Digite o número..." maxlength="14">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Cep</label> <input type="text" name="cep" value="${cep}" class="form-control" placeholder="Digite seu CEP..." maxlength="14">
+                                    <label>Complemento</label> <input type="text" value="${complemento}" name="complemento" class="form-control" placeholder="Digite o complemento..." maxlength="50">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Bairro</label> <input type="text" value="${bairro}" name="bairro" class="form-control" placeholder="Digite seu Bairro..." maxlength="14">
+                                    <label>Cep</label> <input type="text" required="true" onKeyPress="MascaraCep(cadFranquia.cep);" id="cep"  name="cep" value="${cep}" class="form-control" placeholder="Digite seu CEP..." maxlength="9">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Cidade</label> <input type="text"  value="${cidade}" name="cidade" class="form-control" placeholder="Digite sua cidade..." maxlength="14">
+                                    <label>Bairro</label> <input type="text" required="true" value="${bairro}" name="bairro" class="form-control" placeholder="Digite seu Bairro..." maxlength="50">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Cidade</label> <input type="text" required="true" value="${cidade}" name="cidade" class="form-control" placeholder="Digite sua cidade..." maxlength="50">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -135,9 +136,9 @@
 
                                         <c:if test="${action == 'editarFranquia'}">
                                             <option value="${disponibilidadeFranquia}">
-                                            <c:if test="${disponibilidadeFranquia == true}">Habilitado</c:if>
-                                            <c:if test="${disponibilidadeFranquia == false}">Desabilitado</c:if>
-                                            </option>
+                                                <c:if test="${disponibilidadeFranquia == true}">Habilitado</c:if>
+                                                <c:if test="${disponibilidadeFranquia == false}">Desabilitado</c:if>
+                                                </option>
                                             <c:if test="${disponibilidadeFranquia == true}">
                                                 <option value="false">Desabilitado</option>
                                             </c:if>
