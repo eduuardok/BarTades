@@ -47,8 +47,14 @@
 									<a class="dropdown-item" href="FornecedoresServlet">Cadastro</a>
 									<a class="dropdown-item" href="visualizarFornecedor">Visualizar</a>
 								</div></li>
-							<li class="nav-item"><a class="nav-link"
-								href="CadastroFranquia.jsp">Franquias</a></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> Franquias </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="cadastroFranquia">Cadastro</a>
+									<a class="dropdown-item" href="visualizarFranquia">Visualizar</a>
+								</div></li>
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 								role="button" data-toggle="dropdown" aria-haspopup="true"

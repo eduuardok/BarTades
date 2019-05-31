@@ -4,16 +4,16 @@ use bartades;
 
 create table fornecedores(
 id int not null auto_increment,
-nome varchar(255),
+nome varchar(150),
 cnpj varchar (18),
 telefone varchar(13),
-endereco varchar(255),
+endereco varchar(200),
 numero varchar(12),
 complemento varchar(50),
 cep varchar(9),
 bairro varchar(50),
 cidade varchar(50),
-estado varchar(50),
+estado varchar(3),
 enabled boolean,
 primary key (id));
 
@@ -51,9 +51,15 @@ primary key (id));
 
 create table unidades(
 id int not null auto_increment,
-nome varchar(255),
-estado varchar(2),
-endereco varchar(255),
+nome varchar(150),
+endereco varchar(200),
+numero varchar(12),
+complemento varchar(50),
+cep varchar(9),
+bairro varchar(50),
+cidade varchar(50),
+estado varchar(3),
+enabled boolean,
 primary key (id));
 
 create table produtos(
@@ -84,33 +90,33 @@ id int not null auto_increment,
 nome varchar(100),
 primary key (id));
 
-insert into estado (nome) values ('Acre');
-insert into estado (nome) values ('Alagoas');
-insert into estado (nome) values ('Amapá');
-insert into estado (nome) values ('Amazonas');
-insert into estado (nome) values ('Bahia');
-insert into estado (nome) values ('Ceará');
-insert into estado (nome) values ('Distrito Federal');
-insert into estado (nome) values ('Espírito Santo');
-insert into estado (nome) values ('Goiás');
-insert into estado (nome) values ('Maranhão');
-insert into estado (nome) values ('Mato Grosso');
-insert into estado (nome) values ('Mato Grosso do Sul');
-insert into estado (nome) values ('Minas Gerais');
-insert into estado (nome) values ('Pará');
-insert into estado (nome) values ('Paraíba');
-insert into estado (nome) values ('Paraná');
-insert into estado (nome) values ('Pernambuco');
-insert into estado (nome) values ('Piauí');
-insert into estado (nome) values ('Rio de Janeiro');
-insert into estado (nome) values ('Rio Grande do Norte');
-insert into estado (nome) values ('Rio Grande do Sul');
-insert into estado (nome) values ('Rondônia');
-insert into estado (nome) values ('Roraima');
-insert into estado (nome) values ('Santa Catarina');
-insert into estado (nome) values ('São Paulo');
-insert into estado (nome) values ('Sergipe');
-insert into estado (nome) values ('Tocantins');
+insert into estado (nome) values ('AC');
+insert into estado (nome) values ('AL');
+insert into estado (nome) values ('AP');
+insert into estado (nome) values ('AM');
+insert into estado (nome) values ('BA');
+insert into estado (nome) values ('CE');
+insert into estado (nome) values ('DF');
+insert into estado (nome) values ('ES');
+insert into estado (nome) values ('GO');
+insert into estado (nome) values ('MA');
+insert into estado (nome) values ('MT');
+insert into estado (nome) values ('MS');
+insert into estado (nome) values ('MG');
+insert into estado (nome) values ('PA');
+insert into estado (nome) values ('PB');
+insert into estado (nome) values ('PR');
+insert into estado (nome) values ('PE');
+insert into estado (nome) values ('PI');
+insert into estado (nome) values ('RJ');
+insert into estado (nome) values ('RN');
+insert into estado (nome) values ('RS');
+insert into estado (nome) values ('RO');
+insert into estado (nome) values ('RR');
+insert into estado (nome) values ('SC');
+insert into estado (nome) values ('SP');
+insert into estado (nome) values ('SE');
+insert into estado (nome) values ('TO');
 
 create table pedidos_compra(
 id int auto_increment not null,

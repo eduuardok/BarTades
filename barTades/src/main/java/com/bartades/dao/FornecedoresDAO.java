@@ -128,7 +128,12 @@ public class FornecedoresDAO {
 
         ArrayList<Fornecedores> listarFornecedores = new ArrayList();
 
-        String sql = "select fornecedores.id, fornecedores.nome, fornecedores.cnpj, fornecedores.telefone, fornecedores.endereco, fornecedores.numero, fornecedores.complemento, fornecedores.cep, fornecedores.bairro, fornecedores.cidade, fornecedores.enabled, estado.nome  as estado from fornecedores inner join estado on fornecedores.estado = estado.id;\n"
+        String sql = "select fornecedores.id, fornecedores.nome, fornecedores.cnpj,"
+                + " fornecedores.telefone, fornecedores.endereco, "
+                + "fornecedores.numero, fornecedores.complemento, fornecedores.cep, "
+                + "fornecedores.bairro, fornecedores.cidade, fornecedores.enabled, "
+                + "estado.nome  as estado"
+                + " from fornecedores inner join estado on fornecedores.estado = estado.id;\n"
                 + "\n";
 
         try (Connection conn = InterfaceConexao.obterConexao();

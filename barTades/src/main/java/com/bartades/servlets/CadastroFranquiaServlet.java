@@ -1,7 +1,14 @@
 package com.bartades.servlets;
 
+import com.bartades.dao.EstadoDAO;
+import com.bartades.dao.FranquiaDAO;
+import com.bartades.model.Estado;
+import com.bartades.model.Franquia;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,37 +16,58 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bartades.controller.FranquiaController;
-
-@WebServlet(name = "CadastrarFranquia", urlPatterns = "/cadastroFranquia")
+@WebServlet(urlPatterns = "/cadastroFranquia")
 public class CadastroFranquiaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+    private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
 
-		request.getRequestDispatcher("Franquia.jsp");
+        String nome = request.getParameter("nome");
+        String endereco = request.getParameter("endereco");
+        String numero = request.getParameter("numero");
+        String complemento = request.getParameter("complemento");
+        String cep = request.getParameter("cep");
+        String bairro = request.getParameter("bairro");
+        String cidade = request.getParameter("cidade");
+        String estado = request.getParameter("estadoFranquia");
+        boolean disponibilidade = Boolean.parseBoolean(request.getParameter("disponibilidadeFranquia"));
+        Franquia franquia = new Franquia(nome, endereco, numero, complemento, cep, bairro, cidade, estado, disponibilidade);
+        FranquiaDAO.SalvarFranquia(franquia);
+        //RequestDispatcher dispatcher = request.getRequestDispatcher("Produto.jsp");
+        //dispatcher.forward(request, response);
+        response.sendRedirect("visualizarFranquia");
 
-	}
+    }
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
 
-		String nome = request.getParameter("nomeFranquia");
-		String endereco = request.getParameter("enderecoFranquia");
-		String estado = request.getParameter("estadoFranquia");
-		System.out.println(estado);
-		
-		try {
-			FranquiaController.SalvarFranquia(nome, estado, endereco);
-		} catch (ClassNotFoundException | SQLException e) {
-	
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher("Franquia.jsp").forward(request, response);
+        try {
+            ArrayList<Estado> listarEstados = EstadoDAO.listarEstados();
 
-	}
+            request.setAttribute("listarEstados", listarEstados);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("action", "cadastroFranquia");
+        request.setAttribute("pagina", "CADASTRO DE FRANQUIA");
+        request.getRequestDispatcher("CadastroFranquia.jsp").forward(request, response);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
+        try {
+            processarRequisicao("POST", request, response);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CadastroFranquiaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 }
