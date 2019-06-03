@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Antonio Carlos
  */
-@WebServlet(urlPatterns = "/visualizarFranquia")
+@WebServlet(urlPatterns = "/visualizarFranquia", name="visualizarFranquia")
 public class ListarFranquiasServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

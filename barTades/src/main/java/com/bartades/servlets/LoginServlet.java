@@ -2,8 +2,10 @@ package com.bartades.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.bartades.dao.UsuarioDAO;
+import com.bartades.model.Cargo;
 import com.bartades.model.Usuario;
 import com.bartades.services.loginService;
 
@@ -27,7 +29,9 @@ public class LoginServlet extends HttpServlet {
 		String senha = request.getParameter("senhaUsuario");
 		
 		if(loginService.realizarLogin(email, senha)) {
+			ArrayList<Cargo> listaCargos = UsuarioDAO.listarCargos();
 			Usuario usuarioLogin = UsuarioDAO.encontrarUsuarioPorEmail(email);
+			usuarioLogin.encontrarNivelAcesso(listaCargos);
 			sessao.setAttribute("loginValido", "true");
 			sessao.setAttribute("usuario", usuarioLogin);
 			response.sendRedirect("home");

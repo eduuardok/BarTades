@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Antonio Carlos
  */
-@WebServlet(urlPatterns = "/editarFornecedor")
+@WebServlet(urlPatterns = "/editarFornecedor", name="editarFornecedor")
 public class AtualizarFornecedorServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

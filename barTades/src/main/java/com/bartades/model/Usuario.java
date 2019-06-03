@@ -1,5 +1,7 @@
 package com.bartades.model;
 
+import java.util.ArrayList;
+
 public class Usuario {
 
 	private int id;
@@ -11,6 +13,7 @@ public class Usuario {
 	private String sexo;
 	private String unidadeAtuacao;
 	private String cargo;
+	private int nivelAcesso;
 
 	public Usuario() {
 	}
@@ -138,6 +141,22 @@ public class Usuario {
 		return "Usuario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha
 				+ ", telefone=" + telefone + ", sexo=" + sexo + ", unidadeAtuacao=" + unidadeAtuacao + ", cargo="
 				+ cargo + "]";
+	}
+
+	public int getNivelAcesso() {
+		return nivelAcesso;
+	}
+
+	public void setNivelAcesso(int nivelAcesso) {
+		this.nivelAcesso = nivelAcesso;
+	}
+	
+	public void encontrarNivelAcesso(ArrayList<Cargo> listaCargos) {
+		for(Cargo c : listaCargos) {
+			if(c.getNome().equals(this.getCargo())) {
+				this.setNivelAcesso(c.getNivelAcesso());
+			}
+		}
 	}
 
 }

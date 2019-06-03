@@ -7,6 +7,7 @@ package com.bartades.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bartades.controller.UsuarioController;
 import com.bartades.model.Usuario;
@@ -34,9 +36,26 @@ public class ListarUsuariosServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 
-			List<Usuario> listaUsuarios = UsuarioController.listarUsuarios();
+			HttpSession sessao = request.getSession();
+			
+			Usuario user = (Usuario) sessao.getAttribute("usuario");
+			
+			
+			ArrayList<Usuario> listaUsuarios = UsuarioController.listarUsuarios();
+			ArrayList<Usuario> listaFiltrada = new ArrayList<Usuario>();
 
-			request.setAttribute("listaDeUsuarios", listaUsuarios);
+			if(user.getNivelAcesso() <= 4) {
+				for(Usuario u : listaUsuarios) {
+					if(u.getUnidadeAtuacao().equals(user.getUnidadeAtuacao())) {
+						listaFiltrada.add(u);
+					}
+				}
+				request.setAttribute("listaDeUsuarios", listaFiltrada);
+			} else {
+				request.setAttribute("listaDeUsuarios", listaUsuarios);
+			}
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Usuario.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {

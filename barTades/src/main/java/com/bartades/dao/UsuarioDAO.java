@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.bartades.model.Cargo;
 import com.bartades.model.Usuario;
 
 public class UsuarioDAO {
@@ -14,8 +15,21 @@ public class UsuarioDAO {
 
 		Usuario u = new Usuario();
 
-		String sql = "select u.id,\n" + "u.nome, \n" + "u.email, \n" + "u.telefone, \n" + "u.cpf, \n" + "u.sexo, \n"
-				+ "u.senha, \n" + "u.unidade_atuacao, \n" + "u.cargo \n" + "from usuarios u \n" + "where u.email = ?;";
+		String sql = 	"select u.id, \n" + 
+				"		u.nome, \n" + 
+				"		u.email, \n" + 
+				"		u.telefone, \n" + 
+				"		u.cpf, \n" + 
+				"		u.sexo, \n" + 
+				"		u.senha, \n" + 
+				"		un.nome as unidade_atuacao, \n" + 
+				"		c.nome as cargo \n" + 
+				"		from usuarios u \n" + 
+				"		join \n" + 
+				"		unidades un on u.unidade_atuacao = un.id \n" + 
+				"		join \n" + 
+				"		funcoes c on u.cargo = c.id \n" +
+				"		where u.email = ?;";
 
 		try (Connection conn = InterfaceConexao.obterConexao();
 				PreparedStatement select = conn.prepareStatement(sql);) {
@@ -134,7 +148,7 @@ public class UsuarioDAO {
 		return retorno;
 	}
 
-	private static int encontrarIdUnidadeAtuacao(String nomeUnidade) throws ClassNotFoundException, SQLException {
+	protected static int encontrarIdUnidadeAtuacao(String nomeUnidade) throws ClassNotFoundException, SQLException {
 
 		String sql = "SELECT id FROM unidades WHERE nome = ?";
 
@@ -174,6 +188,27 @@ public class UsuarioDAO {
 
 		return idCargo;
 
+	}
+	
+	public static ArrayList<Cargo> listarCargos() throws ClassNotFoundException, SQLException{
+		
+		ArrayList<Cargo> listaCargos = new ArrayList<Cargo>();
+		
+		String sql = "select * from funcoes";
+
+		try (Connection conn = InterfaceConexao.obterConexao();
+				PreparedStatement select = conn.prepareStatement(sql);
+				ResultSet retorno = select.executeQuery()) {
+
+			while (retorno.next()) {
+				Cargo c = new Cargo(retorno.getInt("id"), retorno.getString("nome"), retorno.getInt("nivel_acesso"));
+				listaCargos.add(c);
+			}
+			conn.close();
+		}
+		
+		return listaCargos;
+		
 	}
 
 }

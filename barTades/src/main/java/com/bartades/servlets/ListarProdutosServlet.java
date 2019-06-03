@@ -7,10 +7,12 @@ package com.bartades.servlets;
 
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Produto;
+import com.bartades.model.Usuario;
 import com.bartades.services.loginService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,10 +36,27 @@ public class ListarProdutosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession sessao = request.getSession();
+		
+		Usuario u = (Usuario) sessao.getAttribute("usuario");
+		
 		try {
 
-			List<Produto> listaProdutos = ProdutoDAO.listarProdutos();
-			request.setAttribute("listaDeProdutos", listaProdutos);
+			ArrayList<Produto> listaProdutos = ProdutoDAO.listarProdutos();
+			ArrayList<Produto> listaFiltrada = new ArrayList<Produto>();
+			
+			if(u.getNivelAcesso() <= 4) {
+				for(Produto p : listaProdutos) {
+					if(p.getUnidade().equals(u.getUnidadeAtuacao())) {
+						listaFiltrada.add(p);
+					}
+				}
+				request.setAttribute("listaDeProdutos", listaFiltrada);
+			} else {
+				request.setAttribute("listaDeProdutos", listaProdutos);
+			}
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Produto.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {

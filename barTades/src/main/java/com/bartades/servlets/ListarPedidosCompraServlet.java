@@ -13,11 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bartades.dao.CompraProdutoDAO;
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.PedidoCompraProduto;
 import com.bartades.model.Produto;
+import com.bartades.model.Usuario;
 
 
 @WebServlet(name = "VisualizarCompras", urlPatterns = "/visualizarPedidosCompra")
@@ -29,11 +31,27 @@ public class ListarPedidosCompraServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession sessao = request.getSession();
+		
+		Usuario u = (Usuario) sessao.getAttribute("usuario");
+		
 		if(request.getParameter("idPedido") == null || request.getParameter("idPedido").equals("")) {
 		try {
 
 			ArrayList<PedidoCompraProduto> listaPedidos = CompraProdutoDAO.listarPedidosCompra();
+			ArrayList<PedidoCompraProduto> listaFiltrada = new ArrayList<PedidoCompraProduto>();
+			
+			if(u.getNivelAcesso() <=4) {
+				
+				for(PedidoCompraProduto p1 : listaPedidos) {
+					if(p1.getUnidade().equals(u.getUnidadeAtuacao())) {
+						listaFiltrada.add(p1);
+					}
+				}
+				request.setAttribute("listaDePedidos", listaFiltrada);
+			} else {
 			request.setAttribute("listaDePedidos", listaPedidos);
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/PedidoCompra.jsp");
 			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException ex) {

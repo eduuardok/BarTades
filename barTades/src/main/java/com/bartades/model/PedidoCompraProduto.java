@@ -11,22 +11,25 @@ public class PedidoCompraProduto {
 	private String dataPedido;
 	private int idUsuarioPedido;
 	private String nomeUsuarioPedido;
+	private String unidade;
 	
 	//Construtor utilizado no primeiro cadastro no banco de dados
-	public PedidoCompraProduto(int quantidadeProdutos, ArrayList<Produto> produtos, int idUsuarioPedido) {
+	public PedidoCompraProduto(int quantidadeProdutos, ArrayList<Produto> produtos, int idUsuarioPedido, String unidadePedido) {
 		this.quantidadeProdutos = quantidadeProdutos;
 		this.produtos = produtos;
-		this.setIdUsuarioPedido(idUsuarioPedido);
+		this.idUsuarioPedido = idUsuarioPedido;
+		this.unidade = unidadePedido;
 	}
 	
 	//Construtor completo de pedido compra
-	public PedidoCompraProduto(int CODIGOPEDIDO,  int quantidadeProdutos, ArrayList<Produto> produtos, double valorTotalPedido, String dataPedido, String nomeUsuarioPedido) {
+	public PedidoCompraProduto(int CODIGOPEDIDO,  int quantidadeProdutos, ArrayList<Produto> produtos, double valorTotalPedido, String dataPedido, String nomeUsuarioPedido, String unidadePedido) {
 		this.CODIGOPEDIDO = CODIGOPEDIDO;
 		this.quantidadeProdutos = quantidadeProdutos;
 		this.produtos = produtos;
 		this.valorTotalPedido = valorTotalPedido;
-		this.setDataPedido(dataPedido);
-		this.setNomeUsuarioPedido(nomeUsuarioPedido);
+		this.dataPedido = dataPedido;
+		this.nomeUsuarioPedido = nomeUsuarioPedido;
+		this.unidade = unidadePedido;
 	}
 	
 	//Construtor utilizado ao salvar os produtos nas tabelas de compra no banco de dados (nao contem data e usuario)
@@ -132,5 +135,13 @@ public class PedidoCompraProduto {
 			strFinal += "\nQuantidade de produtos: " + this.getQuantidadeProdutos();
 			strFinal += "\nValor total: " + this.getValorTotalPedido();
 		return strFinal;
+	}
+
+	public String getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
 	}
 }

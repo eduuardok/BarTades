@@ -8,9 +8,9 @@
         <meta charset="ISO-8859-1">
         <script src="js/pedidoScript.js"></script>
         <link rel="stylesheet" href="css/styleUsuario.css" type="text/css" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
@@ -292,68 +292,46 @@
         </div>
         <button type="button" class="btn btn-outline-success" onClick="deleteRow()">aaa</button>
         <br>
-        <footer class="section footer-classic context-dark bg-image" style="background: #2d3246;">
-            <br>
-            <div class="container">
-                <div class="row row-30">
-                    <div class="col-md-4 col-xl-5">
-                        <div class="pr-xl-4">
-                            <a class="brand" href="index.html"><img
-                                    src="https://img.icons8.com/color/50/000000/bar.png"></a>
-                            <p>Nós somos uma empresa focada no melhor atendimento e
-                                experiência do nosso cliente.</p>
-                            <!-- Rights -->
-                            <p class="rights">
-                                <span>ï¿½ï¿½ </span><span
-                                    class="copyright-year">2019</span><span>ï¿½</span><span>BarTades</span><span>.&iuml;&iquest;&frac12;</span><span>All
-                                    Rights Reserved.</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <dl class="contact-list">
-                            <dt>Endere&ccedil;o:</dt>
-                            <dd>798 South Park Avenue, Jaipur, Raj</dd>
-                        </dl>
-                        <dl class="contact-list">
-                            <dt>E-mail:</dt>
-                            <dd>
-                                <a href="mailto:#">dkstudioin@gmail.com</a>
-                            </dd>
-                        </dl>
-                        <dl class="contact-list">
-                            <dt>Telefones:</dt>
-                            <dd>
-                                <a href="tel:#">+91 7568543012</a> <span>or</span> <a href="tel:#">+91 9571195353</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-4 col-xl-3">
-                        <ul class="nav-list">
-                            <li><a href="#">Usuários </a></li>
-                            <li><a href="#">Fornecedores</a></li>
-                            <li><a href="#">Franquias</a></li>
-                            <li><a href="#">Produtos</a></li>
-                            <li><a href="#">Contate-nos</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-gutters social-container">
-                <div class="col">
-                    <a class="social-inner" href="#"><span class="icon mdi mdi-facebook"></span><span>Facebook</span></a>
-                </div>
-                <div class="col">
-                    <a class="social-inner" href="#"><span class="icon mdi mdi-instagram"></span><span>instagram</span></a>
-                </div>
-                <div class="col">
-                    <a class="social-inner" href="#"><span class="icon mdi mdi-twitter"></span><span>twitter</span></a>
-                </div>
-                <div class="col">
-                    <a class="social-inner" href="#"><span class="icon mdi mdi-youtube-play"></span><span>google</span></a>
-                </div>
-            </div>
-        </footer>
+        <footer class="section footer-classic context-dark bg-image"
+		style="background: #2d3246;">
+		<br>
+		<div class="container">
+			<div class="row row-30">
+				<div class="col-md-4 col-xl-5">
+					<div class="pr-xl-4">
+						<a class="brand" href="index.html"><img
+							src="https://img.icons8.com/color/50/000000/bar.png"></a>
+						<p>Bar Tades</p>
+						<!-- Rights-->
+						<p class="rights">
+							<span>BarTades. </span><span class="copyright-year">2019</span><span> </span><span>Avengers Group</span><span> </span><span>All
+								Rights Reserved.</span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<dl class="contact-list">
+						<dt>Endereço:</dt>
+						<dd>Avenida Eng. Eusébio Stevaux, 823</dd>
+					</dl>
+					<dl class="contact-list">
+						<dt>Desenvolvido por:</dt>
+						<dd>
+							<a href="mailto:#">Antonio Carlos</a><br>
+							<a href="mailto:#">Eduardo Luna</a><br>
+							<a href="mailto:#">Renan Queiroz</a><br>
+							<a href="mailto:#">Victor Rodrigues de Matos</a><br>
+							<a href="mailto:#">Vitor luiz dos santos</a><br>
+						</dd>
+					</dl>
+				</div>
+				<div class="col-md-4 col-xl-3">
+					
+				</div>
+			</div>
+		</div>
+		
+	</footer>
 
 
         <script src="https://stackpath.bootstrapcdn.com/?/4.?/js/bootstrap.min.js"

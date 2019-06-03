@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import com.bartades.dao.FornecedoresDAO;
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.dao.UsuarioDAO;
-import com.bartades.dao.PedidoDAO;
+
 import com.bartades.model.Fornecedores;
 import com.bartades.model.PedidoCompraProduto;
 import com.bartades.model.Produto;
@@ -39,7 +39,7 @@ public class TesteMain {
             
         }
 
-        PedidoDAO.SalvarPedido(f);
+
         
     }
 

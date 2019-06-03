@@ -27,7 +27,7 @@ public class CompraProdutoDAO {
     public static int SalvarPedido(PedidoCompraProduto p) throws ClassNotFoundException, SQLException {
 
         int lastId = 0;
-        String sql = "INSERT INTO pedidos_compra (qtde_produtos, valor_total_compra, data_pedido, usuario_pedido) values (?, ?, now(), ?);";
+        String sql = "INSERT INTO pedidos_compra (qtde_produtos, valor_total_compra, data_pedido, usuario_pedido, unidade_pedido) values (?, ?, now(), ?, ?);";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement insert = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
@@ -35,6 +35,7 @@ public class CompraProdutoDAO {
             insert.setInt(1, p.getQuantidadeProdutos());
             insert.setDouble(2, p.getValorTotalPedido());
             insert.setInt(3, p.getIdUsuarioPedido());
+            insert.setInt(4, UsuarioDAO.encontrarIdUnidadeAtuacao(p.getUnidade()));
 
             insert.executeUpdate();
 
@@ -163,7 +164,16 @@ public class CompraProdutoDAO {
         ArrayList<PedidoCompraProduto> listaPedidos = new ArrayList<PedidoCompraProduto>();
         ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 
-        String sql = "select pc.id, pc.qtde_produtos, pc.valor_total_compra, date_format(pc.data_pedido, '%d-%m-%Y') AS data_pedido, u.nome as nome_usuario from pedidos_compra pc join usuarios u where pc.usuario_pedido = u.id;";
+        String sql = "select pc.id,\n" + 
+        		" pc.qtde_produtos,\n" + 
+        		" pc.valor_total_compra,\n" + 
+        		" date_format(pc.data_pedido, '%d-%m-%Y') AS data_pedido,\n" + 
+        		" u.nome as nome_usuario,\n" + 
+        		" un.nome as unidade_pedido from pedidos_compra pc \n" + 
+        		"join \n" + 
+        		"usuarios u on pc.usuario_pedido = u.id \n" + 
+        		"join \n" + 
+        		"unidades un on pc.unidade_pedido = un.id;";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement select = conn.prepareStatement(sql);
@@ -176,7 +186,8 @@ public class CompraProdutoDAO {
                         listaProdutos = produtosPedidoCompra(retorno.getInt("id")),
                         retorno.getDouble("valor_total_compra"),
                         retorno.getString("data_pedido"),
-                        retorno.getString("nome_usuario"));
+                        retorno.getString("nome_usuario"),
+                        retorno.getString("unidade_pedido"));
                 listaPedidos.add(p);
             }
             conn.close();
@@ -231,7 +242,18 @@ public class CompraProdutoDAO {
         ArrayList<PedidoCompraProduto> listaPedidos = new ArrayList<PedidoCompraProduto>();
         ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 
-        String sql = "select pc.id, pc.qtde_produtos, pc.valor_total_compra, date_format(pc.data_pedido, '%d-%m-%Y') AS data_pedido, u.nome as nome_usuario from pedidos_compra pc join usuarios u on pc.usuario_pedido = u.id where pc.id = ?;";
+        String sql = "select pc.id, \n" + 
+        		" pc.qtde_produtos, \n" + 
+        		" pc.valor_total_compra, \n" + 
+        		" date_format(pc.data_pedido, '%d-%m-%Y') AS data_pedido, \n" + 
+        		" u.nome as nome_usuario, \n" + 
+        		" un.nome as unidade_pedido from pedidos_compra pc \n" + 
+        		"join \n" + 
+        		"usuarios u on pc.usuario_pedido = u.id \n" + 
+        		"join \n" + 
+        		"unidades un on pc.unidade_pedido = un.id \n" + 
+        		"where \n" + 
+        		"pc.id = ?;";
 
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement select = conn.prepareStatement(sql);) {
@@ -247,7 +269,8 @@ public class CompraProdutoDAO {
                         listaProdutos = produtosPedidoCompra(retorno.getInt("id")),
                         retorno.getDouble("valor_total_compra"),
                         retorno.getString("data_pedido"),
-                        retorno.getString("nome_usuario"));
+                        retorno.getString("nome_usuario"),
+                        retorno.getString("unidade_pedido"));
                 listaPedidos.add(p);
             }
             conn.close();

@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.bartades.dao.CategoriaDAO;
 import com.bartades.dao.FornecedoresDAO;
 import com.bartades.dao.FranquiaDAO;
@@ -20,6 +22,7 @@ import com.bartades.model.Categoria;
 import com.bartades.model.Fornecedores;
 import com.bartades.model.Franquia;
 import com.bartades.model.Produto;
+import com.bartades.model.Usuario;
 
 /**
  * 
@@ -55,14 +58,31 @@ public class CadastroProdutoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
+		HttpSession sessao = request.getSession();
+		
+		Usuario u = (Usuario) sessao.getAttribute("usuario");
 		
 		try {
 			ArrayList<Categoria> listaCategorias = CategoriaDAO.listarCategorias();
 			ArrayList<Fornecedores> listaFornecedores = FornecedoresDAO.listar();
 			ArrayList<Franquia> listaUnidades = FranquiaDAO.listarFranquias();
+			ArrayList<Franquia> listaFiltrada = new ArrayList<Franquia>();
+			
+			if(u.getNivelAcesso() <= 4) {
+				for(Franquia f : listaUnidades) {
+					if(f.getNome().equals(u.getUnidadeAtuacao())) {
+						listaFiltrada.add(f);
+					}
+				}
+				request.setAttribute("listaUnidades", listaFiltrada);
+			} else {
+				request.setAttribute("listaUnidades", listaUnidades);
+			}
+			
 			request.setAttribute("listaCategorias", listaCategorias);
 			request.setAttribute("listaFornecedores", listaFornecedores);
-			request.setAttribute("listaUnidades", listaUnidades);
+			
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

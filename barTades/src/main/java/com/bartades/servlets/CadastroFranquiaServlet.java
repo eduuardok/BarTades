@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/cadastroFranquia")
+@WebServlet(urlPatterns = "/cadastroFranquia", name="cadastroFranquia")
 public class CadastroFranquiaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

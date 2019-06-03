@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Antonio Carlos
  */
-@WebServlet(urlPatterns = {"/FornecedoresServlet"})
+@WebServlet(urlPatterns = {"/FornecedoresServlet"}, name="FornecedoresServlet")
 public class FornecedoresServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

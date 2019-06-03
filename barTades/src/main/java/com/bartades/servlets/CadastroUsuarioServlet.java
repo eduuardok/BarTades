@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bartades.controller.UsuarioController;
 import com.bartades.dao.FranquiaDAO;
@@ -24,8 +25,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		
-		
+				
 		try {
 			ArrayList<Franquia> franquias = FranquiaDAO.listarFranquias();
 			request.setAttribute("listaFranquias", franquias);

@@ -36,19 +36,32 @@ public class CompraProdutoServlet extends HttpServlet {
 		
 		ArrayList<Produto> produtos = new ArrayList<Produto>();
 		
+		int qtdeProdutos = 0;
 		
-		int qtdeProdutos = Integer.parseInt(request.getParameter("qtdeProdutos"));
-		
-		Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-		
-		//percorre os produtos cadastrados na tela
-		for(int i = 0; i < qtdeProdutos; i++) {
-			Produto p = new Produto(Integer.parseInt(request.getParameter("produto"+i)), Integer.parseInt(request.getParameter("quantidadeProduto"+i)), Double.parseDouble(request.getParameter("valorCompraProduto"+i)));
-			produtos.add(p);
+		if(!request.getParameter("qtdeProdutos").equals("")) {
+			if(Integer.parseInt(request.getParameter("qtdeProdutos")) > 0){
+				qtdeProdutos = Integer.parseInt(request.getParameter("qtdeProdutos"));
+		}
+			
 		}
 		
 		
-		PedidoCompraProduto p1 = new PedidoCompraProduto(produtos.size(), produtos, user.getId());
+		Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+		
+		if(qtdeProdutos == 0) {
+			Produto p = new Produto(Integer.parseInt(request.getParameter("produto0")), Integer.parseInt(request.getParameter("quantidadeProduto0")), Double.parseDouble(request.getParameter("valorCompraProduto0")));
+			produtos.add(p);
+		} else {
+			//percorre os produtos cadastrados na tela
+			for(int i = 0; i <= qtdeProdutos; i++) {
+				Produto p = new Produto(Integer.parseInt(request.getParameter("produto"+i)), Integer.parseInt(request.getParameter("quantidadeProduto"+i)), Double.parseDouble(request.getParameter("valorCompraProduto"+i)));
+				produtos.add(p);
+		}
+		
+		}
+		
+		
+		PedidoCompraProduto p1 = new PedidoCompraProduto(produtos.size(), produtos, user.getId(), user.getUnidadeAtuacao());
 		p1.calculaValorTotalProduto();
 		p1.calculaValorTotalPedido();
 		

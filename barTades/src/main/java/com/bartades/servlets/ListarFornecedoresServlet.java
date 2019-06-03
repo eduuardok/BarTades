@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(urlPatterns = "/visualizarFornecedor")
+@WebServlet(urlPatterns = "/visualizarFornecedor", name="visualizarFornecedor")
 public class ListarFornecedoresServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

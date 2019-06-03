@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Produto;
+import com.bartades.model.Usuario;
 
 @WebServlet(name = "ProdutoAjaxServlet", urlPatterns="/ProdutoAjaxServlet")
 public class ProdutoAjaxServlet extends HttpServlet {
@@ -23,6 +25,9 @@ public class ProdutoAjaxServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession sessao = request.getSession();
+		
+		Usuario u = (Usuario) sessao.getAttribute("usuario");
 		
 		response.setContentType("text/plain");
 		
@@ -47,14 +52,34 @@ public class ProdutoAjaxServlet extends HttpServlet {
 		if(categoriaPesquisa != 0) {
 		try {
 			ArrayList<Produto> listaProdutos = ProdutoDAO.encontrarProdutoPorCategoria(categoriaPesquisa);
+			ArrayList<Produto> listaFiltrada = new ArrayList<Produto>();
 			
 			String resposta = "";
 			
+			if(u.getNivelAcesso() <= 4) {
+				
 			for(Produto p : listaProdutos) {
+				if(p.getUnidade().equals(u.getUnidadeAtuacao())) {
+					listaFiltrada.add(p);
+				}
+			}
+			
+			for(Produto p : listaFiltrada) {
 				resposta += p.getId() + ":" + p.getNome() + ",";
 			}
 			
 			out.write(resposta);
+			
+			} else {
+				
+				for(Produto p : listaProdutos) {
+					resposta += p.getId() + ":" + p.getNome() + ",";
+				}
+				
+				out.write(resposta);
+				
+				
+			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

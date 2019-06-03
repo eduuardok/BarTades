@@ -124,6 +124,7 @@ qtde_produtos int (2),
 valor_total_compra double,
 data_pedido date,
 usuario_pedido int,
+unidade_pedido int,
 primary key (id));
 
 create table produtos_pedidos_compra (
@@ -146,10 +147,27 @@ insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_
 insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Queijo','Frios','3','18','9','1','100',1,1);
 insert into produtos (nome, descricao, categoria, preco_venda, preco_compra, id_fornecedor, quantidade_disponivel, disponibilidade, id_franquia) values ('Presunto','Frios','3','17','10','1','100',1,1);
 
-insert into funcoes (nome, nivel_acesso) values ('Diretor',1);
-insert into funcoes (nome, nivel_acesso) values ('Gerente',2);
 
-insert into unidades (nome, estado, endereco) values ('UND SP', 'SP', 'x');
-insert into unidades (nome, estado, endereco) values ('UND RJ', 'RJ', 'x');
 
-insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Vitor', 'admin@admin.com', '11960940481', '437', 'M', '123456', 1,1);
+insert into funcoes (nome, nivel_acesso) values ('Analista', 1); -- pode somente visualizar fornecedores, pedidos e produtos da sua região
+insert into funcoes (nome, nivel_acesso) values ('Analista/estoquista regional', 2); -- pode criar pedidos de compra de produto, criar e editar produtos, visualizar e criar fornecedores para sua unidade
+insert into funcoes (nome, nivel_acesso) values ('Analista/estoquista/vendedor regional', 3); -- pode fazer tudo acima e criar pedidos de venda para sua unidade
+insert into funcoes (nome, nivel_acesso) values ('Gerente regional', 4); -- tem acesso irrestrito a sua unidade
+insert into funcoes (nome, nivel_acesso) values ('Diretor', 5); -- tem acesso irrestrito a todas as unidades
+insert into funcoes (nome, nivel_acesso) values ('Administrador de sistema', 6); -- tem acesso full, podendo criar usuarios
+
+
+
+insert into unidades (nome, endereco, numero, complemento, cep, bairro, cidade, estado, enabled) values ('unidade1', 'a' , 'a', '12', '13', '14', 'sao paulo', '1', 1);
+insert into unidades (nome, endereco, numero, complemento, cep, bairro, cidade, estado, enabled) values ('unidade2', 'a' , 'a', '12', '13', '14', 'sao paulo', '2', 1);
+insert into unidades (nome, endereco, numero, complemento, cep, bairro, cidade, estado, enabled) values ('unidade3', 'a' , 'a', '12', '13', '14', 'sao paulo', '3', 1);
+
+
+insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Vitor Analista1', 'a1@bartades.com', '11960940481', '437', 'M', 'a1', 1,1);
+insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Eduardo Analista2', 'a2@bartades.com', '11960940482', '438', 'M', 'a2', 1,2);
+insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Victor Analista3', 'a3@bartades.com', '11960940483', '439', 'M', 'a3', 1,3);
+insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Antonio Analista4', 'a4@bartades.com', '11960940484', '440', 'M', 'a4', 1,4);
+insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Renan diretor', 'a5@bartades.com', '11960940485', '441', 'M', 'a5', 1,5);
+insert into usuarios (nome, email, telefone, cpf, sexo, senha, unidade_atuacao, cargo) values ('Adm', 'adm@bartades.com', '11960940486', '442', 'M', 'adm', 1,6);
+
+

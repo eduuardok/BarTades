@@ -244,7 +244,7 @@ public class ProdutoDAO {
                 + "join unidades u on p.id_franquia = u.id \n"
                 + "where p.categoria = ? and p.disponibilidade = 1;";
         
-        System.out.println(sql);
+        
         
         try (Connection conn = InterfaceConexao.obterConexao();
                 PreparedStatement select = conn.prepareStatement(sql);) {
