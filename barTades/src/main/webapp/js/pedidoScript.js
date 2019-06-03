@@ -40,7 +40,7 @@ function isNumber(letra) {
 
     var result = false;
 
-    if (letra >= 0 || letra <= 9) {
+    if (letra >= 0 && letra <= 9) {
         result = true;
     }
 
@@ -102,11 +102,11 @@ function addRow(texto) {
             '<div class="col-md-1">' +
             '   <div class="form-group">' +
             '   <div>Remover</div> ' +
-            '   <button type="button" data-toggle="modal" data-target="#deleteModal" style="margin-top: 8px; margin-left: 23px" onclick="setRemover(' + count + ')" class="btn btn-outline-danger">-</button>' +
+            '   <button name="remover' + count + '" type="button" data-toggle="modal" data-target="#deleteModal" style="margin-top: 8px; margin-left: 23px" onclick="setRemover(' + count + ')" class="btn btn-outline-danger">-</button>' +
             '</div>' +
             '</div>';
 
-    doc.insertAdjacentHTML("afterbegin", texto.replace('categoriaProduto1','categoriaProduto' + count).replace('form_produto1','form_produto' + count).replace('produtos1', 'produtos' + count).replace('valorDesconto1','valorDesconto' + count).replace('quantidade1','quantidade'+count));
+    doc.insertAdjacentHTML("afterbegin", texto.replace('categoriaProduto1','categoriaProduto' + count).replace('form_produto1','form_produto' + count).replace('produtos1', 'produtos' + count).replace('valorTotal1','valorTotal' + count).replace('valorUnitario1','valorUnitario' + count).replace('quantidade1','quantidade'+count));
     zerarProdutos(count);
     
     count = count + 1;
@@ -116,9 +116,24 @@ function addRow(texto) {
 
 
 function deleteRow() {
-
+    
     var doc = document.getElementById('form_produto' + remover);
+    var idRemovido = doc.getAttribute('id').replace('form_produto','');
+    console.log('id: ' + idRemovido);
     doc.innerHTML = "";
+    count = count - 1;
+    if (count > 2) {
+        replaceName(count, idRemovido);
+    }
 
 }
 
+function replaceName(idAntigo, idNovo) {
+    $('select[name=categoriaProduto' + idAntigo + ']').attr('name','categoriaProduto' + idNovo);
+    $('select[name=produtos' + idAntigo + ']').attr('name','produtos' + idNovo);
+    $('input[name=valorUnitario' + idAntigo + ']').attr('name','valorUnitario' + idNovo);
+    $('input[name=quantidade' + idAntigo + ']').attr('name','quantidade' + idNovo);
+    $('input[name=valorTotal' + idAntigo + ']').attr('name', 'valorTotal' + idNovo);
+    $('button[name=remover' + idAntigo + ']').attr('onclick','setRemover('+ idNovo +')');
+    $('button[name=remover' + idAntigo + ']').attr('name','remover' + idNovo);
+}

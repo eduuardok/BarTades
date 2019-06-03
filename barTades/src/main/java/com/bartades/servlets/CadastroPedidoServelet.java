@@ -21,6 +21,7 @@ import com.bartades.dao.ProdutoDAO;
 import com.bartades.model.Produto;
 import com.bartades.model.Franquia;
 import com.bartades.dao.FranquiaDAO;
+import com.bartades.dao.PedidoDAO;
 import com.bartades.model.Pedido;
 import java.util.LinkedList;
 import java.util.Set;
@@ -32,12 +33,50 @@ public class CadastroPedidoServelet extends HttpServlet {
     //private LinkedList<Produto> produtos;
 
     private void processarRequisicao(String metodoHttp, HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, NumberFormatException {
 
-        Pedido p; 
+        Pedido p;
         p = new Pedido(request.getParameter("tipoPagamento"), Integer.valueOf(request.getParameter("unidade")), request.getParameter("emailUsuario"));
+        int i = 1, idPedido;
+        Produto NewP;
 
+        while (i > 0) {
+
+            idPedido = -1;
+            
+            try {
+                idPedido = Integer.valueOf(request.getParameter("produtos" + i));
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(CadastroPedidoServelet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if (idPedido >= 0) {
+                NewP = ProdutoDAO.encontrarProdutoPorId(idPedido).get(0);
+                NewP.setQuantidade(Integer.valueOf(request.getParameter("quantidade" + i)));
+                p.adicionarProduto(NewP);
+                i = i +1;
+            } else {
+                i = 0;
+            }
+            
+            
+
+        }
         
+        PedidoDAO.SalvarPedido(p);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
+        try {
+            processarRequisicao("POST", request, response);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CadastroPedidoServelet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override

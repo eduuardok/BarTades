@@ -24,12 +24,19 @@
 
         var container = '';
         var tar = '';
-        
-        function zerarProdutos(formulario) {
-            $('select[name=produtos'+formulario+']').empty();
-            $('select[name=produtos'+formulario+']').append('<option value = ""></option>');
+
+        function valorTotal(obj) {
+            container = obj;
+            atribuirTar();
+            $('input[name = valorTotal' + tar + ']').val('0');
+
         }
-        
+
+        function zerarProdutos(formulario) {
+            $('select[name=produtos' + formulario + ']').empty();
+            $('select[name=produtos' + formulario + ']').append('<option value = ""></option>');
+        }
+
         $(document).ready(function () {
             $('#formularioPedido').on('change', function (e) {
                 console.log('elemento: ', e.target);
@@ -37,8 +44,6 @@
                 atribuirTar();
                 if (container.getAttribute('id') == 'categoriaProduto' && tar != '') {
                     $('select[name=produtos' + tar + ']').empty();
-                    $('#valorDesconto' + tar).val("");
-                    $('#quantidade' + tar).val("");
                     $('select[name=produtos' + tar + ']').append('<option value = ""></option>');
                     $.ajax({
                         type: 'GET',
@@ -58,24 +63,39 @@
                         }
                     })
                 }
+                if (container.getAttribute('id') == 'quantidade' && tar != '') {
+                    qtde = container.value;
+                    if (qtde < 0) {
+                        qtde = 1
+                        $('input[name=quantidade' + tar + ']').val("1");
+                    }
+                    if (qtde == 0) {
+                        $('input[name=valorTotal' + tar + ']').val("0");
+                    }
+                    if (qtde > 0) {
+                        $('input[name=valorTotal' + tar + ']').val(($('input[name=valorUnitario' + tar + ']').val() * qtde).formatMoney(1, "", ".", ","));
+                    }
+                }
+
+
                 if (container.getAttribute('id') == 'produtos' && tar != '') {
-                    $(document).ready(function () {
-                        $('select[name=produtos' + tar + ']').on('change', function () {
-                            $('[name=valorUnitario'+ tar +']').val("");
-                            $.ajax({
-                                type: 'GET',
-                                url: 'ProdutoAjaxServlet',
-                                data: 'produto=' + $('select[name=produtos' + tar + ']').val(),
-                                statusCode: {
-                                    200: function (responseText) {
-                                        var resposta = responseText;
-                                        $('[name=valorUnitario' + tar + ']').val(resposta);
-                                        $('[name=valorTotal' + tar + ']').val( $('[name=quantidade' + tar + ']').val() * resposta) ;
-                                    }
-                                }
-                            })
-                        })
+                    $('input[name=valorUnitario' + tar + ']').val("");
+                    $('input[name=valorTotal' + tar + ']').val("");
+
+                    $('select[name=produtos' + tar + ']').append('<option value = ""></option>');
+                    $.ajax({
+                        type: 'GET',
+                        url: 'CadastroPedidoAjax',
+                        data: 'produto=' + $('select[name=produtos' + tar + ']').val(),
+                        statusCode: {
+                            200: function (responseText) {
+                                var resposta = responseText;
+                                $('input[name=valorUnitario' + tar + ']').val(resposta);
+                                $('input[name=valorTotal' + tar + ']').val($('[name=quantidade' + tar + ']').val() * resposta);
+                            }
+                        }
                     })
+
                 }
             })
 
@@ -85,8 +105,9 @@
 
 
         function atribuirTar() {
-            if (container.id == 'categoriaProduto') {
-                tar = container.getAttribute('name').replace('categoriaProduto', '');
+            x = container.getAttribute('id')
+            if (x == 'quantidade' || x == 'categoriaProduto' || x == 'produtos' || x == 'valorUnitario') {
+                tar = container.getAttribute('name').replace(container.getAttribute('id'), '');
             }
         }
 
@@ -99,7 +120,17 @@
         })
 
 
-
+        Number.prototype.formatMoney = function (places, symbol, thousand, decimal) {
+            places = !isNaN(places = Math.abs(places)) ? places : 2;
+            symbol = symbol !== undefined ? symbol : "$";
+            thousand = thousand || ",";
+            decimal = decimal || ".";
+            var number = this,
+                    negative = number < 0 ? "-" : "",
+                    i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
+                    j = (j = i.length) > 3 ? j % 3 : 0;
+            return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
+        };
 
 
     </script>
@@ -239,7 +270,7 @@
                                             <label for="valorUnitario">Valor Unitário</label> 
                                             <input type="text"
                                                    class="form-control" id="valorUnitario" value="${valorUnitario}"
-                                                   name="valorUnitario1" placeholder="Valor Unitário"
+                                                   name="valorUnitario1" placeholder="Valor Unitário" readonly="readonly" disabled="disabled"
                                                    onKeyPress="return(moeda(this, '.', ',', event))">
                                         </div>
                                     </div>
@@ -248,7 +279,8 @@
                                             <label for="quantidade">Qtde</label>
                                             <input type="text" class="form-control" id="quantidade" value="${quantidade}"
                                                    name="quantidade1" placeholder="Qtde"
-                                                   onKeyup="return(formatQtde(this))">
+                                                   onKeyUp ="return(formatQtde(this))"
+                                                   onKeyPress="return(formatQtde(this))">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -256,9 +288,9 @@
                                             <label for="valorTotal">Valor Total</label>
                                             <input type="text"
                                                    class="form-control" id="valorTotal" value="${valorTotal}"
-                                                   name="valorTotal1" placeholder="Valor Total"
+                                                   name="valorTotal1" placeholder="Valor Total" readonly="readonly" disabled="disabled"
                                                    onKeyPress="return(moeda(this, '.', ',', event))"
-                                                   onChange="return(moeda(this, '.', ',', event))" >
+                                                   onchange="alert('aaa')" >
                                         </div>
                                     </div>
 
@@ -279,7 +311,7 @@
                             <p></p>
                             <div class="col-md-12">
                                 <button type="submit" name="idProduto" value="${idProduto}"
-                                        class="btn btn-success">Cadastrar</button>
+                                        class="btn btn-success">Salvar</button>
                             </div>
                         </div>
                     </form>
